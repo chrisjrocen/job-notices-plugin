@@ -1,0 +1,82 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/jobs-slides/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --wp-fundi-hover-color:#283784;
+  --wp-fundi-slides-max-height: 400px;
+  --wp-fundi-slides-padding: 30px 30px 30px 30px;
+  --wp-fundi-slides-gap: 30px;
+  --wp-fundi-swiper-background-color: #fff;
+}
+
+.wp-fundi-slides-content * {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.swiper {
+  width: 100%;
+  height: calc(100% + 10px);
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: var(--wp-fundi-swiper-background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wp-fundi-featured-image,
+.swiper-slide {
+  height: 350px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.wp-fundi-slides-content .wp-fundi-featured-image .wp-fundi-image {
+  height: 100%;
+}
+
+.wp-fundi-slides-content.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--wp-fundi-slides-gap, 30px);
+}
+
+.wp-fundi-slides-content {
+  position: relative;
+  overflow: hidden;
+}
+.wp-fundi-slides-content:hover .wp-fundi-image-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wp-fundi-image {
+  position: relative;
+}
+
+.wp-fundi-image-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  pointer-events: none;
+}

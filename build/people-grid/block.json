@@ -1,0 +1,116 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "job-notices/jobs-grid",
+  "version": "0.1.0",
+  "title": "Jobs Grid",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "anchor": true,
+    "ariaLabel": true,
+    "multiple": true,
+    "color": true,
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true,
+      "__experimentalDefaultControls": {
+        "padding": true,
+        "blockGap": true
+      }
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "style": true,
+        "width": true
+      }
+    },
+    "shadow": true
+  },
+  "attributes": {
+    "instanceId": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryID": {
+      "type": "number",
+      "default": 0
+    },
+    "numberOfItems": {
+      "type": "number",
+      "default": 10
+    },
+    "orderBy": {
+      "type": "string",
+      "default": ""
+    },
+    "order": {
+      "type": "string",
+      "default": "DESC"
+    },
+    "showFeatured": {
+      "type": "string",
+      "default": ""
+    },
+    "itemDevice": {
+      "type": "string",
+      "default": "desktop"
+    },
+    "desktopSpaceBetween": {
+      "type": "number",
+      "default": 10
+    },
+    "tabSpaceBetween": {
+      "type": "number",
+      "default": 10
+    },
+    "phoneSpaceBetween": {
+      "type": "number",
+      "default": 10
+    },
+    "desktopGridColumn": {
+      "type": "number",
+      "default": 4
+    },
+    "tabGridColumn": {
+      "type": "number",
+      "default": 3
+    },
+    "phoneGridColumn": {
+      "type": "number",
+      "default": 2
+    }
+  },
+  "styles": [
+    {
+      "name": "wp-fundi-rounded",
+      "label": "Round"
+    },
+    {
+      "name": "wp-fundi-rectangle",
+      "label": "Rectangle"
+    },
+    {
+      "name": "wp-fundi-rounded-rectangle",
+      "label": "Rounded Rectangle"
+    }
+  ],
+  "textdomain": "jobs-grid",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

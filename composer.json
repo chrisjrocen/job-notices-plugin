@@ -1,0 +1,18 @@
+{
+    "name": "mrwp-fundi/jobs-blocks",
+    "description": "Jobs Blocks by Wp-fundi",
+    "type": "project",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "WP-FUNDI",
+            "email": "support@wp-fundi.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": "lib"
+    },
+    "autoload": {
+        "psr-4": {"JOB_NOTICES\\": "./core"}
+    }
+}
