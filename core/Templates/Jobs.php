@@ -21,6 +21,7 @@ class Jobs {
 		// Register the template for the job listings archive.
 		add_action( 'template_redirect', array( $this, 'render' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
+		// add_action( 'pre_get_posts', array( $this, 'job_notices_sorting_logic' ) );
 	}
 
 	/**
@@ -42,10 +43,15 @@ class Jobs {
 	 * @return void
 	 */
 	public function render() {
+
+		// Check if we are on the job listings archive page. If not, return early.
+		if ( ! is_post_type_archive( 'jobs' ) ) {
+			return;
+		}
+
 		get_header();
 
-		echo '<main id="primary" class="site-main jobs-archive">';
-		echo '<div class="jobs-container">';
+		echo '<div class="jobs-container jobs-archive">';
 
 		// Sidebar Filters.
 		echo '<aside class="jobs-filters">';
@@ -58,23 +64,32 @@ class Jobs {
 		$results_count = sprintf(
 			'<div class="results-count">%s</div>',
 			sprintf(
-				/* translators: 1: Number of jobs displayed, 2: Total number of jobs */
 				esc_html__( 'Showing 1 – %1$d of %2$d results', 'job-notices' ),
 				max( get_query_var( 'posts_per_page' ), 10 ),
 				wp_count_posts( 'jobs' )->publish
 			)
 		);
 
+		$current_sort = $_GET['sort'] ?? '';
+
 		$sort_select = sprintf(
-			'<select class="sort-select">
-				<option value="default">%s</option>
-				<option value="latest">%s</option>
-				<option value="salary_high">%s</option>
-				<option value="salary_low">%s</option>
+			'<select class="sort-select" name="sort" onchange="location = this.value;">
+				<option value="%1$s" %2$s>%3$s</option>
+				<option value="%4$s" %5$s>%6$s</option>
+				<option value="%7$s" %8$s>%9$s</option>
+				<option value="%10$s" %11$s>%12$s</option>
 			</select>',
+			add_query_arg( 'sort', 'default' ),
+			selected( $current_sort, 'default', false ),
 			esc_html__( 'Sort by (Default)', 'job-notices' ),
+			add_query_arg( 'sort', 'date_asc' ),
+			selected( $current_sort, 'date_asc', false ),
 			esc_html__( 'Latest', 'job-notices' ),
+			add_query_arg( 'sort', 'salary_desc' ),
+			selected( $current_sort, 'salary_desc', false ),
 			esc_html__( 'Salary: High to Low', 'job-notices' ),
+			add_query_arg( 'sort', 'salary_asc' ),
+			selected( $current_sort, 'salary_asc', false ),
 			esc_html__( 'Salary: Low to High', 'job-notices' )
 		);
 
@@ -120,8 +135,53 @@ class Jobs {
 
 		echo '</section>'; // jobs-results.
 		echo '</div>'; // jobs-container.
-		echo '</main>';
 
 		get_footer();
+	}
+
+	/**
+	 * Sorting logic for job notices.
+	 *
+	 * This method modifies the main query to sort job listings based on user-selected criteria.
+	 *
+	 * @param \WP_Query $query The WP_Query instance (passed by reference).
+	 */
+	public function job_notices_sorting_logic( $query ) {
+		// Only modify main query on frontend archive of 'jobs'.
+		if ( is_admin() || ! $query->is_main_query() || ! is_post_type_archive( 'jobs' ) ) {
+			return;
+		}
+
+		$orderby = $_GET['sort'] ?? '';
+
+		switch ( $orderby ) {
+			case 'date_asc':
+				$query->set( 'orderby', 'date' );
+				$query->set( 'order', 'ASC' );
+				break;
+			case 'salary_desc':
+				$query->set( 'meta_key', 'salary' );
+				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'order', 'DESC' );
+				break;
+			case 'salary_asc':
+				$query->set( 'meta_key', 'salary' );
+				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'order', 'ASC' );
+				break;
+			case 'title_asc':
+				$query->set( 'orderby', 'title' );
+				$query->set( 'order', 'ASC' );
+				break;
+			case 'title_desc':
+				$query->set( 'orderby', 'title' );
+				$query->set( 'order', 'DESC' );
+				break;
+			default:
+				// Default sorting: latest jobs first
+				$query->set( 'orderby', 'date' );
+				$query->set( 'order', 'DESC' );
+				break;
+		}
 	}
 }

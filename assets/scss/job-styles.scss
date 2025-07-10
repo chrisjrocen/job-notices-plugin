@@ -1,22 +1,92 @@
+:root {
+    //Color Palette derived from Blocksy theme's color palette.
+    --wp-fundi-primary-color: var(--theme-palette-color-1, #2872fa); //Primary brand color, used for key accents.
+    --wp-fundi-alternative-color: var(--theme-palette-color-2, #1559ed); //Alternative color, often used for hover effects.
+    --wp-fundi-main-text-color: var(--theme-palette-color-3, #3A4F66); //Main text color for paragraphs.
+    --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #192a3d); //Headings, subheadings, and titles.
+    --wp-fundi-border-color: var(--theme-palette-color-5, #e1e8ed); //Borders and dividing elements.
+    --wp-fundi-subtle-background-color: var(--theme-palette-color-6, #f2f5f7); //Subtle backgrounds, such as page heroes and footers.
+    --wp-fundi-main-background-color: var(--theme-palette-color-7, #FAFBFC); //Main site background.
+    --wp-fundi-light-alternative-color: var(--theme-palette-color-8, #ffffff); //A lighter alternative, often used for header backgrounds.
+
+    //Bonus Colors
+    --wp-fundi-success-color: #34A853; //Success
+    --wp-fundi-error-color: #EA4335; //Error
+    --wp-fundi-warning-color: #FBBC05; //Warning
+    --wp-fundi-info-color: #1967D2; //Info
+
+    --wp-fundi-containers-border-radius: 8px; //Border radius for containers.
+    --wp-fundi-small-containers-border-radius: 4px; //Smaller border radius for compact elements.
+}
+
 // Styles for the Job Archive Page
-.jobs-archive {
-    padding: 2rem;
+.jobs-archive.jobs-container {
+    padding: 10rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    width: var(--theme-container-width, '90%');
+    max-width: var(--theme-normal-container-max-width, '1200px');
+    margin: auto;
 
-    .jobs-container {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 2rem;
-
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-        }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding: 5rem 0.2rem;
     }
 
     .jobs-filters {
-        background: #f9fafb;
-        padding: 1.5rem;
-        border-radius: 0.75rem;
-        border: 1px solid #e5e7eb;
+        background: var(--wp-fundi-subtle-background-color);
+        padding: 26px 30px 30px 30px;
+        border-radius: var(--wp-fundi-containers-border-radius);
+        border: 1px solid var(--wp-fundi-border-color);
+
+        .job-filter-form {
+
+            .filter-group {
+                margin-bottom: 1.5rem;
+
+                label {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    font-weight: 600;
+                    color: var(--wp-fundi-secondary-text-color);
+                }
+
+                select,
+                input[type="text"],
+                input[type="range"] {
+                    width: 100%;
+                    padding: 0.5rem 0.75rem;
+                    border: 1px solid var(--wp-fundi-border-color);
+                    border-radius: 0.375rem;
+                    background: var(--wp-fundi-light-alternative-color);
+                    font-size: 0.9rem;
+
+                    &:focus {
+                        border-color: var(--wp-fundi-primary-color);
+                        outline: none;
+                    }
+                }
+
+                input[type="range"] {
+                    padding: 0.5rem 0;
+                }
+
+                button {
+                    width: 100%;
+                    padding: 0.5rem 0.75rem;
+                    border: 1px solid var(--wp-fundi-alternative-color);
+                    border-radius: 0.375rem;
+                    background: var(--wp-fundi-alternative-color);
+                    font-size: 0.9rem;
+
+                    &:hover {
+                        background: var(--wp-fundi-light-alternative-color);
+                        color: var(--wp-fundi-alternative-color);
+                    }
+                }
+            }
+        }
     }
 
     .jobs-results {
@@ -26,9 +96,14 @@
             align-items: center;
             margin-bottom: 1rem;
 
+            @media (max-width: 768px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .results-count {
                 font-size: 0.95rem;
-                color: #4b5563;
+                color: var(--wp-fundi-secondary-text-color);
             }
 
             .results-controls {
@@ -37,9 +112,9 @@
 
                 select {
                     padding: 0.5rem 0.75rem;
-                    border: 1px solid #d1d5db;
+                    border: 1px solid var(--wp-fundi-border-color);
                     border-radius: 0.5rem;
-                    background: #fff;
+                    background: var(--wp-fundi-subtle-background-color);
                     font-size: 0.9rem;
                 }
             }
@@ -47,47 +122,92 @@
 
         .job-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); TODO Implement switch when you create a settings page.
             gap: 1.5rem;
 
             .job-card {
-                background: #ffffff;
+                background: var(--wp-fundi-subtle-background-color);
                 padding: 1.25rem;
                 border-radius: 0.75rem;
-                border: 1px solid #e5e7eb;
+                border: 1px solid var(--wp-fundi-border-color);
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+
+                &:hover {
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+                }
+
+                .job-card-inner {
+
+                    .job-header {
+
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 1rem;
+                        flex-wrap: wrap;
+
+                        .company-logo {
+
+                            img {
+                                width: 50px;
+                                height: 50px;
+                                border-radius: var(--wp-fundi-small-containers-border-radius);
+                                object-fit: cover;
+                                margin-bottom: 0.5rem;
+                            }
+                        }
+                    }
+                }
 
                 h2 {
                     font-size: 1.125rem;
                     margin-bottom: 0.5rem;
 
                     a {
-                        color: #1f2937;
+                        color: var(--wp-fundi-main-text-color);
                         text-decoration: none;
 
                         &:hover {
-                            color: #2563eb;
+                            color: var(--wp-fundi-primary-color);
                         }
                     }
                 }
 
                 .job-meta {
                     font-size: 0.85rem;
-                    color: #6b7280;
-                }
+                    color: var(--wp-fundi-main-text-color);
 
-                .job-tags {
-                    margin-top: 0.5rem;
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.4rem;
+                    .job-title {
 
-                    .tag {
-                        background-color: #eef2ff;
-                        color: #4338ca;
-                        font-size: 0.75rem;
-                        padding: 0.25rem 0.5rem;
-                        border-radius: 0.375rem;
+                        span.badge.featured {
+                            color: var(--wp-fundi-success-color);
+                        }
+                    }
+
+                    .job-details,
+                    .job-tags {
+                        margin-top: 0.5rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1.4rem;
+
+                        .tag {
+                            background-color: var(--wp-fundi-light-alternative-color);
+                            color: var(--wp-fundi-primary-color);
+                            font-size: 0.75rem;
+                            padding: 0.25rem 0.5rem;
+                            border-radius: 0.375rem;
+                            font-weight: 500;
+
+                            &.type {
+                                background-color: rgba(66, 133, 244, 0.2); // #4285F4 with 0.2 opacity
+                                color: var(--wp-fundi-info-color);
+                            }
+
+                            &.urgent {
+                                background-color: rgba(249, 171, 0, 0.2); // #F9AB00 with 0.2 opacity
+                                color: var(--wp-fundi-warning-color);
+                            }
+                        }
                     }
                 }
             }
@@ -109,15 +229,15 @@
                 a,
                 span {
                     padding: 0.5rem 0.75rem;
-                    border: 1px solid #e5e7eb;
+                    border: 1px solid var(--wp-fundi-border-color);
                     border-radius: 0.375rem;
-                    color: #374151;
+                    color: var(--wp-fundi-primary-color);
                     text-decoration: none;
                 }
 
                 .current {
-                    background-color: #2563eb;
-                    color: #fff;
+                    background-color: var(--wp-fundi-primary-color);
+                    color: var(--wp-fundi-light-text-color);
                 }
             }
         }

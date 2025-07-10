@@ -16,4 +16,6 @@ Schema
 - Included taxonomy registration within the trait
 
 ### 0.1.0
-- Added basic jobs archive.
+- Added basic jobs archive. Completed MVP design
+
+TODO: Add settings page for dynamic settings.
