@@ -22,6 +22,7 @@ final class Init {
 			Base\Activate::class,
 			Admin\Options::class,
 			PostType\Jobs::class,
+			Templates\Jobs::class,
 		);
 	}
 
