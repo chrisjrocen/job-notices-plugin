@@ -15,7 +15,54 @@
   --wp-fundi-small-containers-border-radius: 4px;
 }
 
-.jobs-archive.jobs-container {
+.jobs-archive.jobs-container .single-job-header .apply-button,
+.jobs-archive.jobs-container .single-related-job .apply-button,
+.single-job.jobs-container .single-job-header .apply-button,
+.single-job.jobs-container .single-related-job .apply-button, .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group button,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group button {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--wp-fundi-alternative-color);
+  border-radius: 0.375rem;
+  background: var(--wp-fundi-alternative-color);
+  font-size: 0.9rem;
+}
+.jobs-archive.jobs-container .single-job-header .apply-button:hover,
+.jobs-archive.jobs-container .single-related-job .apply-button:hover,
+.single-job.jobs-container .single-job-header .apply-button:hover,
+.single-job.jobs-container .single-related-job .apply-button:hover, .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group button:hover,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group button:hover {
+  background: var(--wp-fundi-light-alternative-color);
+  color: var(--wp-fundi-alternative-color);
+}
+
+.jobs-archive.jobs-container .single-job-header,
+.jobs-archive.jobs-container .single-related-job,
+.single-job.jobs-container .single-job-header,
+.single-job.jobs-container .single-related-job, .jobs-archive.jobs-container aside.job-sidebar,
+.single-job.jobs-container aside.job-sidebar, .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card,
+.single-job.jobs-container .job-details .job-cards-grid .job-card {
+  background: var(--wp-fundi-subtle-background-color);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--wp-fundi-border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.jobs-archive.jobs-container .single-job-header:hover,
+.jobs-archive.jobs-container .single-related-job:hover,
+.single-job.jobs-container .single-job-header:hover,
+.single-job.jobs-container .single-related-job:hover, .jobs-archive.jobs-container aside.job-sidebar:hover,
+.single-job.jobs-container aside.job-sidebar:hover, .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card:hover,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card:hover,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card:hover,
+.single-job.jobs-container .job-details .job-cards-grid .job-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.jobs-archive.jobs-container,
+.single-job.jobs-container {
   padding: 10rem 2rem;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -23,23 +70,153 @@
   width: var(--theme-container-width, "90%");
   max-width: var(--theme-normal-container-max-width, "1200px");
   margin: auto;
+  grid-template-areas: "job-header job-header" "job-content job-sidebar" "related-jobs related-jobs";
 }
 @media (max-width: 768px) {
-  .jobs-archive.jobs-container {
+  .jobs-archive.jobs-container,
+  .single-job.jobs-container {
     grid-template-columns: 1fr;
     padding: 5rem 0.2rem;
+    grid-template-areas: "job-header" "job-content" "job-sidebar" "related-jobs";
   }
 }
-.jobs-archive.jobs-container .jobs-filters {
+.jobs-archive.jobs-container h2,
+.jobs-archive.jobs-container h3,
+.jobs-archive.jobs-container h4,
+.jobs-archive.jobs-container h5,
+.jobs-archive.jobs-container h6,
+.single-job.jobs-container h2,
+.single-job.jobs-container h3,
+.single-job.jobs-container h4,
+.single-job.jobs-container h5,
+.single-job.jobs-container h6 {
+  font-size: 1.125rem;
+}
+.jobs-archive.jobs-container .single-job-header,
+.jobs-archive.jobs-container .single-related-job,
+.single-job.jobs-container .single-job-header,
+.single-job.jobs-container .single-related-job {
+  grid-area: job-header;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+.jobs-archive.jobs-container .single-job-header .application-section,
+.jobs-archive.jobs-container .single-related-job .application-section,
+.single-job.jobs-container .single-job-header .application-section,
+.single-job.jobs-container .single-related-job .application-section {
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .jobs-archive.jobs-container .single-job-header,
+  .jobs-archive.jobs-container .single-related-job,
+  .single-job.jobs-container .single-job-header,
+  .single-job.jobs-container .single-related-job {
+    flex-direction: column;
+  }
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .company-logo img,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .company-logo img,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .company-logo img,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .company-logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--wp-fundi-containers-border-radius);
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-title span.badge.featured,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-title span.badge.featured,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-title span.badge.featured,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-title span.badge.featured {
+  color: var(--wp-fundi-success-color);
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details,
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+}
+@media (max-width: 768px) {
+  .jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details,
+  .jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags,
+  .jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details,
+  .jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags,
+  .single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details,
+  .single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags,
+  .single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details,
+  .single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags {
+    gap: 0.4rem;
+  }
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag,
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag {
+  background-color: var(--wp-fundi-light-alternative-color);
+  color: var(--wp-fundi-primary-color);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag.type,
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag.type,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag.type,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag.type,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag.type,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag.type,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag.type,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag.type {
+  background-color: rgba(66, 133, 244, 0.2);
+  color: var(--wp-fundi-info-color);
+}
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag.urgent,
+.jobs-archive.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag.urgent,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag.urgent,
+.jobs-archive.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag.urgent,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-details .tag.urgent,
+.single-job.jobs-container .single-job-header .job-card-inner .job-header .job-meta .job-tags .tag.urgent,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-details .tag.urgent,
+.single-job.jobs-container .single-related-job .job-card-inner .job-header .job-meta .job-tags .tag.urgent {
+  background-color: rgba(249, 171, 0, 0.2);
+  color: var(--wp-fundi-warning-color);
+}
+.jobs-archive.jobs-container .jobs-filters,
+.single-job.jobs-container .jobs-filters {
   background: var(--wp-fundi-subtle-background-color);
   padding: 26px 30px 30px 30px;
   border-radius: var(--wp-fundi-containers-border-radius);
   border: 1px solid var(--wp-fundi-border-color);
 }
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group {
+.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group {
   margin-bottom: 1.5rem;
 }
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group label {
+.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group label,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
@@ -47,7 +224,10 @@
 }
 .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group select,
 .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=text],
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range] {
+.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range],
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group select,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group input[type=text],
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range] {
   width: 100%;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--wp-fundi-border-color);
@@ -57,106 +237,138 @@
 }
 .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group select:focus,
 .jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=text]:focus,
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range]:focus {
+.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range]:focus,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group select:focus,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group input[type=text]:focus,
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range]:focus {
   border-color: var(--wp-fundi-primary-color);
   outline: none;
 }
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range] {
+.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range],
+.single-job.jobs-container .jobs-filters .job-filter-form .filter-group input[type=range] {
   padding: 0.5rem 0;
 }
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group button {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--wp-fundi-alternative-color);
-  border-radius: 0.375rem;
-  background: var(--wp-fundi-alternative-color);
-  font-size: 0.9rem;
-}
-.jobs-archive.jobs-container .jobs-filters .job-filter-form .filter-group button:hover {
-  background: var(--wp-fundi-light-alternative-color);
-  color: var(--wp-fundi-alternative-color);
-}
-.jobs-archive.jobs-container .jobs-results .jobs-results-header {
+.jobs-archive.jobs-container .jobs-results .jobs-results-header,
+.jobs-archive.jobs-container .job-details .jobs-results-header,
+.single-job.jobs-container .jobs-results .jobs-results-header,
+.single-job.jobs-container .job-details .jobs-results-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 @media (max-width: 768px) {
-  .jobs-archive.jobs-container .jobs-results .jobs-results-header {
+  .jobs-archive.jobs-container .jobs-results .jobs-results-header,
+  .jobs-archive.jobs-container .job-details .jobs-results-header,
+  .single-job.jobs-container .jobs-results .jobs-results-header,
+  .single-job.jobs-container .job-details .jobs-results-header {
     flex-direction: column;
     align-items: flex-start;
   }
 }
-.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-count {
+.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-count,
+.jobs-archive.jobs-container .job-details .jobs-results-header .results-count,
+.single-job.jobs-container .jobs-results .jobs-results-header .results-count,
+.single-job.jobs-container .job-details .jobs-results-header .results-count {
   font-size: 0.95rem;
   color: var(--wp-fundi-secondary-text-color);
 }
-.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-controls {
+.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-controls,
+.jobs-archive.jobs-container .job-details .jobs-results-header .results-controls,
+.single-job.jobs-container .jobs-results .jobs-results-header .results-controls,
+.single-job.jobs-container .job-details .jobs-results-header .results-controls {
   display: flex;
   gap: 0.75rem;
 }
-.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-controls select {
+.jobs-archive.jobs-container .jobs-results .jobs-results-header .results-controls select,
+.jobs-archive.jobs-container .job-details .jobs-results-header .results-controls select,
+.single-job.jobs-container .jobs-results .jobs-results-header .results-controls select,
+.single-job.jobs-container .job-details .jobs-results-header .results-controls select {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--wp-fundi-border-color);
   border-radius: 0.5rem;
   background: var(--wp-fundi-subtle-background-color);
   font-size: 0.9rem;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid,
+.jobs-archive.jobs-container .job-details .job-cards-grid,
+.single-job.jobs-container .jobs-results .job-cards-grid,
+.single-job.jobs-container .job-details .job-cards-grid {
   display: grid;
   gap: 1.5rem;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card {
-  background: var(--wp-fundi-subtle-background-color);
-  padding: 1.25rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--wp-fundi-border-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-}
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-card-inner .job-header,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-card-inner .job-header {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   flex-wrap: wrap;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header .company-logo img {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header .company-logo img,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-card-inner .job-header .company-logo img,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-card-inner .job-header .company-logo img,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-card-inner .job-header .company-logo img {
   width: 50px;
   height: 50px;
   border-radius: var(--wp-fundi-small-containers-border-radius);
   object-fit: cover;
   margin-bottom: 0.5rem;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2 {
-  font-size: 1.125rem;
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card h2,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card h2,
+.single-job.jobs-container .job-details .job-cards-grid .job-card h2 {
   margin-bottom: 0.5rem;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2 a {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2 a,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card h2 a,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card h2 a,
+.single-job.jobs-container .job-details .job-cards-grid .job-card h2 a {
   color: var(--wp-fundi-main-text-color);
   text-decoration: none;
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2 a:hover {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card h2 a:hover,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card h2 a:hover,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card h2 a:hover,
+.single-job.jobs-container .job-details .job-cards-grid .job-card h2 a:hover {
   color: var(--wp-fundi-primary-color);
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta {
   font-size: 0.85rem;
   color: var(--wp-fundi-main-text-color);
 }
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-title span.badge.featured {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-title span.badge.featured,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-title span.badge.featured,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-title span.badge.featured,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-title span.badge.featured {
   color: var(--wp-fundi-success-color);
 }
 .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details,
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags {
   margin-top: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1.4rem;
 }
 .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag,
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag {
   background-color: var(--wp-fundi-light-alternative-color);
   color: var(--wp-fundi-primary-color);
   font-size: 0.75rem;
@@ -165,36 +377,201 @@
   font-weight: 500;
 }
 .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag.type,
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.type {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.type,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag.type,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag.type,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag.type,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.type,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag.type,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag.type {
   background-color: rgba(66, 133, 244, 0.2);
   color: var(--wp-fundi-info-color);
 }
 .jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag.urgent,
-.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.urgent {
+.jobs-archive.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.urgent,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag.urgent,
+.jobs-archive.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag.urgent,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-details .tag.urgent,
+.single-job.jobs-container .jobs-results .job-cards-grid .job-card .job-meta .job-tags .tag.urgent,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-details .tag.urgent,
+.single-job.jobs-container .job-details .job-cards-grid .job-card .job-meta .job-tags .tag.urgent {
   background-color: rgba(249, 171, 0, 0.2);
   color: var(--wp-fundi-warning-color);
 }
-.jobs-archive.jobs-container .pagination {
+.jobs-archive.jobs-container .jobs-results .job-single-header,
+.jobs-archive.jobs-container .job-details .job-single-header,
+.single-job.jobs-container .jobs-results .job-single-header,
+.single-job.jobs-container .job-details .job-single-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.jobs-archive.jobs-container .jobs-results .job-single-header .job-title-section .job-meta,
+.jobs-archive.jobs-container .job-details .job-single-header .job-title-section .job-meta,
+.single-job.jobs-container .jobs-results .job-single-header .job-title-section .job-meta,
+.single-job.jobs-container .job-details .job-single-header .job-title-section .job-meta {
+  font-size: 0.85rem;
+  color: var(--wp-fundi-main-text-color);
+}
+.jobs-archive.jobs-container .jobs-results .job-description,
+.jobs-archive.jobs-container .jobs-results .job-overview,
+.jobs-archive.jobs-container .jobs-results .job-location,
+.jobs-archive.jobs-container .jobs-results .job-skills,
+.jobs-archive.jobs-container .jobs-results .job-employer,
+.jobs-archive.jobs-container .jobs-results .related-jobs,
+.jobs-archive.jobs-container .job-details .job-description,
+.jobs-archive.jobs-container .job-details .job-overview,
+.jobs-archive.jobs-container .job-details .job-location,
+.jobs-archive.jobs-container .job-details .job-skills,
+.jobs-archive.jobs-container .job-details .job-employer,
+.jobs-archive.jobs-container .job-details .related-jobs,
+.single-job.jobs-container .jobs-results .job-description,
+.single-job.jobs-container .jobs-results .job-overview,
+.single-job.jobs-container .jobs-results .job-location,
+.single-job.jobs-container .jobs-results .job-skills,
+.single-job.jobs-container .jobs-results .job-employer,
+.single-job.jobs-container .jobs-results .related-jobs,
+.single-job.jobs-container .job-details .job-description,
+.single-job.jobs-container .job-details .job-overview,
+.single-job.jobs-container .job-details .job-location,
+.single-job.jobs-container .job-details .job-skills,
+.single-job.jobs-container .job-details .job-employer,
+.single-job.jobs-container .job-details .related-jobs {
+  margin-top: 2rem;
+}
+.jobs-archive.jobs-container .jobs-results .job-overview,
+.jobs-archive.jobs-container .jobs-results .job-location,
+.jobs-archive.jobs-container .jobs-results .job-skills,
+.jobs-archive.jobs-container .jobs-results .job-employer,
+.jobs-archive.jobs-container .job-details .job-overview,
+.jobs-archive.jobs-container .job-details .job-location,
+.jobs-archive.jobs-container .job-details .job-skills,
+.jobs-archive.jobs-container .job-details .job-employer,
+.single-job.jobs-container .jobs-results .job-overview,
+.single-job.jobs-container .jobs-results .job-location,
+.single-job.jobs-container .jobs-results .job-skills,
+.single-job.jobs-container .jobs-results .job-employer,
+.single-job.jobs-container .job-details .job-overview,
+.single-job.jobs-container .job-details .job-location,
+.single-job.jobs-container .job-details .job-skills,
+.single-job.jobs-container .job-details .job-employer {
+  background-color: var(--wp-fundi-subtle-background-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--wp-fundi-border-color);
+}
+.jobs-archive.jobs-container .jobs-results .job-overview ul,
+.jobs-archive.jobs-container .jobs-results .job-location ul,
+.jobs-archive.jobs-container .jobs-results .job-skills ul,
+.jobs-archive.jobs-container .jobs-results .job-employer ul,
+.jobs-archive.jobs-container .job-details .job-overview ul,
+.jobs-archive.jobs-container .job-details .job-location ul,
+.jobs-archive.jobs-container .job-details .job-skills ul,
+.jobs-archive.jobs-container .job-details .job-employer ul,
+.single-job.jobs-container .jobs-results .job-overview ul,
+.single-job.jobs-container .jobs-results .job-location ul,
+.single-job.jobs-container .jobs-results .job-skills ul,
+.single-job.jobs-container .jobs-results .job-employer ul,
+.single-job.jobs-container .job-details .job-overview ul,
+.single-job.jobs-container .job-details .job-location ul,
+.single-job.jobs-container .job-details .job-skills ul,
+.single-job.jobs-container .job-details .job-employer ul {
+  list-style: none;
+  padding: 0;
+}
+.jobs-archive.jobs-container .jobs-results .job-overview ul li,
+.jobs-archive.jobs-container .jobs-results .job-location ul li,
+.jobs-archive.jobs-container .jobs-results .job-skills ul li,
+.jobs-archive.jobs-container .jobs-results .job-employer ul li,
+.jobs-archive.jobs-container .job-details .job-overview ul li,
+.jobs-archive.jobs-container .job-details .job-location ul li,
+.jobs-archive.jobs-container .job-details .job-skills ul li,
+.jobs-archive.jobs-container .job-details .job-employer ul li,
+.single-job.jobs-container .jobs-results .job-overview ul li,
+.single-job.jobs-container .jobs-results .job-location ul li,
+.single-job.jobs-container .jobs-results .job-skills ul li,
+.single-job.jobs-container .jobs-results .job-employer ul li,
+.single-job.jobs-container .job-details .job-overview ul li,
+.single-job.jobs-container .job-details .job-location ul li,
+.single-job.jobs-container .job-details .job-skills ul li,
+.single-job.jobs-container .job-details .job-employer ul li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.jobs-archive.jobs-container .jobs-results .job-overview ul li i,
+.jobs-archive.jobs-container .jobs-results .job-location ul li i,
+.jobs-archive.jobs-container .jobs-results .job-skills ul li i,
+.jobs-archive.jobs-container .jobs-results .job-employer ul li i,
+.jobs-archive.jobs-container .job-details .job-overview ul li i,
+.jobs-archive.jobs-container .job-details .job-location ul li i,
+.jobs-archive.jobs-container .job-details .job-skills ul li i,
+.jobs-archive.jobs-container .job-details .job-employer ul li i,
+.single-job.jobs-container .jobs-results .job-overview ul li i,
+.single-job.jobs-container .jobs-results .job-location ul li i,
+.single-job.jobs-container .jobs-results .job-skills ul li i,
+.single-job.jobs-container .jobs-results .job-employer ul li i,
+.single-job.jobs-container .job-details .job-overview ul li i,
+.single-job.jobs-container .job-details .job-location ul li i,
+.single-job.jobs-container .job-details .job-skills ul li i,
+.single-job.jobs-container .job-details .job-employer ul li i {
+  color: var(--wp-fundi-primary-color);
+}
+.jobs-archive.jobs-container .jobs-results .related-jobs .job-card,
+.jobs-archive.jobs-container .job-details .related-jobs .job-card,
+.single-job.jobs-container .jobs-results .related-jobs .job-card,
+.single-job.jobs-container .job-details .related-jobs .job-card {
+  margin-bottom: 1rem;
+}
+.jobs-archive.jobs-container .pagination,
+.single-job.jobs-container .pagination {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
-.jobs-archive.jobs-container .pagination ul {
+.jobs-archive.jobs-container .pagination ul,
+.single-job.jobs-container .pagination ul {
   list-style: none;
   display: flex;
   gap: 0.5rem;
 }
 .jobs-archive.jobs-container .pagination ul li a,
-.jobs-archive.jobs-container .pagination ul li span {
+.jobs-archive.jobs-container .pagination ul li span,
+.single-job.jobs-container .pagination ul li a,
+.single-job.jobs-container .pagination ul li span {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--wp-fundi-border-color);
   border-radius: 0.375rem;
   color: var(--wp-fundi-primary-color);
   text-decoration: none;
 }
-.jobs-archive.jobs-container .pagination ul li .current {
+.jobs-archive.jobs-container .pagination ul li .current,
+.single-job.jobs-container .pagination ul li .current {
   background-color: var(--wp-fundi-primary-color);
   color: var(--wp-fundi-light-text-color);
+}
+.jobs-archive.jobs-container .related-jobs h2,
+.single-job.jobs-container .related-jobs h2 {
+  margin-bottom: 0.5rem;
+}
+.jobs-archive.jobs-container .related-jobs .related-cards-grid,
+.single-job.jobs-container .related-jobs .related-cards-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+article.single-job.jobs-container {
+  grid-template-columns: 2fr 1fr;
+}
+@media (max-width: 768px) {
+  article.single-job.jobs-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*# sourceMappingURL=job-styles.css.map */

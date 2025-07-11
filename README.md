@@ -18,4 +18,8 @@ Schema
 ### 0.1.0
 - Added basic jobs archive. Completed MVP design
 
+### 0.2.0
+- Improved design for archive. 
+- Added design for single job page.
+
 TODO: Add settings page for dynamic settings.
