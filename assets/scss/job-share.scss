@@ -1,0 +1,22 @@
+@use 'root-and-variables.scss';
+
+.job-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    align-items: center;
+    text-align: center;
+    font-weight: 600;
+
+    span {
+        margin-right: 1rem;
+    }
+
+    a,
+    button {
+        @extend %application-button;
+        width: 120px;
+        color: var(--wp-fundi-light-alternative-color);
+    }
+}

@@ -1,0 +1,18 @@
+:root {
+  --wp-fundi-primary-color: var(--theme-palette-color-1, #2872fa);
+  --wp-fundi-alternative-color: var(--theme-palette-color-2, #1559ed);
+  --wp-fundi-main-text-color: var(--theme-palette-color-3, #3A4F66);
+  --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #192a3d);
+  --wp-fundi-border-color: var(--theme-palette-color-5, #e1e8ed);
+  --wp-fundi-subtle-background-color: var(--theme-palette-color-6, #f2f5f7);
+  --wp-fundi-main-background-color: var(--theme-palette-color-7, #FAFBFC);
+  --wp-fundi-light-alternative-color: var(--theme-palette-color-8, #ffffff);
+  --wp-fundi-success-color: #34A853;
+  --wp-fundi-error-color: #EA4335;
+  --wp-fundi-warning-color: #FBBC05;
+  --wp-fundi-info-color: #1967D2;
+  --wp-fundi-containers-border-radius: 8px;
+  --wp-fundi-small-containers-border-radius: 4px;
+}
+
+/*# sourceMappingURL=root-and-variables.css.map */
