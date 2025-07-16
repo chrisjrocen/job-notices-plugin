@@ -22,8 +22,11 @@ final class Init {
 			Base\Activate::class,
 			Admin\Options::class,
 			PostType\Jobs::class,
+			PostType\EmployerFields::class,
 			Templates\JobsArchive::class,
 			Templates\SingleJob::class,
+			Users\Employer::class,
+			Users\JobSeeker::class,
 		);
 	}
 

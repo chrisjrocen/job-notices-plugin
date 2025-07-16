@@ -42,21 +42,21 @@ class Jobs {
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_names_plural = array( 'Job Category', 'Locations', 'Companies' );
+	protected $taxonomy_names_plural = array( 'Job Category', 'Locations', 'Employers' );
 
 	/**
 	 * Taxonomy Names Singular.
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_names_singular = array( 'Job Category', 'Location', 'Company' );
+	protected $taxonomy_names_singular = array( 'Job Category', 'Location', 'Employer' );
 
 	/**
 	 * Taxonomy Slugs.
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_slugs = array( 'job_category', 'location', 'company' );
+	protected $taxonomy_slugs = array( 'job_category', 'location', 'employer' );
 
 	/**
 	 * Taxonomy Slug for Jobs.
@@ -124,7 +124,7 @@ class Jobs {
 	/**
 	 * Constructor to register the Jobs post type and taxonomy.
 	 */
-	public function __construct() {
+	public function register() {
 		$this->register_jobs_post_type();
 	}
 }
