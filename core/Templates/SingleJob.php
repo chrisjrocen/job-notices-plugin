@@ -99,6 +99,8 @@ class SingleJob {
 	/**
 	 * Outputs social share buttons for the current post.
 	 *
+	 * @param String $post_url Post url.
+	 * @param String $post_title Post title.
 	 * @return void
 	 */
 	public function job_notices_share_buttons( $post_url, $post_title ) {

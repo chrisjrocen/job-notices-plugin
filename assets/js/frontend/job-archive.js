@@ -1,5 +1,5 @@
 // JavaScript for handling job archive filter interactions
-
+//TODO Implement Ajax so that the page does not reload. 
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
 

@@ -22,4 +22,8 @@ Schema
 - Improved design for archive. 
 - Added design for single job page.
 
+### 0.3.0
+- Added user roles (employer and Job seeker) REG MODULE NEEDED
+- Added employer meta data.
+
 TODO: Add settings page for dynamic settings.

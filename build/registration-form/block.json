@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "job-notices/job-notices-registration-form",
+  "version": "2.0.1",
+  "title": "Registration Form",
+  "category": "widgets",
+  "icon": "feedback",
+  "description": "Display Registration Form.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "anchor": true,
+    "ariaLabel": true,
+    "multiple": true,
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true,
+      "__experimentalDefaultControls": {
+        "padding": true,
+        "blockGap": true
+      }
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "style": true,
+        "width": true
+      }
+    },
+    "shadow": true
+  },
+  "textdomain": "job-notices",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}
