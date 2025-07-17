@@ -27,20 +27,20 @@ if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
  *
  * @return void
  */
-function activate_mrksuperblocks_jobs_addon_plugin() {
+function activate_jobs_notices_plugin() {
 	JOB_NOTICES\Base\Activate::activate();
 }
-register_activation_hook( __FILE__, 'activate_mrksuperblocks_jobs_addon_plugin' );
+register_activation_hook( __FILE__, 'activate_jobs_notices_plugin' );
 
 /**
  * The code that runs during plugin deactivation.
  *
  * @return void
  */
-function deactivate_mrksuperblocks_jobs_addon_plugin() {
+function deactivate_jobs_notices_plugin() {
 	JOB_NOTICES\Base\Deactivate::deactivate();
 }
-register_deactivation_hook( __FILE__, 'deactivate_mrksuperblocks_jobs_addon_plugin' );
+register_deactivation_hook( __FILE__, 'deactivate_jobs_notices_plugin' );
 
 /**
  * Initialize all the core classes of the plugin.

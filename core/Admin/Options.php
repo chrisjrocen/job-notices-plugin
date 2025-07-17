@@ -80,7 +80,7 @@ class Options extends BaseController {
 		$response                            = array();
 		$response['post_type_name']          = get_option( 'options_jobs_post_type_name', 'Jobs' );
 		$response['post_type_name_singular'] = get_option( 'options_jobs_post_type_name_singular', 'Job' );
-		$response['post_type_slug']          = get_option( 'options_jobs_post_type_slug', 'mrk-jobs-listing' );
+		$response['post_type_slug']          = get_option( 'options_jobs_post_type_slug', 'job-notices-jobs-listing' );
 		$response['enable_editor']           = get_option( 'options_jobs_enable_gutenberg_editor', 'true' );
 		$response['enable_detail_pages']     = get_option( 'options_jobs_enable_detail_pages', 'true' );
 		$response['enable_taxonomy']         = get_option( 'options_jobs_enable_taxonomy', 'false' );
@@ -229,7 +229,7 @@ class Options extends BaseController {
 			const mctpOptions = {
 				postTypeName: "<?php echo esc_attr( get_option( 'options_jobs_post_type_name', 'Jobs' ) ); ?>",
 				postTypeNameSingle: "<?php echo esc_attr( get_option( 'options_jobs_post_type_name_singular', 'Job' ) ); ?>",
-				postTypeSlug: "<?php echo esc_attr( get_option( 'options_jobs_post_type_slug', 'mrk-jobs-listing' ) ); ?>",
+				postTypeSlug: "<?php echo esc_attr( get_option( 'options_jobs_post_type_slug', 'job-notices-jobs-listing' ) ); ?>",
 				enabledBlockEditor: <?php echo esc_attr( get_option( 'options_jobs_enable_gutenberg_editor', 'true' ) ); ?>,
 				enableDetailPages: <?php echo esc_attr( get_option( 'options_jobs_enable_detail_pages', 'true' ) ); ?>,
 				enableTaxonomy: <?php echo esc_attr( get_option( 'options_jobs_enable_taxonomy', 'false' ) ); ?>,

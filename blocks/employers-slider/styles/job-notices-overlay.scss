@@ -1,0 +1,31 @@
+.job-noticescarousel-content {
+	position: relative;
+	overflow: hidden;
+
+	.job-noticesimage {
+		position: relative;
+	}
+
+	.job-noticesimage-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		text-align: center;
+		pointer-events: none; // Prevent blocking image interactions if needed
+	}
+
+	&:hover {
+		.job-noticesimage-overlay {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+}
