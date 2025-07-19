@@ -56,29 +56,24 @@ class EmployersSlider extends BaseController {
 	 * @return string The HTML markup for the carousel.
 	 */
 	public function get_carousel( $attr ) {
-		// Use the 'numberOfItems' attribute from the block, with a default of -1 (all).
 		$number_of_items = isset( $attr['numberOfItems'] ) ? intval( $attr['numberOfItems'] ) : -1;
 
-		// For debugging: You can uncomment these lines to see what's happening.
 		do_action( 'qm/debug', $attr );
 
-		// Arguments to get the employer terms.
 		$args = array(
 			'taxonomy'   => 'employer',
 			'hide_empty' => true,
-			'number'     => $number_of_items, // Use the dynamic number of items.
+			'number'     => $number_of_items,
 		);
 
 		$terms = get_terms( $args );
 		do_action( 'qm/debug', $terms );
 
-		// If no terms are found, return a simple message.
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
 			do_action( 'qm/debug', 'No Employer Terms Found' );
 			return '<p>No Employers found for this carousel.</p>';
 		}
 
-		// --- Start building the HTML markup ---
 		$instance_id          = sanitize_html_class( 'swiper-js-' . $attr['instanceId'] );
 		$post_list_formatted  = sprintf(
 			'<div class="job-noticescarousel-contents align%2$s %3$s swiper" id="%1$s">',
@@ -95,19 +90,16 @@ class EmployersSlider extends BaseController {
 
 			$logo_url = get_term_meta( $term->term_id, 'job_notices_employer_logo', true );
 
-			// Check if a logo URL exists and create the image tag.
 			if ( ! empty( $logo_url ) ) {
 				$logo_img = sprintf( '<img class="swiper-lazy" src="%s" alt="%s" />', esc_url( $logo_url ), esc_attr( $term_name ) );
 			} else {
-				// Provide a placeholder if no logo is found.
+				// TODO Provide a placeholder if no logo is found.
 				$logo_img = '<div class="placeholder-logo">No Logo</div>';
 			}
 
-			// Add the slide markup.
 			$post_list_formatted .= '<div class="job-notices-carousel-content swiper-slide">';
 			$post_list_formatted .= sprintf( '<a href="%s" class="job-notices-image">%s</a>', esc_url( $term_link ), $logo_img );
 			if ( true === $attr['displayTitle'] || 'true' === $attr['displayTitle'] ) {
-				// If displayTitle is true, show the term name.
 				$post_list_formatted .= sprintf( '<div class="job-notices-carousel-title">%s</div>', $term_name );
 			}
 			$post_list_formatted .= '</div>';
@@ -122,8 +114,6 @@ class EmployersSlider extends BaseController {
 		// for the carousel based on the block's settings.
 
 		$spacing_styles = $this->get_block_level_styles( $attr );
-
-		do_action('qm/debug', $spacing_styles);
 
 		$this->job_notices_enqueue_inline_styles(
 			'job_notices_register_inline_carousel_block_styles',
@@ -148,8 +138,6 @@ class EmployersSlider extends BaseController {
 	 * @return void
 	 */
 	public function job_notices_register_inline_carousel_block_scripts( $attr, $instance_id ) {
-		// These variables should be defined before this function is hooked.
-
 		printf(
 			'<script id="%1$s">
 				document.addEventListener("DOMContentLoaded", function() {
@@ -223,8 +211,6 @@ class EmployersSlider extends BaseController {
 		$box_shadow,
 		$spacing_styles
 	) {
-		// Output dynamic styles for the carousel instance.
-
 		printf(
 			'<style id="%1$s_carousel">
 
