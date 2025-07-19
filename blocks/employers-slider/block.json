@@ -26,6 +26,10 @@
 				"blockGap": true
 			}
 		},
+		"color" : {
+			"background": true,
+			"text": true
+		},
 		"__experimentalBorder": {
 			"color": true,
 			"radius": true,
@@ -49,9 +53,9 @@
 			"type": "number",
 			"default": "3"
 		},
-		"orderBy": {
-			"type": "string",
-			"default": ""
+		"displayTitle": {
+			"type": "boolean",
+			"default": "false"
 		},
 		"order": {
 			"type": "string",
@@ -108,44 +112,12 @@
 		"showDots": {
 			"type": "boolean",
 			"default": true
-		},
-		"slideShadowColor": {
-			"type": "string",
-			"default": "#FFFFFF"
-		},
-		"slideShadowOpacity": {
-			"type": "number",
-			"default": 0.5
-		},
-		"slideShadowBlur": {
-			"type": "number",
-			"default": 0
-		},
-		"slideShadowOffsetX": {
-			"type": "number",
-			"default": 0
-		},
-		"slideShadowOffsetY": {
-			"type": "number",
-			"default": 0
-		},
-		"slideShadowSpread": {
-			"type": "number",
-			"default": 0
 		}
 	},
 	"styles": [
 		{
-			"name": "job-noticesrounded",
-			"label": "Round"
-		},
-		{
-			"name": "job-noticesrectangle",
-			"label": "Rectangle"
-		},
-		{
-			"name": "job-noticesrounded-rectangle",
-			"label": "Rounded Rectangle"
+			"name": "job-notices-rounded",
+			"label": "Rounded"
 		}
 	],
 	"textdomain": "employers-slider",

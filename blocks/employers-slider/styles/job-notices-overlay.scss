@@ -1,12 +1,23 @@
-.job-noticescarousel-content {
+.job-notices-carousel-content {
 	position: relative;
 	overflow: hidden;
 
-	.job-noticesimage {
+	.job-notices-image {
 		position: relative;
+		width: 120px;
+		height: 120px;
+		display: flex;
+		align-items: center;
+
+		img {
+			width: 100%;
+			height: auto;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
 	}
 
-	.job-noticesimage-overlay {
+	.job-notices-image-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -23,7 +34,7 @@
 	}
 
 	&:hover {
-		.job-noticesimage-overlay {
+		.job-notices-image-overlay {
 			opacity: 1;
 			pointer-events: auto;
 		}

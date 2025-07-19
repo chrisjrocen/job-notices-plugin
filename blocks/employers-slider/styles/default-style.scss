@@ -11,7 +11,7 @@
 	--employers-slider-border-color: var(--global-palette6, #718096);
 }
 
-.job-noticescarousel-contents.swiper {
+.job-notices-carousel-content.swiper {
 	width: 100%;
 	height: calc(100% + 10px);
 	background-color: var(--employers-slider-background-color, #ffffff);
@@ -30,7 +30,7 @@
 			align-items: center;
 			overflow: visible;
 
-			&.job-noticescarousel-content {
+			&.job-notices-carousel-content {
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-start;
@@ -52,11 +52,11 @@
 	}
 }
 
-.is-style-job-noticesrounded {
-	.job-noticescarousel-content {
+.is-style-job-notices-rounded {
+	.job-notices-carousel-content {
 
 		.job-noticesfeatured-image,
-		.job-noticesimage-overlay {
+		.job-notices-image-overlay {
 			border-radius: 50%;
 			aspect-ratio: 1 / 1;
 			display: block;
@@ -74,7 +74,7 @@
 			box-sizing: border-box;
 		}
 
-		.job-noticesfeatured-image .job-noticesimage img {
+		.job-noticesfeatured-image .job-notices-image img {
 			border-radius: 50%;
 			aspect-ratio: 1 / 1;
 			display: block;
@@ -87,10 +87,10 @@
 }
 
 .is-style-default {
-	.job-noticescarousel-content {
+	.job-notices-carousel-content {
 
 		.job-noticesfeatured-image,
-		.job-noticesimage-overlay {
+		.job-notices-image-overlay {
 			border-radius: 0%;
 			aspect-ratio: 1 / 1;
 			display: block;
@@ -109,7 +109,7 @@
 			box-sizing: border-box;
 		}
 
-		.job-noticesfeatured-image .job-noticesimage img {
+		.job-noticesfeatured-image .job-notices-image img {
 			border-radius: 0%;
 			aspect-ratio: 1 / 1;
 			display: block;
@@ -121,10 +121,10 @@
 }
 
 .is-style-job-noticesrectangle {
-	.job-noticescarousel-content {
+	.job-notices-carousel-content {
 
 		.job-noticesfeatured-image,
-		.job-noticesimage-overlay {
+		.job-notices-image-overlay {
 			border-radius: 0%;
 			aspect-ratio: 16 / 9;
 			display: block;
@@ -142,7 +142,7 @@
 			box-sizing: border-box;
 		}
 
-		.job-noticesfeatured-image .job-noticesimage img {
+		.job-noticesfeatured-image .job-notices-image img {
 			border-radius: 0%;
 			aspect-ratio: 16 / 9;
 			display: block;
@@ -154,11 +154,11 @@
 	}
 }
 
-.is-style-job-noticesrounded-rectangle {
-	.job-noticescarousel-content {
+.is-style-job-notices-rounded-rectangle {
+	.job-notices-carousel-content {
 
 		.job-noticesfeatured-image,
-		.job-noticesimage-overlay {
+		.job-notices-image-overlay {
 			border-radius: 20px;
 			aspect-ratio: 16 / 9;
 			display: block;
@@ -176,7 +176,7 @@
 			box-sizing: border-box;
 		}
 
-		.job-noticesfeatured-image .job-noticesimage img {
+		.job-noticesfeatured-image .job-notices-image img {
 			border-radius: 20px;
 			aspect-ratio: 16 / 9;
 			display: block;

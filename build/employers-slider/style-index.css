@@ -14,17 +14,17 @@
   --employers-slider-border-color: var(--global-palette6, #718096);
 }
 
-.job-notices-carousel-content.swiper {
+.job-notices-carousel-contentswiper {
   width: 100%;
   height: calc(100% + 10px);
   background-color: var(--employers-slider-background-color, #ffffff);
   color: var(--job-notices-text-color, #2D3748);
   justify-content: center;
 }
-.job-notices-carousel-content.swiper .swiper-wrapper {
+.job-notices-carousel-contentswiper .swiper-wrapper {
   justify-content: center;
 }
-.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide {
+.job-notices-carousel-contentswiper .swiper-wrapper .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: var(--job-noticesswiper-background-color, #ffffff);
@@ -33,18 +33,18 @@
   align-items: center;
   overflow: visible;
 }
-.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content {
+.job-notices-carousel-contentswiper .swiper-wrapper .swiper-slide.job-notices-carousel-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--job-noticescarousel-gap, 30px);
 }
-.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticestitle {
+.job-notices-carousel-contentswiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticestitle {
   font-weight: 700;
   font-size: 18px;
 }
-.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticescompany,
-.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticesblurb {
+.job-notices-carousel-contentswiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticescompany,
+.job-notices-carousel-contentswiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticesblurb {
   font-weight: 400;
   font-size: 16px;
   margin: 20px;
@@ -187,7 +187,7 @@
 .job-notices-carousel-content .job-notices-image-overlay {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: auto;
   display: flex;
@@ -203,3 +203,5 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+/*# sourceMappingURL=style-index.css.map*/

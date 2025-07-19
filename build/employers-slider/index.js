@@ -8,7 +8,7 @@
   \********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/employers-slider","version":"2.0.1","title":"Employers Slider","category":"widgets","icon":"slides","description":"Display Employers Slider.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"attributes":{"instanceId":{"type":"string","default":""},"numberOfItems":{"type":"number","default":"3"},"orderBy":{"type":"string","default":""},"order":{"type":"string","default":"DESC"},"slidesPerView":{"type":"number","default":4},"autoplayDelay":{"type":"number","default":5000},"autoplayDisableOninteraction":{"type":"boolean","default":true},"itemDevice":{"type":"string","default":"desktop"},"desktopSlidesPerView":{"type":"number","default":4},"tabSlidesPerView":{"type":"number","default":3},"phoneSlidesPerView":{"type":"number","default":2},"desktopSpaceBetween":{"type":"number","default":30},"tabSpaceBetween":{"type":"number","default":30},"phoneSpaceBetween":{"type":"number","default":30},"lazyLoad":{"type":"boolean","default":true},"loopSlides":{"type":"boolean","default":true},"showDots":{"type":"boolean","default":true},"slideShadowColor":{"type":"string","default":"#FFFFFF"},"slideShadowOpacity":{"type":"number","default":0.5},"slideShadowBlur":{"type":"number","default":0},"slideShadowOffsetX":{"type":"number","default":0},"slideShadowOffsetY":{"type":"number","default":0},"slideShadowSpread":{"type":"number","default":0}},"styles":[{"name":"job-noticesrounded","label":"Round"},{"name":"job-noticesrectangle","label":"Rectangle"},{"name":"job-noticesrounded-rectangle","label":"Rounded Rectangle"}],"textdomain":"employers-slider","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/employers-slider","version":"2.0.1","title":"Employers Slider","category":"widgets","icon":"slides","description":"Display Employers Slider.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"color":{"background":true,"text":true},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"attributes":{"instanceId":{"type":"string","default":""},"numberOfItems":{"type":"number","default":"3"},"displayTitle":{"type":"boolean","default":"false"},"order":{"type":"string","default":"DESC"},"slidesPerView":{"type":"number","default":4},"autoplayDelay":{"type":"number","default":5000},"autoplayDisableOninteraction":{"type":"boolean","default":true},"itemDevice":{"type":"string","default":"desktop"},"desktopSlidesPerView":{"type":"number","default":4},"tabSlidesPerView":{"type":"number","default":3},"phoneSlidesPerView":{"type":"number","default":2},"desktopSpaceBetween":{"type":"number","default":30},"tabSpaceBetween":{"type":"number","default":30},"phoneSpaceBetween":{"type":"number","default":30},"lazyLoad":{"type":"boolean","default":true},"loopSlides":{"type":"boolean","default":true},"showDots":{"type":"boolean","default":true}},"styles":[{"name":"job-notices-rounded","label":"Rounded"}],"textdomain":"employers-slider","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
 
 /***/ }),
 
@@ -136,12 +136,7 @@ function Edit({
 }) {
   const {
     numberOfItems,
-    showOverlay,
-    showOverlayName,
-    showOverlayCompany,
-    showOverlayBlurb,
-    orderBy,
-    order,
+    displayTitle,
     autoplayDelay,
     autoplayDisableOninteraction,
     itemDevice,
@@ -152,13 +147,7 @@ function Edit({
     tabSpaceBetween,
     phoneSpaceBetween,
     lazyLoad,
-    loopSlides,
-    showDots,
-    slideShadowOpacity,
-    slideShadowBlur,
-    slideShadowSpread,
-    slideShadowOffsetX,
-    slideShadowOffsetY
+    showDots
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   const instanceId = clientId;
@@ -167,23 +156,6 @@ function Edit({
       instanceId
     });
   }, [instanceId]);
-  const orderby_options = [{
-    label: 'Default',
-    value: ''
-  }, {
-    label: 'Name',
-    value: 'title'
-  }, {
-    label: 'Custom Rank',
-    value: 'people_ranking'
-  }];
-  const order_options = [{
-    label: 'Ascending',
-    value: 'ASC'
-  }, {
-    label: 'Descending',
-    value: 'DESC'
-  }];
   const boolean_options = [{
     label: 'Yes',
     value: true
@@ -191,13 +163,12 @@ function Edit({
     label: 'No',
     value: false
   }];
-  let cats;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number of Items', 'job-notices'),
         initialOpen: false,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
               label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter the number of items to display', 'job-notices'),
@@ -208,32 +179,15 @@ function Edit({
               type: "number"
             })
           })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order options', 'job-notices'),
-        initialOpen: false,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order by', 'job-notices'),
-              options: orderby_options,
-              value: orderBy,
-              onChange: value => {
-                setAttributes({
-                  orderBy: value
-                });
-              }
-            })
-          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order in', 'job-notices'),
-              options: order_options,
-              value: order,
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display title?', 'job-notices'),
+              options: boolean_options,
+              value: displayTitle,
               onChange: value => {
                 setAttributes({
-                  order: value
+                  displayTitle: value
                 });
               }
             })
@@ -344,71 +298,6 @@ function Edit({
                   showDots: value
                 });
               }
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide Shadow Opacity', 'job-notices'),
-              value: slideShadowOpacity,
-              onChange: value => setAttributes({
-                slideShadowOpacity: value
-              }),
-              min: 0,
-              max: 1,
-              step: 0.01 // Opacity should be 0–1
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide Shadow Blur', 'job-notices'),
-              value: slideShadowBlur,
-              onChange: value => setAttributes({
-                slideShadowBlur: value
-              }),
-              min: 0,
-              max: 100,
-              step: 1
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide Shadow Spread', 'job-notices'),
-              value: slideShadowSpread,
-              onChange: value => setAttributes({
-                slideShadowSpread: value
-              }),
-              min: -100,
-              max: 100,
-              step: 1
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide Shadow Offset X', 'job-notices'),
-              value: slideShadowOffsetX,
-              onChange: value => setAttributes({
-                slideShadowOffsetX: value
-              }),
-              min: -100,
-              max: 100,
-              step: 1
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("fieldset", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide Shadow Offset Y', 'job-notices'),
-              value: slideShadowOffsetY,
-              onChange: value => setAttributes({
-                slideShadowOffsetY: value
-              }),
-              min: -100,
-              max: 100,
-              step: 1
             })
           })
         })]

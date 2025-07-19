@@ -29,7 +29,6 @@ class EmployersSlider extends BaseController {
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ), 1 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 1 );
-		add_action( 'after_setup_theme', array( $this, 'job_notices_register_block_styles' ) );
 
 		register_block_type_from_metadata(
 			$this->plugin_path . 'build/employers-slider/',
@@ -61,14 +60,13 @@ class EmployersSlider extends BaseController {
 		$number_of_items = isset( $attr['numberOfItems'] ) ? intval( $attr['numberOfItems'] ) : -1;
 
 		// For debugging: You can uncomment these lines to see what's happening.
-		// do_action( 'qm/debug', 'Carousel Called (Employers)' );
-		// do_action( 'qm/debug', $attr );
+		do_action( 'qm/debug', $attr );
 
 		// Arguments to get the employer terms.
 		$args = array(
 			'taxonomy'   => 'employer',
 			'hide_empty' => true,
-			'number'     => 10, // Use the dynamic number of items.
+			'number'     => $number_of_items, // Use the dynamic number of items.
 		);
 
 		$terms = get_terms( $args );
@@ -106,22 +104,26 @@ class EmployersSlider extends BaseController {
 			}
 
 			// Add the slide markup.
-			$post_list_formatted .= '<div class="job-noticescarousel-content swiper-slide">';
-			$post_list_formatted .= sprintf( '<a href="%s" class="job-noticesimage">%s</a>', esc_url( $term_link ), $logo_img );
-			$post_list_formatted .= sprintf( '<div class="term-title">%s</div>', $term_name );
+			$post_list_formatted .= '<div class="job-notices-carousel-content swiper-slide">';
+			$post_list_formatted .= sprintf( '<a href="%s" class="job-notices-image">%s</a>', esc_url( $term_link ), $logo_img );
+			if ( true === $attr['displayTitle'] || 'true' === $attr['displayTitle'] ) {
+				// If displayTitle is true, show the term name.
+				$post_list_formatted .= sprintf( '<div class="job-notices-carousel-title">%s</div>', $term_name );
+			}
 			$post_list_formatted .= '</div>';
 		}
 
-		$post_list_formatted .= '</div>'; // End .swiper-wrapper
+		$post_list_formatted .= '</div>';
 		$post_list_formatted .= '<div class="job-noticespagination swiper-pagination"></div>';
-		$post_list_formatted .= '</div>'; // End main wrapper (.swiper)
+		$post_list_formatted .= '</div>';
 
 		// --- Enqueue Styles & Scripts ---
 		// This section generates and injects CSS styles and JavaScript configurations
 		// for the carousel based on the block's settings.
 
-		$box_shadow     = $attr['slideShadowOffsetX'] . 'px ' . $attr['slideShadowOffsetY'] . 'px ' . $attr['slideShadowBlur'] . 'px ' . $attr['slideShadowSpread'] . 'px ' . $this->job_notices_extract_color_value( $attr['slideShadowColor'] );
 		$spacing_styles = $this->get_block_level_styles( $attr );
+
+		do_action('qm/debug', $spacing_styles);
 
 		$this->job_notices_enqueue_inline_styles(
 			'job_notices_register_inline_carousel_block_styles',
@@ -136,32 +138,6 @@ class EmployersSlider extends BaseController {
 		);
 
 		return $post_list_formatted;
-	}
-
-
-	/**
-	 * Register block styles for Carousel block.
-	 *
-	 * @return void
-	 */
-	public function job_notices_register_block_styles() {
-
-		$styles = array(
-			array(
-				'name'  => 'job-noticesrounded',
-				'label' => __( 'Round', 'job-notices' ),
-			),
-			array(
-				'name'  => 'job-noticesrectangle',
-				'label' => __( 'Rectangle', 'job-notices' ),
-			),
-			array(
-				'name'  => 'job-noticesrounded-rectangle',
-				'label' => __( 'Rounded Rectangle', 'job-notices' ),
-			),
-		);
-
-		$this->register_job_notices_block_styles( 'job-notices/employers-slider', $styles );
 	}
 
 	/**
@@ -238,6 +214,7 @@ class EmployersSlider extends BaseController {
 	 * @param Array  $attr attributes from React Block.
 	 * @param String $instance_id ID target for Block.
 	 * @param String $box_shadow from the block params.
+	 * @param String $spacing_styles Arraay of all the spacing styles.
 	 * @return void
 	 */
 	public function job_notices_register_inline_carousel_block_styles(
@@ -254,24 +231,22 @@ class EmployersSlider extends BaseController {
 			#%1$s,
 			#%1$s .swiper-wrapper { 
 				justify-content: flex-start;
+				background: %4$s;
 			}
 			#%1$s .swiper-wrapper { 
 				gap: %3$s;
 			}
-			#%1$s .job-noticescarousel-content.swiper-slide {
-  				background: transparent;
+			#%1$s .job-notices-carousel-content.swiper-slide {
   				box-shadow: none;
   				overflow: visible;
   				padding: 0;
   				margin: 0;
 			}
-			#%1$s .job-noticescarousel-content.swiper-slide .job-noticesfeatured-image .job-noticesimage img {
-				box-shadow: %2$s;
-			}
 			</style>',
 			esc_attr( $instance_id ),
 			esc_attr( $box_shadow ),
 			esc_attr( $spacing_styles['gap'] ),
+			esc_attr( $spacing_styles['background-color'] )
 		);
 	}
 }

@@ -164,6 +164,10 @@ trait Styler {
 
 		$styles['border-color'] = $border_color;
 
+		$background_color = $this->job_notices_extract_color_value( $attr['backgroundColor'] );
+
+		$styles['background-color'] = $background_color;
+
 		// $styles['block-gap'] = $attr['style']['spacing']['blockGap'] ?? 0;
 
 		return $styles;
@@ -233,32 +237,5 @@ trait Styler {
 		}
 
 		return $style;
-	}
-
-
-	/**
-	 * Register blocks styles for a given block.
-	 *
-	 * @param string $block_name Full block name.
-	 * @param array  $styles     Array of styles to register. Each style is an associative array with 'name' and 'label'.
-	 *
-	 * @return void
-	 */
-	public function register_job_notices_block_styles( string $block_name, array $styles ) {
-		if ( ! function_exists( 'register_block_style' ) ) {
-			return;
-		}
-
-		foreach ( $styles as $style ) {
-			if ( isset( $style['name'], $style['label'] ) ) {
-				register_block_style(
-					$block_name,
-					array(
-						'name'  => $style['name'],
-						'label' => $style['label'],
-					)
-				);
-			}
-		}
 	}
 }

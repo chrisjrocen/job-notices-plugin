@@ -44,12 +44,7 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         numberOfItems,
-        showOverlay,
-        showOverlayName,
-        showOverlayCompany,
-        showOverlayBlurb,
-        orderBy,
-        order,
+        displayTitle,
         autoplayDelay,
         autoplayDisableOninteraction,
         itemDevice,
@@ -60,13 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         tabSpaceBetween,
         phoneSpaceBetween,
         lazyLoad,
-        loopSlides,
-        showDots,
-        slideShadowOpacity,
-        slideShadowBlur,
-        slideShadowSpread,
-        slideShadowOffsetX,
-        slideShadowOffsetY
+        showDots
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -75,32 +64,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         setAttributes({ instanceId });
     }, [instanceId]);
-
-    const orderby_options = [
-        {
-            label: 'Default',
-            value: '',
-        },
-        {
-            label: 'Name',
-            value: 'title',
-        },
-        {
-            label: 'Custom Rank',
-            value: 'people_ranking',
-        }
-    ];
-
-    const order_options = [
-        {
-            label: 'Ascending',
-            value: 'ASC',
-        },
-        {
-            label: 'Descending',
-            value: 'DESC',
-        }
-    ];
 
     const boolean_options = [
         {
@@ -112,8 +75,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             value: false
         }
     ];
-
-    let cats;
 
     return (
         <>
@@ -132,31 +93,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             />
                         </fieldset>
                     </PanelRow>
-                </PanelBody>
-                <PanelBody
-                    title={__('Order options', 'job-notices')}
-                    initialOpen={false}
-                >
                     <PanelRow>
                         <fieldset>
                             <SelectControl
-                                label={__('Order by', 'job-notices')}
-                                options={orderby_options}
-                                value={orderBy}
+                                label={__('Display title?', 'job-notices')}
+                                options={boolean_options}
+                                value={displayTitle}
                                 onChange={(value) => {
-                                    setAttributes({ orderBy: value });
-                                }}
-                            />
-                        </fieldset>
-                    </PanelRow>
-                    <PanelRow>
-                        <fieldset>
-                            <SelectControl
-                                label={__('Order in', 'job-notices')}
-                                options={order_options}
-                                value={order}
-                                onChange={(value) => {
-                                    setAttributes({ order: value });
+                                    setAttributes({ displayTitle: value });
                                 }}
                             />
                         </fieldset>
@@ -294,70 +238,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 onChange={(value) => {
                                     setAttributes({ showDots: value });
                                 }}
-                            />
-                        </fieldset>
-                    </PanelRow>
-                    <PanelRow>
-                        <fieldset>
-                            <RangeControl
-                                label={__('Slide Shadow Opacity', 'job-notices')}
-                                value={slideShadowOpacity}
-                                onChange={(value) => setAttributes({ slideShadowOpacity: value })}
-                                min={0}
-                                max={1}
-                                step={0.01} // Opacity should be 0–1
-                            />
-                        </fieldset>
-                    </PanelRow>
-
-                    <PanelRow>
-                        <fieldset>
-                            <RangeControl
-                                label={__('Slide Shadow Blur', 'job-notices')}
-                                value={slideShadowBlur}
-                                onChange={(value) => setAttributes({ slideShadowBlur: value })}
-                                min={0}
-                                max={100}
-                                step={1}
-                            />
-                        </fieldset>
-                    </PanelRow>
-
-                    <PanelRow>
-                        <fieldset>
-                            <RangeControl
-                                label={__('Slide Shadow Spread', 'job-notices')}
-                                value={slideShadowSpread}
-                                onChange={(value) => setAttributes({ slideShadowSpread: value })}
-                                min={-100}
-                                max={100}
-                                step={1}
-                            />
-                        </fieldset>
-                    </PanelRow>
-
-                    <PanelRow>
-                        <fieldset>
-                            <RangeControl
-                                label={__('Slide Shadow Offset X', 'job-notices')}
-                                value={slideShadowOffsetX}
-                                onChange={(value) => setAttributes({ slideShadowOffsetX: value })}
-                                min={-100}
-                                max={100}
-                                step={1}
-                            />
-                        </fieldset>
-                    </PanelRow>
-
-                    <PanelRow>
-                        <fieldset>
-                            <RangeControl
-                                label={__('Slide Shadow Offset Y', 'job-notices')}
-                                value={slideShadowOffsetY}
-                                onChange={(value) => setAttributes({ slideShadowOffsetY: value })}
-                                min={-100}
-                                max={100}
-                                step={1}
                             />
                         </fieldset>
                     </PanelRow>
