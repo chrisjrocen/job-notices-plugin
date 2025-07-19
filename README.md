@@ -26,4 +26,7 @@ Schema
 - Added user roles (employer and Job seeker) REG MODULE NEEDED
 - Added employer meta data.
 
+### 0.4.0
+- Added carousel block. Using swiper.js library
+
 TODO: Add settings page for dynamic settings.

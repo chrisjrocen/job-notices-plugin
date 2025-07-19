@@ -27,6 +27,7 @@ final class Init {
 			Templates\SingleJob::class,
 			Users\Employer::class,
 			Users\JobSeeker::class,
+			Blocks\EmployersSlider::class,
 		);
 	}
 
