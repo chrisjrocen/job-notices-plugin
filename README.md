@@ -29,4 +29,7 @@ Schema
 ### 0.4.0
 - Added carousel block. Using swiper.js library
 
+### 0.5.0
+- Added Jobs Counter shortcode.
+
 TODO: Add settings page for dynamic settings.

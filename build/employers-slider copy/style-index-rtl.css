@@ -1,0 +1,205 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!../../../../../../../../../usr/local/lib/node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/employers-slider copy/style.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --job-noticeshover-color: #283784;
+  --job-noticescarousel-max-height: 400px;
+  --job-noticescarousel-padding: 30px 30px 30px 30px;
+  --job-noticescarousel-gap: 30px;
+  --job-noticesswiper-background-color: var(--global-palette9, #ffffff);
+  --employers-slider-background-color: var(--global-palette9, #ffffff);
+  --job-notices-text-color: var(--global-palette4, #2D3748);
+  --job-notices-overlay-text-color: var(--global-palette7, #EDF2F7);
+  --job-notices-overlay-background-color: var(--global-palette2, #215387);
+  --employers-slider-border-color: var(--global-palette6, #718096);
+}
+
+.job-notices-carousel-content.swiper {
+  width: 100%;
+  height: calc(100% + 10px);
+  background-color: var(--employers-slider-background-color, #ffffff);
+  color: var(--job-notices-text-color, #2D3748);
+  justify-content: center;
+}
+.job-notices-carousel-content.swiper .swiper-wrapper {
+  justify-content: center;
+}
+.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: var(--job-noticesswiper-background-color, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--job-noticescarousel-gap, 30px);
+}
+.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticestitle {
+  font-weight: 700;
+  font-size: 18px;
+}
+.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticescompany,
+.job-notices-carousel-content.swiper .swiper-wrapper .swiper-slide.job-notices-carousel-content .job-noticesblurb {
+  font-weight: 400;
+  font-size: 16px;
+  margin: 20px;
+}
+
+.is-style-job-notices-rounded .job-notices-carousel-content .job-noticesfeatured-image,
+.is-style-job-notices-rounded .job-notices-carousel-content .job-notices-image-overlay {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: var(--job-notices-overlay-background-color, #215387);
+  color: var(--job-notices-overlay-text-color, #EDF2F7);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.is-style-job-notices-rounded .job-notices-carousel-content .job-noticesfeatured-image .job-notices-image img {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: block;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.is-style-default .job-notices-carousel-content .job-noticesfeatured-image,
+.is-style-default .job-notices-carousel-content .job-notices-image-overlay {
+  border-radius: 0%;
+  aspect-ratio: 1/1;
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: var(--job-notices-overlay-background-color, #215387);
+  color: var(--job-notices-overlay-text-color, #EDF2F7);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.is-style-default .job-notices-carousel-content .job-noticesfeatured-image .job-notices-image img {
+  border-radius: 0%;
+  aspect-ratio: 1/1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.is-style-job-noticesrectangle .job-notices-carousel-content .job-noticesfeatured-image,
+.is-style-job-noticesrectangle .job-notices-carousel-content .job-notices-image-overlay {
+  border-radius: 0%;
+  aspect-ratio: 16/9;
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: var(--job-notices-overlay-background-color, #215387);
+  color: var(--job-notices-overlay-text-color, #EDF2F7);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.is-style-job-noticesrectangle .job-notices-carousel-content .job-noticesfeatured-image .job-notices-image img {
+  border-radius: 0%;
+  aspect-ratio: 16/9;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.is-style-job-notices-rounded-rectangle .job-notices-carousel-content .job-noticesfeatured-image,
+.is-style-job-notices-rounded-rectangle .job-notices-carousel-content .job-notices-image-overlay {
+  border-radius: 20px;
+  aspect-ratio: 16/9;
+  display: block;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: var(--job-notices-overlay-background-color, #215387);
+  color: var(--job-notices-overlay-text-color, #EDF2F7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.is-style-job-notices-rounded-rectangle .job-notices-carousel-content .job-noticesfeatured-image .job-notices-image img {
+  border-radius: 20px;
+  aspect-ratio: 16/9;
+  display: block;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.job-notices-carousel-content {
+  position: relative;
+  overflow: hidden;
+}
+.job-notices-carousel-content .job-notices-image {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+}
+.job-notices-carousel-content .job-notices-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.job-notices-carousel-content .job-notices-image-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  pointer-events: none;
+}
+.job-notices-carousel-content:hover .job-notices-image-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
