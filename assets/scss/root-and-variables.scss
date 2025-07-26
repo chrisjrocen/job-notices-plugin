@@ -46,4 +46,16 @@
     }
 }
 
-//Resusable styles
+%inputs {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--wp-fundi-border-color);
+    border-radius: 0.375rem;
+    background: var(--wp-fundi-light-alternative-color);
+    font-size: 0.9rem;
+
+    &:focus {
+        border-color: var(--wp-fundi-primary-color);
+        outline: none;
+    }
+}

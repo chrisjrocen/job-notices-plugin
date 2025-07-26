@@ -126,5 +126,21 @@ class BaseController {
 		$this->plugin_path = trailingslashit( plugin_dir_path( dirname( __DIR__, 1 ) ) );
 		$this->plugin_url  = trailingslashit( plugin_dir_url( dirname( __DIR__, 1 ) ) );
 		$this->plugin      = plugin_basename( dirname( __DIR__, 2 ) ) . '/job-notices.php';
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
+
+	}
+
+	/**
+	 * Register styles and scripts for the job listings.
+	 *
+	 * This method enqueues the necessary CSS styles for the job listings page.
+	 */
+	public function register_assets() {
+
+		wp_register_style( 'job-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-styles.css', array(), JOB_NOTICES_VERSION );
+		wp_enqueue_style( 'job-styles' );
+		wp_register_script( 'job-scripts', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/js/frontend/job-archive.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
+		wp_enqueue_script( 'job-scripts' );
 	}
 }
