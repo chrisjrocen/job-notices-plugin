@@ -6,8 +6,8 @@
  */
 
 $post_id      = get_the_ID();
-$company_logo = get_the_post_thumbnail_url( $post_id, 'thumbnail' ); //TODO Add a default logo if not set. to be set in the options page.
-$location = get_post_meta( $post_id, 'location', true ) ? get_post_meta( $post_id, 'location', true ) : 'Uganda';
+$company_logo = get_the_post_thumbnail_url( $post_id, 'thumbnail' ); // TODO Add a default logo if not set. to be set in the options page.
+$location     = get_post_meta( $post_id, 'location', true ) ? get_post_meta( $post_id, 'location', true ) : 'Uganda';
 $salary       = get_post_meta( $post_id, 'salary', true ) ? get_post_meta( $post_id, 'salary', true ) : 'Salary Not specified';
 $job_type     = get_post_meta( $post_id, 'job_type', true ) ? get_post_meta( $post_id, 'job_type', true ) : 'Type Not specified';
 $featured     = get_post_meta( $post_id, 'featured', true ) ? get_post_meta( $post_id, 'featured', true ) : true;

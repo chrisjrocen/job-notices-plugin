@@ -28,6 +28,8 @@ final class Init {
 			Users\Employer::class,
 			Users\JobSeeker::class,
 			Blocks\EmployersSlider::class,
+			Blocks\HeroSearch::class,
+			Shortcodes\JobsCounter::class,
 		);
 	}
 
