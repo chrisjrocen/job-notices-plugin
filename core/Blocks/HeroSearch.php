@@ -35,15 +35,24 @@ class HeroSearch extends BaseController {
 		);
 	}
 
-
 	/**
-	 * Get carousel is a render callback for the dynamic block - document list.
 	 * Returns a formatted list for the Gutenberg block.
 	 *
 	 * @param array $attributes Attributes from the Gutenberg block.
 	 * @return string The HTML markup for the carousel.
 	 */
 	public function render_block( $attributes ) {
-		return 'Here';
+		$description = esc_html( $attributes['description'] ?? 'Search for jobs by title, keywords, or company.' );
+
+		$hero_search  = '<div class="hero-search-block" id="hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';
+		$hero_search .= '<p class="hero-description">' . $description . '</p>';
+
+		ob_start();
+		include plugin_dir_path( __DIR__ ) . 'Templates/JobFilters.php';
+		$hero_search .= ob_get_clean();
+
+		$hero_search .= '</div>';
+
+		return $hero_search;
 	}
 }

@@ -10,26 +10,29 @@ Schema
 
 ## Changelog
 
-### 0.0.1
-- Initial Release.
-- Created `JobsPostTypeTrait` to modularize CPT registration
-- Included taxonomy registration within the trait
+### 0.6.0 
+- Added hero-search block.
 
-### 0.1.0
-- Added basic jobs archive. Completed MVP design
+### 0.5.0
+- Added Jobs Counter shortcode.
 
-### 0.2.0
-- Improved design for archive. 
-- Added design for single job page.
+### 0.4.0
+- Added carousel block. Using swiper.js library
 
 ### 0.3.0
 - Added user roles (employer and Job seeker) REG MODULE NEEDED
 - Added employer meta data.
 
-### 0.4.0
-- Added carousel block. Using swiper.js library
+### 0.2.0
+- Improved design for archive. 
+- Added design for single job page.
 
-### 0.5.0
-- Added Jobs Counter shortcode.
+### 0.1.0
+- Added basic jobs archive. Completed MVP design
+
+### 0.0.1
+- Initial Release.
+- Created `JobsPostTypeTrait` to modularize CPT registration
+- Included taxonomy registration within the trait
 
 TODO: Add settings page for dynamic settings.

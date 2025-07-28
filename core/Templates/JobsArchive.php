@@ -20,20 +20,6 @@ class JobsArchive {
 	public function register() {
 		// Register the template for the job listings archive.
 		add_action( 'template_redirect', array( $this, 'render' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
-	}
-
-	/**
-	 * Register styles and scripts for the job listings.
-	 *
-	 * This method enqueues the necessary CSS styles for the job listings page.
-	 */
-	public function register_assets() {
-
-		wp_register_style( 'job-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-styles.css', array(), JOB_NOTICES_VERSION );
-		wp_enqueue_style( 'job-styles' );
-		wp_register_script( 'job-scripts', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/js/frontend/job-archive.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
-		wp_enqueue_script( 'job-scripts' );
 	}
 
 	/**
@@ -113,7 +99,7 @@ class JobsArchive {
 		echo '</div>'; // jobs-results-header.
 
 		if ( have_posts() ) {
-			echo '<div class="job-cards-grid">';
+			echo '<div id="job-results" class="job-cards-grid">';
 
 			while ( have_posts() ) {
 				the_post();
