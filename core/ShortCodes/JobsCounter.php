@@ -5,7 +5,7 @@
  * @package JOB_NOTICES
  */
 
-namespace JOB_NOTICES\Shortcodes;
+namespace JOB_NOTICES\ShortCodes;
 
 use JOB_NOTICES\Base\BaseController;
 

@@ -29,7 +29,7 @@ final class Init {
 			Users\JobSeeker::class,
 			Blocks\EmployersSlider::class,
 			Blocks\HeroSearch::class,
-			Shortcodes\JobsCounter::class,
+			ShortCodes\JobsCounter::class,
 		);
 	}
 
