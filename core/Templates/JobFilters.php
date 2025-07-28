@@ -10,7 +10,7 @@
 <form method="GET" class="job-filter-form" action="<?php echo esc_url( get_post_type_archive_link( 'jobs' ) ); ?>">
 	<div class="filter-group">
 		<label for="keywords">Search by Keywords</label>
-		<input type="text" id="keywords" name="s" placeholder="Job title, keywords..." value="<?php echo esc_attr( get_search_query() ); ?>">
+		<input type="text" id="keywords" name="s" onkeyup="filterJobsByKeywords()" placeholder="Job title, keywords..." value="<?php echo esc_attr( get_search_query() ); ?>">
 	</div>
 
 	<div class="filter-group">
