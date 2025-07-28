@@ -10,6 +10,9 @@ Schema
 
 ## Changelog
 
+### 0.6.1
+- Fixed bug with autoloading.
+
 ### 0.6.0 
 - Added hero-search block.
 
