@@ -42,7 +42,10 @@ class HeroSearch extends BaseController {
 	 * @return string The HTML markup for the carousel.
 	 */
 	public function render_block( $attributes ) {
-		$description = esc_html( $attributes['description'] ?? 'Search for jobs by title, keywords, or company.' );
+
+		do_action( 'qm/debug', $attributes );
+
+		$description = esc_html( $attributes['heroDesc'] ?? 'Search for jobs by title, keywords, or company.' );
 
 		$hero_search  = '<div class="hero-search-block" id="hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';
 		$hero_search .= '<p class="hero-description">' . $description . '</p>';

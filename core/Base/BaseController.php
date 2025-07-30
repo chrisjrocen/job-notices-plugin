@@ -128,7 +128,6 @@ class BaseController {
 		$this->plugin      = plugin_basename( dirname( __DIR__, 2 ) ) . '/job-notices.php';
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
-
 	}
 
 	/**

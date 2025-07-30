@@ -370,8 +370,8 @@
     flex-direction: column;
 
     p.hero-description {
-        font-size: 1.125rem;
-        color: var(--wp-fundi-secondary-text-color);
+        font-size: 2.125rem;
+        color: var(--wp-fundi-primary-color);
         margin-bottom: 1.5rem;
         text-align: center;
     }
@@ -405,5 +405,19 @@ article.single-job.jobs-container {
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
+    }
+}
+
+.jobs-hero {
+
+    .jobs-container.jobs-archive {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+
+        form.job-filter-form {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }

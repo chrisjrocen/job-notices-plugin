@@ -7,12 +7,19 @@
 
 namespace JOB_NOTICES\Templates;
 
+use WP_Query;
+
 /**
- * Class Jobs
+ * Class JobsArchive
  *
  * This class handles the rendering of job listings on the archive page.
  */
 class JobsArchive {
+
+	/**
+	 * Use the RenderJobsTrait Trait
+	 */
+	use \JOB_NOTICES\Traits\RenderJobsTrait;
 
 	/**
 	 * Constructor to initialize the template.
@@ -36,6 +43,24 @@ class JobsArchive {
 
 		get_header();
 
+		$results_count   = $this->render_results_count();
+		$sort_select     = $this->sort_select();
+		$per_page_select = $this->per_page_select();
+
+		$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select );
+
+		get_footer();
+	}
+
+	/**
+	 * Render the job listings archive content.
+	 *
+	 * @param string $results_count The HTML for the results count.
+	 * @param string $sort_select The HTML for the sort select dropdown.
+	 * @param string $per_page_select The HTML for the per-page select dropdown.
+	 */
+	public function render_jobs_archive_content( $results_count, $sort_select, $per_page_select ) {
+
 		echo '<div class="jobs-container jobs-archive">';
 
 		// Sidebar Filters.
@@ -46,50 +71,6 @@ class JobsArchive {
 		// Job Results.
 		echo '<section class="jobs-results">';
 
-		$results_count = sprintf(
-			'<div class="results-count">%s</div>',
-			sprintf(
-				/* translators: 1: Number of jobs shown, 2: Total number of jobs */
-				esc_html__( 'Showing 1 – %1$d of %2$d results', 'job-notices' ),
-				max( get_query_var( 'posts_per_page' ), 10 ),
-				wp_count_posts( 'jobs' )->publish
-			)
-		);
-
-		$current_sort = $_GET['sort'] ?? '';
-
-		$sort_select = sprintf(
-			'<select class="sort-select" name="sort" onchange="location = this.value;">
-				<option value="%1$s" %2$s>%3$s</option>
-				<option value="%4$s" %5$s>%6$s</option>
-				<option value="%7$s" %8$s>%9$s</option>
-				<option value="%10$s" %11$s>%12$s</option>
-			</select>',
-			add_query_arg( 'sort', 'default' ),
-			selected( $current_sort, 'default', false ),
-			esc_html__( 'Sort by (Default)', 'job-notices' ),
-			add_query_arg( 'sort', 'date_asc' ),
-			selected( $current_sort, 'date_asc', false ),
-			esc_html__( 'Latest', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_desc' ),
-			selected( $current_sort, 'salary_desc', false ),
-			esc_html__( 'Salary: High to Low', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_asc' ),
-			selected( $current_sort, 'salary_asc', false ),
-			esc_html__( 'Salary: Low to High', 'job-notices' )
-		);
-
-		$per_page_select = sprintf(
-			'<select class="per-page-select">
-				<option value="12">%s</option>
-				<option value="24">%s</option>
-				<option value="48">%s</option>
-			</select>',
-			esc_html__( '12 Per Page', 'job-notices' ),
-			esc_html__( '24 Per Page', 'job-notices' ),
-			esc_html__( '48 Per Page', 'job-notices' )
-		);
-
 		echo '<div class="jobs-results-header">';
 		echo $results_count;
 		echo '<div class="results-controls">';
@@ -98,11 +79,18 @@ class JobsArchive {
 		echo '</div>';
 		echo '</div>'; // jobs-results-header.
 
-		if ( have_posts() ) {
+		$jobs = new WP_Query(
+			array(
+				'post_type'      => 'jobs',
+				'posts_per_page' => -1,
+			)
+		);
+
+		if ( $jobs->have_posts() ) {
 			echo '<div id="job-results" class="job-cards-grid">';
 
-			while ( have_posts() ) {
-				the_post();
+			while ( $jobs->have_posts() ) {
+				$jobs->the_post();
 
 				// Use a template part for each job card.
 				echo '<div class="job-card">';
@@ -121,7 +109,5 @@ class JobsArchive {
 
 		echo '</section>'; // jobs-results.
 		echo '</div>'; // jobs-container.
-
-		get_footer();
 	}
 }

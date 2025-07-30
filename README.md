@@ -10,6 +10,11 @@ Schema
 
 ## Changelog
 
+### 0.6.2
+- Added Render jobs block. This is a block that uses the same design as the archive. 
+
+Note: Thinking of doing a way with the archive template. The idea is to use a block that can be used to display jobs, with settings to manpulate the jobs query to users preferences.
+
 ### 0.6.1
 - Fixed bug with autoloading.
 

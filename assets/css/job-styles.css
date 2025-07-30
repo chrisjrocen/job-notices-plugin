@@ -738,8 +738,8 @@
   flex-direction: column;
 }
 #hero-search-block p.hero-description {
-  font-size: 1.125rem;
-  color: var(--wp-fundi-secondary-text-color);
+  font-size: 2.125rem;
+  color: var(--wp-fundi-primary-color);
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -768,6 +768,16 @@ article.single-job.jobs-container {
   article.single-job.jobs-container {
     grid-template-columns: 1fr;
   }
+}
+
+.jobs-hero .jobs-container.jobs-archive {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+.jobs-hero .jobs-container.jobs-archive form.job-filter-form {
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=job-styles.css.map */
