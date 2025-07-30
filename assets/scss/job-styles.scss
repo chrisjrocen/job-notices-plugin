@@ -45,6 +45,11 @@
 
         .application-section {
             text-align: right;
+            font-weight: bold;
+
+            span.expiry-date {
+                color: red;
+            }
         }
 
         @media (max-width: 768px) {
@@ -69,7 +74,20 @@
 
                 .job-meta {
 
-                    .job-title {
+                    font-weight: 600;
+
+                    .job-title,
+                    .job-details {
+
+                        a {
+                            color: var(--wp-fundi-main-text-color);
+                            text-decoration: none;
+
+                            &:hover {
+                                color: var(--wp-fundi-primary-color);
+                            }
+                        }
+
                         span.badge.featured {
                             color: var(--wp-fundi-success-color);
                         }
@@ -224,6 +242,7 @@
 
                 .job-meta {
                     font-size: 0.85rem;
+                    font-weight: 600;
                     color: var(--wp-fundi-main-text-color);
 
                     .job-title {
@@ -274,6 +293,7 @@
 
                 .job-meta {
                     font-size: 0.85rem;
+                    font-weight: 600;
                     color: var(--wp-fundi-main-text-color);
                 }
             }
@@ -353,6 +373,15 @@
 
         h2 {
             margin-bottom: 0.5rem;
+
+            a {
+                color: var(--wp-fundi-main-text-color);
+                text-decoration: none;
+
+                &:hover {
+                    color: var(--wp-fundi-primary-color);
+                }
+            }
         }
 
         .related-cards-grid {

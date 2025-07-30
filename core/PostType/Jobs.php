@@ -42,21 +42,28 @@ class Jobs {
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_names_plural = array( 'Job Category', 'Locations', 'Employers' );
+	protected $taxonomy_names_plural = array( 'Job Category', 'Locations', 'Employers', 'Job Types' );
 
 	/**
 	 * Taxonomy Names Singular.
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_names_singular = array( 'Job Category', 'Location', 'Employer' );
+	protected $taxonomy_names_singular = array( 'Job Category', 'Location', 'Employer', 'Job Type' );
 
 	/**
 	 * Taxonomy Slugs.
 	 *
 	 * @var array
 	 */
-	protected $taxonomy_slugs = array( 'job_category', 'location', 'employer' );
+	protected $taxonomy_slugs = array( 'job_category', 'location', 'employer', 'job_type' );
+
+	/**
+	 * Hierarchical Taxonomies.
+	 *
+	 * @var array
+	 */
+	protected $is_taxonomy_hierarchical = array( true, false, true, true );
 
 	/**
 	 * Taxonomy Slug for Jobs.
@@ -100,26 +107,6 @@ class Jobs {
 	 */
 	protected $enable_hierarchical = false;
 
-	/**
-	 * Enable Detail Pages.
-	 *
-	 * @var bool
-	 */
-	protected $enable_detail_pages = true;
-
-	/**
-	 * Enable Taxonomy Page.
-	 *
-	 * @var bool
-	 */
-	protected $enable_taxonomy_page = true;
-
-	/**
-	 * Enable Taxonomy.
-	 *
-	 * @var bool
-	 */
-	protected $enable_taxonomy = true;
 
 	/**
 	 * Constructor to register the Jobs post type and taxonomy.
