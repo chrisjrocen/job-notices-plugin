@@ -80,14 +80,15 @@ trait PostTypeTrait {
 	 */
 	public function register_taxonomies() {
 		foreach ( $this->taxonomy_slugs as $index => $slug ) {
-			$plural   = $this->taxonomy_names_plural[ $index ] ?? ucfirst( $slug ) . 's';
-			$singular = $this->taxonomy_names_singular[ $index ] ?? ucfirst( $slug );
+			$plural          = $this->taxonomy_names_plural[ $index ] ?? ucfirst( $slug ) . 's';
+			$singular        = $this->taxonomy_names_singular[ $index ] ?? ucfirst( $slug );
+			$is_hierarchical = $this->is_taxonomy_hierarchical[ $index ] ?? true;
 
 			register_taxonomy(
 				$slug,
 				$this->post_type_slug,
 				array(
-					'hierarchical'          => true,
+					'hierarchical'          => $is_hierarchical,
 					'public'                => true,
 					'public_queryable'      => true,
 					'show_in_nav_menus'     => true,

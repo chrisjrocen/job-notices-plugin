@@ -89,8 +89,8 @@ class SingleJob {
 		echo '<div class="single-job-header">';
 			include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
 			echo sprintf(
-				'<div class="application-section">%s<a class="button apply-button" href="#apply">%s</a></div>',
-				esc_html( sprintf( 'Application ends: %s', $application_deadline ) ),
+				'<div class="application-section"><p>Application ends: <span class="expiry-date">%s</span></p><a class="button apply-button" href="#apply">%s</a></div>',
+				esc_html( $application_deadline ),
 				esc_html( 'Apply Now' )
 			);
 		echo '</div>';

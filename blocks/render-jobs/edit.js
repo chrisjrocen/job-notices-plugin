@@ -73,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </InspectorControls>
             <div {...blockProps}>
                 <ServerSideRender
-                    block="job-notices/hero-search"
+                    block="job-notices/render-jobs"
                     attributes={attributes}
                 />
             </div>

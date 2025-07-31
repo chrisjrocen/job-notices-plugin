@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "job-notices/hero-search",
+  "name": "job-notices/render-jobs",
   "version": "2.0.1",
-  "title": "Hero search",
+  "title": "Render jobs",
   "category": "widgets",
   "icon": "slides",
-  "description": "Display Hero search.",
+  "description": "Render jobs.",
   "example": {},
   "supports": {
     "html": false,
@@ -44,19 +44,7 @@
     },
     "shadow": true
   },
-  "attributes": {
-    "heroDesc": {
-      "type": "string",
-      "default": "Search for jobs"
-    }
-  },
-  "styles": [
-    {
-      "name": "job-notices-rounded",
-      "label": "Rounded"
-    }
-  ],
-  "textdomain": "hero-search",
+  "textdomain": "render-jobs",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": [

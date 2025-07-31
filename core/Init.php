@@ -23,12 +23,14 @@ final class Init {
 			Admin\Options::class,
 			PostType\Jobs::class,
 			PostType\EmployerFields::class,
+			PostType\JobFields::class,
 			Templates\JobsArchive::class,
 			Templates\SingleJob::class,
 			Users\Employer::class,
 			Users\JobSeeker::class,
 			Blocks\EmployersSlider::class,
 			Blocks\HeroSearch::class,
+			Blocks\RenderJobs::class,
 			ShortCodes\JobsCounter::class,
 		);
 	}

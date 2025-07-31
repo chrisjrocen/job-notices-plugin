@@ -2,19 +2,19 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./blocks/hero-search/block.json":
+/***/ "./blocks/render-jobs/block.json":
 /*!***************************************!*\
-  !*** ./blocks/hero-search/block.json ***!
+  !*** ./blocks/render-jobs/block.json ***!
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/hero-search","version":"2.0.1","title":"Hero search","category":"widgets","icon":"slides","description":"Display Hero search.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"color":{"background":true,"text":true},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"attributes":{"heroDesc":{"type":"string","default":"Search for jobs"}},"styles":[{"name":"job-notices-rounded","label":"Rounded"}],"textdomain":"hero-search","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/render-jobs","version":"2.0.1","title":"Render jobs","category":"widgets","icon":"slides","description":"Render jobs.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"color":{"background":true,"text":true},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"textdomain":"render-jobs","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
 
 /***/ }),
 
-/***/ "./blocks/hero-search/edit.js":
+/***/ "./blocks/render-jobs/edit.js":
 /*!************************************!*\
-  !*** ./blocks/hero-search/edit.js ***!
+  !*** ./blocks/render-jobs/edit.js ***!
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./blocks/hero-search/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./blocks/render-jobs/editor.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 /**
@@ -109,7 +109,7 @@ function Edit({
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2___default()), {
-        block: "job-notices/hero-search",
+        block: "job-notices/render-jobs",
         attributes: attributes
       })
     })]
@@ -118,9 +118,9 @@ function Edit({
 
 /***/ }),
 
-/***/ "./blocks/hero-search/editor.scss":
+/***/ "./blocks/render-jobs/editor.scss":
 /*!****************************************!*\
-  !*** ./blocks/hero-search/editor.scss ***!
+  !*** ./blocks/render-jobs/editor.scss ***!
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -130,18 +130,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./blocks/hero-search/index.js":
+/***/ "./blocks/render-jobs/index.js":
 /*!*************************************!*\
-  !*** ./blocks/hero-search/index.js ***!
+  !*** ./blocks/render-jobs/index.js ***!
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./blocks/hero-search/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/hero-search/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./blocks/hero-search/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./blocks/render-jobs/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/render-jobs/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./blocks/render-jobs/block.json");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -178,9 +178,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./blocks/hero-search/style.scss":
+/***/ "./blocks/render-jobs/style.scss":
 /*!***************************************!*\
-  !*** ./blocks/hero-search/style.scss ***!
+  !*** ./blocks/render-jobs/style.scss ***!
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -370,8 +370,8 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"hero-search/index": 0,
-/******/ 			"hero-search/style-index": 0
+/******/ 			"render-jobs/index": 0,
+/******/ 			"render-jobs/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -421,7 +421,7 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["hero-search/style-index"], () => (__webpack_require__("./blocks/hero-search/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["render-jobs/style-index"], () => (__webpack_require__("./blocks/render-jobs/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

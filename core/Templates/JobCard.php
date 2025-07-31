@@ -5,15 +5,32 @@
  * @package JOB_NOTICES
  */
 
-$post_id      = get_the_ID();
-$company_logo = get_the_post_thumbnail_url( $post_id, 'thumbnail' ); // TODO Add a default logo if not set. to be set in the options page.
-$location     = get_post_meta( $post_id, 'location', true ) ? get_post_meta( $post_id, 'location', true ) : 'Uganda';
-$salary       = get_post_meta( $post_id, 'salary', true ) ? get_post_meta( $post_id, 'salary', true ) : 'Salary Not specified';
-$job_type     = get_post_meta( $post_id, 'job_type', true ) ? get_post_meta( $post_id, 'job_type', true ) : 'Type Not specified';
-$featured     = get_post_meta( $post_id, 'featured', true ) ? get_post_meta( $post_id, 'featured', true ) : true;
-$urgent       = get_post_meta( $post_id, 'urgent', true ) ? get_post_meta( $post_id, 'urgent', true ) : true;
-$rate_type    = get_post_meta( $post_id, 'rate_type', true ) ? get_post_meta( $post_id, 'rate_type', true ) : 'Rate Not specified';
+$post_id = get_the_ID();
 
+$company_logo = get_the_post_thumbnail_url( $post_id, 'thumbnail' ); // TODO Add a default logo if not set. to be set in the options page.
+
+$location_terms = get_the_terms( $post_id, 'location' );
+$location       = ( ! is_wp_error( $location_terms ) && ! empty( $location_terms ) ) ? $location_terms[0]->name : 'Uganda';
+
+$job_type_terms = get_the_terms( $post_id, 'job_type' );
+$job_type       = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : '';
+
+$salary   = get_post_meta( $post_id, 'job_notices_salary', true ) ? get_post_meta( $post_id, 'job_notices_salary', true ) : '';
+$featured = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
+$urgent   = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
+$application_deadline = get_post_meta( $post_id, 'job_notices_expiry_date', true );
+if ( $application_deadline ) {
+	$date_obj = DateTime::createFromFormat( 'Y-m-d', $application_deadline );
+	if ( $date_obj ) {
+		$application_deadline = $date_obj->format( 'jS F Y' );
+	}
+}
+if ( ! $application_deadline ) {
+	$post_date = get_the_date( 'Y-m-d', $post_id );
+	$date = new DateTime( $post_date );
+	$date->modify( '+30 days' );
+	$application_deadline = $date->format( 'jS F Y' );
+}
 ?>
 
 <div class="job-card-inner">
@@ -41,8 +58,12 @@ $rate_type    = get_post_meta( $post_id, 'rate_type', true ) ? get_post_meta( $p
 				<span class="detail location"><?php echo esc_html( $location ); ?></span>
 				<?php if ( $salary ) : ?>
 					<span class="detail salary">
-						<?php echo esc_html( '$' . $salary ); ?>
-						<?php echo $rate_type ? esc_html( ' / ' . $rate_type ) : ''; ?>
+						<?php echo esc_html( $salary ); ?>
+					</span>
+				<?php endif; ?>
+				<?php if ( $application_deadline ) : ?>
+					<span class="detail deadline">
+						<?php echo esc_html( $application_deadline ); ?>
 					</span>
 				<?php endif; ?>
 			</div>

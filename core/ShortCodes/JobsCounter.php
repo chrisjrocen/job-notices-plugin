@@ -46,7 +46,7 @@ class JobsCounter extends BaseController {
 		$atts = shortcode_atts( $default, $atts );
 
 		$job_count = sprintf(
-			'<p class="job_notices_count" >  %s %d %s </p>',
+			'<h3 class="job_notices_count" >  %s %d %s </h3>',
 			$atts['prefix'],
 			$all_jobs->found_posts,
 			$atts['suffix']
@@ -63,8 +63,8 @@ class JobsCounter extends BaseController {
 	public function add_inline_styles() {
 		echo '<style>
             .job_notices_count {
-                font-size: 1.2em;
-                color: #333;
+                font-size: 2.2em;
+                color: #fcdfb7;
                 text-align: center;
                 margin: 20px 0;
             }
