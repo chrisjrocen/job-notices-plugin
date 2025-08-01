@@ -1,9 +1,9 @@
 :root {
-  --wp-fundi-primary-color: var(--theme-palette-color-1, #2872fa);
-  --wp-fundi-alternative-color: var(--theme-palette-color-2, #1559ed);
-  --wp-fundi-main-text-color: var(--theme-palette-color-3, #3A4F66);
-  --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #192a3d);
-  --wp-fundi-border-color: var(--theme-palette-color-5, #e1e8ed);
+  --wp-fundi-primary-color: var(--theme-palette-color-1, #552732);
+  --wp-fundi-alternative-color: var(--theme-palette-color-2, #fcdfb7);
+  --wp-fundi-main-text-color: var(--theme-palette-color-3, #192a3d);
+  --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #000000);
+  --wp-fundi-border-color: var(--theme-palette-color-5, #687279);
   --wp-fundi-subtle-background-color: var(--theme-palette-color-6, #f2f5f7);
   --wp-fundi-main-background-color: var(--theme-palette-color-7, #FAFBFC);
   --wp-fundi-light-alternative-color: var(--theme-palette-color-8, #ffffff);
@@ -21,12 +21,12 @@
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--wp-fundi-alternative-color);
   border-radius: 0.375rem;
-  background: var(--wp-fundi-alternative-color);
+  background: var(--wp-fundi-primary-color);
   font-size: 0.9rem;
 }
 .job-share-buttons a:hover,
 .job-share-buttons button:hover {
-  background: var(--wp-fundi-light-alternative-color);
+  background: var(--wp-fundi-primary-color);
   color: var(--wp-fundi-alternative-color);
 }
 
