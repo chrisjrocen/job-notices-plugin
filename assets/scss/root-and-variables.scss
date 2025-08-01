@@ -27,6 +27,7 @@
     border-radius: 0.375rem;
     background: var(--wp-fundi-primary-color);
     font-size: 0.9rem;
+    color: var(--wp-fundi-light-alternative-color);
 
     &:hover {
         background: var(--wp-fundi-primary-color);
@@ -58,4 +59,15 @@
         border-color: var(--wp-fundi-primary-color);
         outline: none;
     }
+}
+
+%job-details-link {
+
+    color: var(--wp-fundi-main-text-color);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--wp-fundi-border-color);
+    }
+
 }
