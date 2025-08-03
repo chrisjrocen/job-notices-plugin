@@ -1,6 +1,17 @@
 @use 'root-and-variables.scss';
 
-// Styles for the Job Archive and Single Job Page
+%application-section {
+
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.85rem;
+
+    span.expiry-date {
+        color: red;
+    }
+}
+
+// Container Styles
 .jobs-archive.jobs-container,
 .single-job.jobs-container,
 .hero-search-block {
@@ -8,17 +19,19 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
-    width: var(--theme-container-width, '90%');
-    max-width: var(--theme-normal-container-max-width, '1200px');
+    width: var(--theme-container-width, 90%);
+    max-width: var(--theme-normal-container-max-width, 1200px);
     margin: auto;
-    grid-template-areas: "job-header job-header"
+    grid-template-areas:
+        "job-header job-header"
         "job-content job-sidebar"
         "related-jobs related-jobs";
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
         padding: 5rem 0.2rem;
-        grid-template-areas: "job-header"
+        grid-template-areas:
+            "job-header"
             "job-content"
             "job-sidebar"
             "related-jobs";
@@ -32,6 +45,10 @@
         font-size: 1.125rem;
     }
 
+    .apply-button {
+        @extend %application-button;
+    }
+
     .single-job-header,
     .single-related-job {
         grid-area: job-header;
@@ -40,15 +57,13 @@
         align-items: center;
         justify-content: space-between;
         font-size: 0.95rem;
-
         @extend %cards;
 
         .application-section {
-            text-align: right;
-            font-weight: bold;
+            @extend %application-section;
 
-            span.expiry-date {
-                color: red;
+            .apply-button {
+                @extend %application-button;
             }
         }
 
@@ -57,12 +72,13 @@
         }
 
         .job-card-inner {
-
             .job-header {
-                display: flex;
-                align-items: flex-start;
+                display: grid;
+                grid-template-columns: 1fr 6fr 2fr;
                 gap: 1rem;
-                flex-wrap: wrap;
+                margin: auto;
+                grid-template-areas:
+                    "company-logo job-meta application-section";
 
                 .company-logo img {
                     width: 100px;
@@ -73,19 +89,12 @@
                 }
 
                 .job-meta {
-
                     font-weight: 600;
 
                     .job-title,
                     .job-details {
-
                         a {
-                            color: var(--wp-fundi-main-text-color);
-                            text-decoration: none;
-
-                            &:hover {
-                                color: var(--wp-fundi-primary-color);
-                            }
+                            @extend %job-details-link;
                         }
 
                         span.badge.featured {
@@ -123,13 +132,12 @@
                             }
                         }
                     }
-
                 }
             }
         }
 
         .apply-button {
-            @extend %application-button
+            @extend %application-button;
         }
     }
 
@@ -142,6 +150,10 @@
         padding: 26px 30px 30px 30px;
         border-radius: var(--wp-fundi-containers-border-radius);
         border: 1px solid var(--wp-fundi-border-color);
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
 
         .job-filter-form {
             .filter-group {
@@ -165,7 +177,7 @@
                 }
 
                 button {
-                    @extend %application-button
+                    @extend %application-button;
                 }
             }
         }
@@ -173,6 +185,10 @@
 
     .jobs-results,
     .job-details {
+        a {
+            @extend %job-details-link;
+        }
+
         .jobs-results-header {
             display: flex;
             justify-content: space-between;
@@ -212,10 +228,12 @@
 
                 .job-card-inner {
                     .job-header {
-                        display: flex;
-                        align-items: flex-start;
+                        display: grid;
+                        grid-template-columns: 1fr 6fr 2fr;
                         gap: 1rem;
-                        flex-wrap: wrap;
+                        margin: auto;
+                        grid-template-areas:
+                            "company-logo job-meta application-section";
 
                         .company-logo img {
                             width: 50px;
@@ -223,6 +241,14 @@
                             border-radius: var(--wp-fundi-small-containers-border-radius);
                             object-fit: cover;
                             margin-bottom: 0.5rem;
+                        }
+
+                        .application-section {
+                            @extend %application-section;
+
+                            .apply-button {
+                                @extend %application-button;
+                            }
                         }
                     }
                 }
@@ -246,7 +272,6 @@
                     color: var(--wp-fundi-main-text-color);
 
                     .job-title {
-
                         span.badge.featured {
                             color: var(--wp-fundi-success-color);
                         }
@@ -290,14 +315,12 @@
             align-items: center;
 
             .job-title-section {
-
                 .job-meta {
                     font-size: 0.85rem;
                     font-weight: 600;
                     color: var(--wp-fundi-main-text-color);
                 }
             }
-
         }
 
         .job-description,
@@ -370,7 +393,6 @@
     }
 
     .related-jobs {
-
         h2 {
             margin-bottom: 0.5rem;
 
@@ -393,6 +415,7 @@
     }
 }
 
+// Hero Search Block
 #hero-search-block {
     padding: 2rem 1rem;
     display: flex;
@@ -423,12 +446,12 @@
         }
 
         button {
-            width: 100%;
             @extend %application-button;
         }
     }
 }
 
+// Single Job Container
 article.single-job.jobs-container {
     grid-template-columns: 2fr 1fr;
 
@@ -437,8 +460,8 @@ article.single-job.jobs-container {
     }
 }
 
+// Jobs Hero
 .jobs-hero {
-
     .jobs-container.jobs-archive {
         display: flex;
         flex-direction: column;
@@ -447,6 +470,17 @@ article.single-job.jobs-container {
         form.job-filter-form {
             display: flex;
             justify-content: space-between;
+        }
+    }
+
+    .job-title,
+    .job-details {
+        a {
+            @extend %job-details-link;
+        }
+
+        span.badge.featured {
+            color: var(--wp-fundi-success-color);
         }
     }
 }
