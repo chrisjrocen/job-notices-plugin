@@ -30,4 +30,15 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
+	/**
+	 * Save function for the block
+	 *
+	 * @param {Object} props Block props
+	 * @return {WPElement} Element to render
+	 */
+	save: function( props ) {
+		// This is a dynamic block, so we return null for the save function
+		// The content will be rendered server-side via the render_callback
+		return null;
+	},
 } );

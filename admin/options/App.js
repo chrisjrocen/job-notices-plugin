@@ -1,4 +1,4 @@
-const useEffect = wp.element.useState;
+const useEffect = wp.element.useEffect;
 const useState = wp.element.useState;
 
 import {
@@ -19,38 +19,49 @@ const App = () => {
   const [postTypeName, setPostTypeName] = useState('');
   const [postTypeNameSingular, setPostTypeNameSingular] = useState('');
   const [postTypeSlug, setPostTypeSlug] = useState('');
-  const [enableEditor, setEnableEditor] = useState('');
-  const [enableDetailPages, setEnableDetailPages] = useState('');
-  const [enableTaxonomy, setEnableTaxonomy] = useState('');
-  const [enableTaxonomyPage, setEnableTaxonomyPage] = useState('');
+  const [enableEditor, setEnableEditor] = useState(false);
+  const [enableDetailPages, setEnableDetailPages] = useState(false);
+  const [enableTaxonomy, setEnableTaxonomy] = useState(false);
+  const [enableTaxonomyPage, setEnableTaxonomyPage] = useState(false);
   const [taxonomySlug, setTaxonomySlug] = useState('');
-  const [enableCarouselBlock, setEnableCarouselBlock] = useState('');
-  const [enableGridBlock, setEnableGridBlock] = useState('');
-
+  const [enableCarouselBlock, setEnableCarouselBlock] = useState(false);
+  const [enableGridBlock, setEnableGridBlock] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     /**
      * Initialize the options fields with the data received from the REST API
      * endpoint provided by the plugin.
      */
-    wp.apiFetch({path: '/jobs-settings-page/v1/options'}).
-        then(data => {
+    wp.apiFetch({path: '/jobs-settings-page/v1/options'})
+      .then(data => {
+        //Set the new values of the options in the state
+        setPostTypeName(data['post_type_name'] || '');
+        setPostTypeNameSingular(data['post_type_name_singular'] || '');
+        setPostTypeSlug(data['post_type_slug'] || '');
+        setEnableEditor(!!data['enable_editor']);
+        setEnableDetailPages(!!data['enable_detail_pages']);
+        setEnableTaxonomy(!!data['enable_taxonomy']);
+        setEnableTaxonomyPage(!!data['enable_taxonomy_page']);
+        setTaxonomySlug(data['taxonomy_slug'] || '');
+        setEnableCarouselBlock(!!data['enable_carousel_block']);
+        setEnableGridBlock(!!data['enable_grid_block']);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError('Failed to load options');
+        setIsLoading(false);
+      });
+  }, []);
 
-              //Set the new values of the options in the state
-              setPostTypeName(data['post_type_name'])
-              setPostTypeNameSingular(data['post_type_name_singular'])
-              setPostTypeSlug(data['post_type_slug'])
-              setEnableEditor(data['enable_editor'])
-              setEnableDetailPages(data['enable_detail_pages'])
-              setEnableTaxonomy(data['enable_taxonomy'])
-              setEnableTaxonomyPage(data['enable_taxonomy_page'])
-              setTaxonomySlug(data['taxonomy_slug'])
-              setEnableCarouselBlock(data['enable_carousel_block'])
-              setEnableGridBlock(data['enable_grid_block'])
-            },
-        );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  });
+  if (error) {
+    return <Notice status="error">{error}</Notice>;
+  }
 
   return (
         <Card style={{marginTop:20, marginRight:40}}>

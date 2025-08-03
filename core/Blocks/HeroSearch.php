@@ -43,8 +43,6 @@ class HeroSearch extends BaseController {
 	 */
 	public function render_block( $attributes ) {
 
-		do_action( 'qm/debug', $attributes );
-
 		$description = esc_html( $attributes['heroDesc'] ?? 'Search for jobs by title, keywords, or company.' );
 
 		$hero_search  = '<div class="hero-search-block" id="hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';

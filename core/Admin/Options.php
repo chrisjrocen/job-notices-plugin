@@ -44,7 +44,7 @@ class Options extends BaseController {
 			array(
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'rest_api_jobs_settings_page_read_options_callback' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'check_permissions' ),
 			)
 		);
 		// Add the POST 'react_settings_page/v1/options' endpoint to the Rest API.
@@ -54,9 +54,25 @@ class Options extends BaseController {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'rest_api_jobs_settings_page_update_options_callback' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'check_permissions' ),
 			)
 		);
+	}
+
+	/**
+	 * Check permissions for REST API endpoints
+	 *
+	 * @return bool|WP_Error
+	 */
+	public function check_permissions() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return new WP_Error(
+				'rest_forbidden',
+				__( 'Sorry, you are not allowed to access this endpoint.', 'job-notices' ),
+				array( 'status' => 403 )
+			);
+		}
+		return true;
 	}
 
 	/**
@@ -66,15 +82,6 @@ class Options extends BaseController {
 	 * @return mixed response object from rest.
 	 */
 	public function rest_api_jobs_settings_page_read_options_callback( $data ) {
-
-		// Check the capability.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error(
-				'rest_read_error',
-				'Sorry, you are not allowed to view the options.',
-				array( 'status' => 403 )
-			);
-		}
 
 		// Generate the response by fetching options from the database.
 		$response                            = array();
@@ -112,14 +119,6 @@ class Options extends BaseController {
 	 * @return mixed response object from rest.
 	 */
 	public function rest_api_jobs_settings_page_update_options_callback( $request ) {
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error(
-				'rest_update_error',
-				'Sorry, you are not allowed to update the DAEXT UI Test options.',
-				array( 'status' => 403 )
-			);
-		}
 
 		// Get the data and sanitize.
 		// Note: In a real-world scenario, the sanitization function should be based on the option type.
@@ -246,7 +245,7 @@ class Options extends BaseController {
 	 * @return void
 	 */
 	public function mctp_enqueue_scripts() {
-		wp_enqueue_script( 'mctp-react-app', $this->plugin_url . 'assets/js/admin/index.js', array( 'wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'wp-data' ), '1.0', true ); // Dependencies and in_footer.
+		wp_enqueue_script( 'mctp-react-app', $this->plugin_url . 'assets/js/admin/index.js', array( 'wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'wp-data' ), JOB_NOTICES_VERSION, true ); // Dependencies and in_footer.
 	}
 
 	/**

@@ -58,8 +58,6 @@ class EmployersSlider extends BaseController {
 	public function get_carousel( $attr ) {
 		$number_of_items = isset( $attr['numberOfItems'] ) ? intval( $attr['numberOfItems'] ) : -1;
 
-		do_action( 'qm/debug', $attr );
-
 		$args = array(
 			'taxonomy'   => 'employer',
 			'hide_empty' => true,
@@ -67,11 +65,9 @@ class EmployersSlider extends BaseController {
 		);
 
 		$terms = get_terms( $args );
-		do_action( 'qm/debug', $terms );
 
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
-			do_action( 'qm/debug', 'No Employer Terms Found' );
-			return '<p>No Employers found for this carousel.</p>';
+			return '<p>' . esc_html__( 'No employers found for this carousel.', 'job-notices' ) . '</p>';
 		}
 
 		$instance_id          = sanitize_html_class( 'swiper-js-' . $attr['instanceId'] );
@@ -117,7 +113,7 @@ class EmployersSlider extends BaseController {
 
 		$this->job_notices_enqueue_inline_styles(
 			'job_notices_register_inline_carousel_block_styles',
-			array( $attr, $instance_id, $box_shadow, $spacing_styles )
+			array( $attr, $instance_id, $spacing_styles )
 		);
 
 		$this->job_notices_register_inline_block_level_styles( $attr, $instance_id, $spacing_styles );

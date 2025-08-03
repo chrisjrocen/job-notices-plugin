@@ -20,7 +20,7 @@ trait UserRoleManagerTrait {
 	/**
 	 * Create a custom user role with specific capabilities.
 	 *
-     * @return void
+	 * @return void
 	 */
 	public function create_custom_role() {
 
@@ -30,11 +30,6 @@ trait UserRoleManagerTrait {
 
 		if ( ! get_role( $role_key ) ) {
 			add_role( $role_key, $role_name, $capabilities );
-
-            do_action( 'qm/debug', $role_key );
-            do_action( 'qm/debug', $role_name );
-            do_action( 'qm/debug', $capabilities );
-
 		} else {
 			// Optionally update capabilities if the role already exists.
 			$role = get_role( $role_key );

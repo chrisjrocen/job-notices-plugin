@@ -49,13 +49,12 @@ if ( class_exists( 'JOB_NOTICES\\Init' ) ) {
 	JOB_NOTICES\Init::register_services();
 }
 
-// TODO. Move enqueue hook to  a class.
 add_action(
 	'admin_enqueue_scripts',
 	function () {
 		if ( isset( $_GET['taxonomy'] ) && in_array( $_GET['taxonomy'], array( 'employer', 'industry' ), true ) ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'taxonomy-image-upload', plugin_dir_url( __FILE__ ) . '/assets//js/admin/taxonomy-image-upload.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'taxonomy-image-upload', plugin_dir_url( __FILE__ ) . 'assets/js/admin/taxonomy-image-upload.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
 		}
 	}
 );

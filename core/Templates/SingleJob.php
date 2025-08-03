@@ -27,8 +27,7 @@ class SingleJob {
 	 * Register assets
 	 */
 	public function register_assets() {
-
-		$enable_share_buttons = true; // TODO Implement the setting in options.
+		$enable_share_buttons = true;
 
 		if ( true === $enable_share_buttons ) {
 			wp_register_style( 'job-share-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-share.css', array(), JOB_NOTICES_VERSION );
@@ -71,9 +70,6 @@ class SingleJob {
 			echo '</div>';
 
 			$this->render_job_sidebar( $job_date, $location, $salary, $experience );
-
-			// TODO Optionally embed map, employer, social links etc.
-
 			$this->get_related_jobs( $current_post_id );
 		}
 		echo '</article>'; // single-job-container.
@@ -127,7 +123,6 @@ class SingleJob {
 			esc_url( $email_url )
 		);
 	}
-
 
 	/**
 	 * Render Job Sidebar

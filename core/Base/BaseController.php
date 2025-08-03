@@ -137,9 +137,24 @@ class BaseController {
 	 */
 	public function register_assets() {
 
-		wp_register_style( 'job-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-styles.css', array(), JOB_NOTICES_VERSION );
+		wp_register_style( 'job-styles', $this->plugin_url . 'assets/css/job-styles.css', array(), JOB_NOTICES_VERSION );
 		wp_enqueue_style( 'job-styles' );
-		wp_register_script( 'job-scripts', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/js/frontend/job-archive.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
+		wp_register_script( 'job-scripts', $this->plugin_url . 'assets/js/frontend/job-archive.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
 		wp_enqueue_script( 'job-scripts' );
+
+		// Localize script with Ajax URL and nonce.
+		wp_localize_script(
+			'job-scripts',
+			'jobNoticesAjax',
+			array(
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'job_filter_nonce' ),
+				'strings' => array(
+					'loading' => __( 'Loading jobs...', 'job-notices' ),
+					'error'   => __( 'An error occurred while filtering jobs.', 'job-notices' ),
+					'noJobs'  => __( 'No jobs found matching your criteria.', 'job-notices' ),
+				),
+			)
+		);
 	}
 }
