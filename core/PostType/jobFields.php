@@ -20,7 +20,9 @@ class JobFields {
 		$this->post_type = 'jobs';
 
 		$this->fields = array(
-			'job_notices_expiry_date'          => array(
+
+			'job_notices_expiry_date'     => array(
+
 				'label'       => 'Expiry Date',
 				'type'        => 'date',
 				'description' => 'Deadline date',
@@ -48,7 +50,6 @@ class JobFields {
 			),
 		);
 
-		// $this->init_post_type_fields();
-		add_action( 'init', array( $this, 'init_post_type_fields' ) );
+		$this->init_post_type_fields();
 	}
 }
