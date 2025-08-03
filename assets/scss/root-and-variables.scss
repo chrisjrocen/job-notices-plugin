@@ -1,10 +1,10 @@
 :root {
     //Color Palette derived from Blocksy theme's color palette.
-    --wp-fundi-primary-color: var(--theme-palette-color-1, #2872fa); //Primary brand color, used for key accents.
-    --wp-fundi-alternative-color: var(--theme-palette-color-2, #1559ed); //Alternative color, often used for hover effects.
-    --wp-fundi-main-text-color: var(--theme-palette-color-3, #3A4F66); //Main text color for paragraphs.
-    --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #192a3d); //Headings, subheadings, and titles.
-    --wp-fundi-border-color: var(--theme-palette-color-5, #e1e8ed); //Borders and dividing elements.
+    --wp-fundi-primary-color: var(--theme-palette-color-1, #552732); //Primary brand color, used for key accents.
+    --wp-fundi-alternative-color: var(--theme-palette-color-2, #fcdfb7); //Alternative color, often used for hover effects.
+    --wp-fundi-main-text-color: var(--theme-palette-color-3, #192a3d); //Main text color for paragraphs.
+    --wp-fundi-secondary-text-color: var(--theme-palette-color-4, #000000); //Headings, subheadings, and titles.
+    --wp-fundi-border-color: var(--theme-palette-color-5, #687279); //Borders and dividing elements.
     --wp-fundi-subtle-background-color: var(--theme-palette-color-6, #f2f5f7); //Subtle backgrounds, such as page heroes and footers.
     --wp-fundi-main-background-color: var(--theme-palette-color-7, #FAFBFC); //Main site background.
     --wp-fundi-light-alternative-color: var(--theme-palette-color-8, #ffffff); //A lighter alternative, often used for header backgrounds.
@@ -25,11 +25,12 @@
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--wp-fundi-alternative-color);
     border-radius: 0.375rem;
-    background: var(--wp-fundi-alternative-color);
+    background: var(--wp-fundi-primary-color);
     font-size: 0.9rem;
+    color: var(--wp-fundi-light-alternative-color);
 
     &:hover {
-        background: var(--wp-fundi-light-alternative-color);
+        background: var(--wp-fundi-primary-color);
         color: var(--wp-fundi-alternative-color);
     }
 }
@@ -42,7 +43,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 
     &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 }
 
@@ -58,4 +59,15 @@
         border-color: var(--wp-fundi-primary-color);
         outline: none;
     }
+}
+
+%job-details-link {
+
+    color: var(--wp-fundi-main-text-color);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--wp-fundi-border-color);
+    }
+
 }

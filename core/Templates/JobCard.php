@@ -8,7 +8,6 @@
 $post_id = get_the_ID();
 
 $company_logo = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
-
 $location_terms       = get_the_terms( $post_id, 'location' );
 $location             = ( ! is_wp_error( $location_terms ) && ! empty( $location_terms ) ) ? $location_terms[0]->name : 'Uganda';
 $job_type_terms       = get_the_terms( $post_id, 'job_type' );
@@ -53,15 +52,12 @@ if ( ! $application_deadline ) {
 				<span class="detail categories">
 					<?php the_terms( $post_id, 'job_category', '', ', ', '' ); ?>
 				</span>
-				<span class="detail location"><?php echo esc_html( $location ); ?></span>
+				<span class="detail location">
+					<?php the_terms( $post_id, 'location', '', ', ', '' ); ?>
+				</span>
 				<?php if ( $salary ) : ?>
 					<span class="detail salary">
 						<?php echo esc_html( $salary ); ?>
-					</span>
-				<?php endif; ?>
-				<?php if ( $application_deadline ) : ?>
-					<span class="detail deadline">
-						<?php echo esc_html( $application_deadline ); ?>
 					</span>
 				<?php endif; ?>
 			</div>
@@ -74,6 +70,10 @@ if ( ! $application_deadline ) {
 					<span class="tag urgent">Urgent</span>
 				<?php endif; ?>
 			</div>
+		</div>
+		<div class="application-section">
+			<p>Application ends: <span class="expiry-date"><?php echo esc_html( $application_deadline ); ?></span></p>
+			<a class="button apply-button" href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">Apply Now</a>
 		</div>
 	</div>
 </div>

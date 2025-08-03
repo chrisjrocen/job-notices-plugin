@@ -53,14 +53,15 @@ class SingleJob {
 
 			$current_post_id = get_the_ID();
 
-			$salary               = get_post_meta( $current_post_id, 'salary', true ) ? get_post_meta( $current_post_id, 'salary', true ) : 'Not specified';
-			$location             = get_post_meta( $current_post_id, 'location', true ) ? get_post_meta( $current_post_id, 'location', true ) : 'Not specified';
-			$type                 = get_post_meta( $current_post_id, 'job_type', true ) ? get_post_meta( $current_post_id, 'job_type', true ) : 'Not specified';
-			$experience           = get_post_meta( $current_post_id, 'experience_level', true ) ? get_post_meta( $current_post_id, 'experience_level', true ) : 'Not specified';
-			$application_deadline = get_post_meta( $current_post_id, 'application_deadline', true ) ? get_post_meta( $current_post_id, 'application_deadline', true ) : '30 Dec. 2025';
-			$job_date             = get_post_meta( $current_post_id, get_the_date(), true );
-			$post_url             = urlencode( get_permalink() );
-			$post_title           = urlencode( get_the_title() );
+			$salary                 = get_post_meta( $current_post_id, 'salary', true ) ? get_post_meta( $current_post_id, 'salary', true ) : 'Not specified';
+			$location               = get_post_meta( $current_post_id, 'location', true ) ? get_post_meta( $current_post_id, 'location', true ) : 'Not specified';
+			$type                   = get_post_meta( $current_post_id, 'job_type', true ) ? get_post_meta( $current_post_id, 'job_type', true ) : 'Not specified';
+			$experience             = get_post_meta( $current_post_id, 'experience_level', true ) ? get_post_meta( $current_post_id, 'experience_level', true ) : 'Not specified';
+			$application_deadline   = get_post_meta( $current_post_id, 'application_deadline', true ) ? get_post_meta( $current_post_id, 'application_deadline', true ) : '30 Dec. 2025';
+			$application_link_email = get_post_meta( $current_post_id, 'job_notices_job_application_link', true ) ? get_post_meta( $current_post_id, 'job_notices_job_application_link', true ) : '';
+			$job_date               = get_post_meta( $current_post_id, get_the_date(), true );
+			$post_url               = urlencode( get_permalink() );
+			$post_title             = urlencode( get_the_title() );
 
 			$this->render_job_header( $application_deadline );
 
@@ -84,11 +85,6 @@ class SingleJob {
 	public function render_job_header( $application_deadline ) {
 		echo '<div class="single-job-header">';
 			include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
-			echo sprintf(
-				'<div class="application-section"><p>Application ends: <span class="expiry-date">%s</span></p><a class="button apply-button" href="#apply">%s</a></div>',
-				esc_html( $application_deadline ),
-				esc_html( 'Apply Now' )
-			);
 		echo '</div>';
 	}
 
