@@ -26,6 +26,10 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.0
+
+- Added category section to the sidebar
+
 ### 0.7.0
 
 - Refactored to use namespaced CSS classes to prevent conflicts with WordPress themes and other plugins.

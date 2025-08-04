@@ -82,6 +82,7 @@ class SingleJob {
 		}
 		echo '</article>'; // job-notices__container.
 		get_footer();
+		exit; // Ensure no further processing occurs.
 	}
 
 	/**
