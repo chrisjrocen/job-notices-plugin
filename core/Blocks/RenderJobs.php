@@ -24,7 +24,7 @@ class RenderJobs extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function register() {
+	public function register_block() {
 
 		register_block_type_from_metadata(
 			$this->plugin_path . 'build/render-jobs/',
@@ -66,8 +66,7 @@ class RenderJobs extends BaseController {
 				echo '</div>';
 			}
 			echo '</div>';
-			
-			// Add pagination if needed
+			// Add pagination if needed.
 			if ( $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination job-notices__pagination--block">';
 				echo paginate_links(
@@ -79,7 +78,6 @@ class RenderJobs extends BaseController {
 				);
 				echo '</div>';
 			}
-			
 			wp_reset_postdata();
 		} else {
 			echo '<div class="job-notices__no-jobs-found">';

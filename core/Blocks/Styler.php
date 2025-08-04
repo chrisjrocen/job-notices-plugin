@@ -151,25 +151,6 @@ trait Styler {
 			)
 		);
 
-		// Border color.
-		$border_color = $this->job_notices_extract_color_value( $attr['borderColor'] )
-		?? $this->job_notices_extract_color_value( $attr['style']['border']['color'] )
-		?? implode(
-			' ',
-			array_map(
-				fn( $side ) => $this->job_notices_extract_color_value( $attr['style']['border'][ $side ]['color'] ?? '' ),
-				array( 'top', 'right', 'bottom', 'left' )
-			)
-		);
-
-		$styles['border-color'] = $border_color;
-
-		$background_color = $this->job_notices_extract_color_value( $attr['backgroundColor'] );
-
-		$styles['background-color'] = $background_color;
-
-		// $styles['block-gap'] = $attr['style']['spacing']['blockGap'] ?? 0;
-
 		return $styles;
 	}
 

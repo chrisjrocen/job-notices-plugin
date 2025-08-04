@@ -61,7 +61,7 @@ trait PostTypeTrait {
 			'show_in_admin_bar'   => true,
 			'can_export'          => true,
 			'exclude_from_search' => false,
-			'publicly_queryable'  => $this->enable_detail_pages,
+			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 		);
 

@@ -182,6 +182,7 @@
             grid-template-areas:
                 "job-header job-header"
                 "job-content job-sidebar"
+                "job-content job-categories"
                 "related-jobs related-jobs";
 
             @media (max-width: 768px) {
@@ -190,6 +191,7 @@
                     "job-header"
                     "job-content"
                     "job-sidebar"
+                    "job-categories"
                     "related-jobs";
             }
         }
@@ -216,17 +218,39 @@
         border: 1px solid var(--wp-fundi-border-color, #687279);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             color: var(--wp-fundi-main-text-color, #192a3d);
             margin-bottom: 1rem;
         }
 
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.75rem; }
-        h3 { font-size: 1.5rem; }
-        h4 { font-size: 1.25rem; }
-        h5 { font-size: 1.125rem; }
-        h6 { font-size: 1rem; }
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+        }
+
+        h5 {
+            font-size: 1.125rem;
+        }
+
+        h6 {
+            font-size: 1rem;
+        }
 
         p {
             color: var(--wp-fundi-main-text-color, #192a3d);
@@ -234,7 +258,8 @@
             line-height: 1.6;
         }
 
-        ul, ol {
+        ul,
+        ol {
             margin: 0 0 1rem 1.5rem;
             padding: 0;
 
@@ -292,7 +317,7 @@
         // Single job header variant
         &--single {
             @extend %job-notices__card;
-            
+
             .job-notices__company-logo {
                 img {
                     width: 120px;
@@ -691,6 +716,15 @@
         @extend %job-notices__card;
     }
 
+    &__job-category {
+        @extend %job-notices__card;
+    }
+
+    &__job-category-link {
+        @extend %job-notices__link;
+        font-weight: 500;
+    }
+
     &__job-overview {
         h4 {
             margin-bottom: 1rem;
@@ -760,7 +794,8 @@
         grid-area: related-jobs;
         margin-top: 3rem;
 
-        h2, h3 {
+        h2,
+        h3 {
             margin-bottom: 1.5rem;
             color: var(--wp-fundi-main-text-color, #192a3d);
             font-size: 1.5rem;

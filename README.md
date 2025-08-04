@@ -4,7 +4,20 @@ A plugin for WordPress with a custom post type for jobs management.
 
 ## Features
 
-Schema
+This is a list of all the features intended for the plugin. Some are not yet created.
+
+- Use maps to plot jobs location and impelement geo-location searc
+- User managment (Employer and employee). Allow employers to list jobs in the frontend and employees to apply for jobs.
+- Application status tracking
+- Social and email login
+- Apply with Linkedin or indeed.
+- Email alerts
+- Resume Builder. (can be a separate plugin)
+
+## Road map for v1
+
+- Featured jobs on top
+- Add schema to jobs.
 
 ## Setup
 
@@ -12,6 +25,11 @@ Schema
 - Run `composer install` to get the PHP setup.
 
 ## Changelog
+
+### 0.8.0
+
+- Added category section to the sidebar
+- Added JobPosting schema for job posts
 
 ### 0.7.0
 

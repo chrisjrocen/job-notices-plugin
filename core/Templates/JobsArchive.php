@@ -204,6 +204,8 @@ class JobsArchive {
 		$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select );
 
 		get_footer();
+
+		exit; // Ensure no further processing occurs.
 	}
 
 	/**
@@ -256,8 +258,7 @@ class JobsArchive {
 			}
 
 			echo '</div>'; // job-notices__job-cards-grid.
-			
-			// Add pagination
+			// Add pagination.
 			if ( $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination">';
 				echo paginate_links(

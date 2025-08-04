@@ -42,6 +42,13 @@ final class Init {
 	public static function register_services() {
 		foreach ( self::get_services() as $class ) {
 			$service = self::instantiate( $class );
+
+			// If service has a register_block method, hook it to init.
+			if ( method_exists( $service, 'register_block' ) ) {
+				add_action( 'init', array( $service, 'register_block' ) );
+			}
+
+			// If service has a regular register method, call it immediately.
 			if ( method_exists( $service, 'register' ) ) {
 				$service->register();
 			}
