@@ -13,13 +13,18 @@ Schema
 
 ## Changelog
 
-### 0.6.4 
+### 0.7.0
 
-Added a live Ajax-based filtering system that allows users to filter jobs in real-time without page reloads.
+- Refactored to use namespaced CSS classes to prevent conflicts with WordPress themes and other plugins.
+- visual consistency improvements made across all job-related components in the Job Notices plugin. All components now share a unified design system with consistent spacing, typography, colors, and layout patterns.
+
+### 0.6.4
+
+- Added a live Ajax-based filtering system that allows users to filter jobs in real-time without page reloads.
 
 ### 0.6.2
 
-- Added Render jobs block. This is a block that uses the same design as the archive. 
+- Added Render jobs block. This is a block that uses the same design as the archive.
 - Added custom fields for the jobs.
 
 Note: Thinking of doing a way with the archive template. The idea is to use a block that can be used to display jobs, with settings to manpulate the jobs query to users preferences.
@@ -28,7 +33,7 @@ Note: Thinking of doing a way with the archive template. The idea is to use a bl
 
 - Fixed bug with autoloading.
 
-### 0.6.0 
+### 0.6.0
 
 - Added hero-search block.
 
@@ -47,7 +52,7 @@ Note: Thinking of doing a way with the archive template. The idea is to use a bl
 
 ### 0.2.0
 
-- Improved design for archive. 
+- Improved design for archive.
 - Added design for single job page.
 
 ### 0.1.0

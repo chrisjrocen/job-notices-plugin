@@ -46,7 +46,7 @@ class SingleJob {
 		}
 
 		get_header();
-		echo '<article class="single-job jobs-container">';
+		echo '<article class="job-notices job-notices__container job-notices__container--single">';
 
 		while ( have_posts() ) {
 			the_post();
@@ -65,7 +65,7 @@ class SingleJob {
 
 			$this->render_job_header( $application_deadline );
 
-			echo '<div class="job-content">';
+			echo '<div class="job-notices__content">';
 				echo wp_kses_post( the_content() );
 				$this->job_notices_share_buttons( $post_url, $post_title );
 			echo '</div>';
@@ -73,7 +73,7 @@ class SingleJob {
 			$this->render_job_sidebar( $job_date, $location, $salary, $experience );
 			$this->get_related_jobs( $current_post_id );
 		}
-		echo '</article>'; // single-job-container.
+		echo '</article>'; // job-notices__container.
 		get_footer();
 	}
 
@@ -83,7 +83,7 @@ class SingleJob {
 	 * @param int $application_deadline Application deadline.
 	 */
 	public function render_job_header( $application_deadline ) {
-		echo '<div class="single-job-header">';
+		echo '<div class="job-notices__job-header job-notices__job-header--single">';
 			include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
 		echo '</div>';
 	}
@@ -102,13 +102,13 @@ class SingleJob {
 		$email_url    = "mailto:?subject={$post_title}&body={$post_url}";
 
 		echo sprintf(
-			'<div class="job-share-buttons">' .
+			'<div class="job-notices__share-buttons">' .
 			'<span>%s</span>' .
-			'<button class="copy-link-button" data-url="%s">%s</button>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer">Facebook</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer">X</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer">WhatsApp</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer">Email</a>' .
+			'<button class="job-notices__share-button job-notices__share-button--copy" data-url="%s">%s</button>' .
+			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--facebook">Facebook</a>' .
+			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--twitter">X</a>' .
+			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--whatsapp">WhatsApp</a>' .
+			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--email">Email</a>' .
 			'</div>',
 			esc_html__( 'Share this post:', 'job-notices' ),
 			esc_url( get_permalink() ),
@@ -129,8 +129,8 @@ class SingleJob {
 	 * @param string $experience Experience.
 	 */
 	public function render_job_sidebar( $job_date, $location, $salary, $experience ) {
-		echo '<aside class="job-sidebar">';
-				echo '<div class="job-overview">';
+		echo '<aside class="job-notices__sidebar">';
+				echo '<div class="job-notices__job-overview">';
 					echo '<h4>Job Overview</h4>';
 					echo sprintf( '<p><strong>Date Posted:</strong> %s</p>', $job_date );
 					echo sprintf( '<p><strong>Location:</strong> %s</p>', esc_html( $location ) );
@@ -146,7 +146,7 @@ class SingleJob {
 	 * @param int $current_post_id The ID of the current job post.
 	 */
 	public function get_related_jobs( $current_post_id ) {
-		echo sprintf( '<div class="related-jobs"><h3>%s</h3>', esc_html( 'Related Jobs' ) );
+		echo sprintf( '<div class="job-notices__related-jobs"><h3>%s</h3>', esc_html( 'Related Jobs' ) );
 
 		$related_jobs = new \WP_Query(
 			array(
@@ -157,10 +157,10 @@ class SingleJob {
 		);
 
 		if ( $related_jobs->have_posts() ) {
-			echo '<div class="related-cards-grid">';
+			echo '<div class="job-notices__related-cards-grid">';
 			while ( $related_jobs->have_posts() ) {
 				$related_jobs->the_post();
-				echo '<div class="single-related-job">';
+				echo '<div class="job-notices__job-card job-notices__job-card--related">';
 				include plugin_dir_path( __FILE__ ) . 'JobCard.php';
 				echo '</div>';
 			}

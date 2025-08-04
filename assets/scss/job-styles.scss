@@ -1,78 +1,340 @@
 @use 'root-and-variables.scss';
 
-%application-section {
+// =============================================================================
+// JOB NOTICES PLUGIN - NAMESPACED STYLES
+// =============================================================================
+// All styles are scoped under .job-notices to prevent conflicts with themes
+// and other plugins. This ensures the plugin styles work reliably across
+// different WordPress installations.
 
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.85rem;
+.job-notices {
+    // =============================================================================
+    // CSS RESET & NORMALIZATION (SCOPED TO PLUGIN ONLY)
+    // =============================================================================
 
-    span.expiry-date {
-        color: red;
-    }
-}
-
-// Container Styles
-.jobs-archive.jobs-container,
-.single-job.jobs-container,
-.hero-search-block {
-    padding: 10rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    width: var(--theme-container-width, 90%);
-    max-width: var(--theme-normal-container-max-width, 1200px);
-    margin: auto;
-    grid-template-areas:
-        "job-header job-header"
-        "job-content job-sidebar"
-        "related-jobs related-jobs";
-
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        padding: 5rem 0.2rem;
-        grid-template-areas:
-            "job-header"
-            "job-content"
-            "job-sidebar"
-            "related-jobs";
+    // Reset box-sizing for all elements within the plugin
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
     }
 
+    // Reset margins and paddings for headings within plugin
+    h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-        font-size: 1.125rem;
+        margin: 0;
+        padding: 0;
+        font-weight: inherit;
+        font-size: inherit;
+        line-height: inherit;
     }
 
-    .apply-button {
-        @extend %application-button;
+    // Reset list styles within plugin
+    ul,
+    ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
 
-    .single-job-header,
-    .single-related-job {
+    // Reset form elements within plugin
+    input,
+    select,
+    textarea,
+    button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+    }
+
+    // =============================================================================
+    // PLACEHOLDER MIXINS & EXTENDS
+    // =============================================================================
+
+    %job-notices__application-section {
+        text-align: right;
+        font-weight: bold;
+        font-size: 0.85rem;
+
+        .job-notices__expiry-date {
+            color: var(--wp-fundi-error-color, #EA4335);
+        }
+    }
+
+    %job-notices__application-button {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--wp-fundi-alternative-color, #fcdfb7);
+        border-radius: 0.375rem;
+        background: var(--wp-fundi-primary-color, #552732);
+        font-size: 0.9rem;
+        color: var(--wp-fundi-light-alternative-color, #ffffff);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: var(--wp-fundi-primary-color, #552732);
+            color: var(--wp-fundi-alternative-color, #fcdfb7);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(85, 39, 50, 0.2);
+        }
+    }
+
+    %job-notices__card {
+        background: var(--wp-fundi-subtle-background-color, #f2f5f7);
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--wp-fundi-border-color, #687279);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        transition: box-shadow 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+    }
+
+    %job-notices__input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--wp-fundi-border-color, #687279);
+        border-radius: 0.375rem;
+        background: var(--wp-fundi-light-alternative-color, #ffffff);
+        font-size: 0.9rem;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            border-color: var(--wp-fundi-primary-color, #552732);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(85, 39, 50, 0.2);
+        }
+    }
+
+    %job-notices__link {
+        color: var(--wp-fundi-main-text-color, #192a3d);
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--wp-fundi-border-color, #687279);
+        }
+    }
+
+    // =============================================================================
+    // MAIN CONTAINER STYLES
+    // =============================================================================
+
+    &__container {
+        padding: 10rem 2rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        width: var(--theme-container-width, 90%);
+        max-width: var(--theme-normal-container-max-width, 1200px);
+        margin: auto;
+        grid-template-areas:
+            "job-header job-header"
+            "job-content job-sidebar"
+            "related-jobs related-jobs";
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            padding: 5rem 0.2rem;
+            grid-template-areas:
+                "job-header"
+                "job-content"
+                "job-sidebar"
+                "related-jobs";
+        }
+
+        // Typography reset within container
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin: 0 0 1rem 0;
+            line-height: 1.6;
+        }
+
+        // Single job container variant
+        &--single {
+            grid-template-columns: 2fr 1fr;
+            grid-template-areas:
+                "job-header job-header"
+                "job-content job-sidebar"
+                "related-jobs related-jobs";
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "job-header"
+                    "job-content"
+                    "job-sidebar"
+                    "related-jobs";
+            }
+        }
+
+        // Block container variant
+        &--block {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "job-content";
+            padding: 2rem;
+            max-width: 100%;
+        }
+    }
+
+    // =============================================================================
+    // CONTENT AREA STYLES
+    // =============================================================================
+
+    &__content {
+        grid-area: job-content;
+        background: var(--wp-fundi-light-alternative-color, #ffffff);
+        padding: 2rem;
+        border-radius: var(--wp-fundi-containers-border-radius, 8px);
+        border: 1px solid var(--wp-fundi-border-color, #687279);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--wp-fundi-main-text-color, #192a3d);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.75rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        h5 { font-size: 1.125rem; }
+        h6 { font-size: 1rem; }
+
+        p {
+            color: var(--wp-fundi-main-text-color, #192a3d);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        ul, ol {
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+
+            li {
+                margin-bottom: 0.5rem;
+                line-height: 1.6;
+            }
+        }
+
+        ul {
+            list-style: disc;
+        }
+
+        ol {
+            list-style: decimal;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--wp-fundi-primary-color, #552732);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--wp-fundi-secondary-text-color, #000000);
+        }
+
+        @media (max-width: 768px) {
+            padding: 1.5rem;
+        }
+    }
+
+    // =============================================================================
+    // JOB HEADER STYLES
+    // =============================================================================
+
+    &__job-header {
         grid-area: job-header;
         display: flex;
         gap: 1rem;
         align-items: center;
         justify-content: space-between;
         font-size: 0.95rem;
-        @extend %cards;
-
-        .application-section {
-            @extend %application-section;
-
-            .apply-button {
-                @extend %application-button;
-            }
-        }
 
         @media (max-width: 768px) {
             flex-direction: column;
         }
 
-        .job-card-inner {
-            .job-header {
+        .job-notices__application-section {
+            @extend %job-notices__application-section;
+
+            .job-notices__apply-button {
+                @extend %job-notices__application-button;
+            }
+        }
+
+        // Single job header variant
+        &--single {
+            @extend %job-notices__card;
+            
+            .job-notices__company-logo {
+                img {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                &--placeholder {
+                    width: 120px;
+                    height: 120px;
+                    font-size: 2.5rem;
+                }
+            }
+
+            .job-notices__job-meta {
+                .job-notices__job-title {
+                    h2 {
+                        font-size: 1.5rem;
+                        margin-bottom: 0.75rem;
+                    }
+                }
+
+                .job-notices__job-details {
+                    gap: 3rem;
+                    margin-top: 1rem;
+
+                    @media (max-width: 768px) {
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    // =============================================================================
+    // JOB CARD STYLES
+    // =============================================================================
+
+    &__job-card {
+        @extend %job-notices__card;
+
+        &-inner {
+            .job-notices__job-header {
                 display: grid;
                 grid-template-columns: 1fr 6fr 2fr;
                 gap: 1rem;
@@ -80,411 +342,292 @@
                 grid-template-areas:
                     "company-logo job-meta application-section";
 
-                .company-logo img {
-                    width: 100px;
-                    height: 100px;
-                    border-radius: var(--wp-fundi-containers-border-radius);
-                    object-fit: cover;
-                    margin-bottom: 0.5rem;
-                }
-
-                .job-meta {
-                    font-weight: 600;
-
-                    .job-title,
-                    .job-details {
-                        a {
-                            @extend %job-details-link;
-                        }
-
-                        span.badge.featured {
-                            color: var(--wp-fundi-success-color);
-                        }
-                    }
-
-                    .job-details,
-                    .job-tags {
-                        margin-top: 0.5rem;
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 2.4rem;
-
-                        @media (max-width: 768px) {
-                            gap: 0.4rem;
-                        }
-
-                        .tag {
-                            background-color: var(--wp-fundi-light-alternative-color);
-                            color: var(--wp-fundi-primary-color);
-                            font-size: 0.75rem;
-                            padding: 0.25rem 0.5rem;
-                            border-radius: 0.375rem;
-                            font-weight: 500;
-
-                            &.type {
-                                background-color: rgba(66, 133, 244, 0.2);
-                                color: var(--wp-fundi-info-color);
-                            }
-
-                            &.urgent {
-                                background-color: rgba(249, 171, 0, 0.2);
-                                color: var(--wp-fundi-warning-color);
-                            }
-                        }
-                    }
+                @media (max-width: 768px) {
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "company-logo"
+                        "job-meta"
+                        "application-section";
                 }
             }
         }
 
-        .apply-button {
-            @extend %application-button;
+        // Related job card variant
+        &--related {
+            .job-notices__company-logo {
+                img {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                &--placeholder {
+                    width: 60px;
+                    height: 60px;
+                    font-size: 1.5rem;
+                }
+            }
+
+            .job-notices__job-meta {
+                .job-notices__job-title {
+                    h2 {
+                        font-size: 1rem;
+                        margin-bottom: 0.5rem;
+                    }
+                }
+
+                .job-notices__job-details {
+                    gap: 1rem;
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+
+        // Block job card variant
+        &--block {
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
         }
     }
 
-    aside.job-sidebar {
-        @extend %cards;
+    &__company-logo {
+        grid-area: company-logo;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--wp-fundi-containers-border-radius, 8px);
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+        }
+
+        &--small img {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--wp-fundi-small-containers-border-radius, 4px);
+        }
+
+        &--placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--wp-fundi-containers-border-radius, 8px);
+            background: var(--wp-fundi-subtle-background-color, #f2f5f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--wp-fundi-border-color, #687279);
+        }
     }
 
-    .jobs-filters {
-        background: var(--wp-fundi-subtle-background-color);
+    &__job-meta {
+        grid-area: job-meta;
+        font-weight: 600;
+
+        .job-notices__job-title,
+        .job-notices__job-details {
+            a {
+                @extend %job-notices__link;
+            }
+
+            .job-notices__badge {
+                &.job-notices__badge--featured {
+                    color: var(--wp-fundi-success-color, #34A853);
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        .job-notices__job-details,
+        .job-notices__job-tags {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.4rem;
+
+            @media (max-width: 768px) {
+                gap: 0.4rem;
+            }
+        }
+    }
+
+    &__tag {
+        background-color: var(--wp-fundi-light-alternative-color, #ffffff);
+        color: var(--wp-fundi-primary-color, #552732);
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        display: inline-block;
+
+        &--type {
+            background-color: rgba(66, 133, 244, 0.2);
+            color: var(--wp-fundi-info-color, #1967D2);
+        }
+
+        &--urgent {
+            background-color: rgba(249, 171, 0, 0.2);
+            color: var(--wp-fundi-warning-color, #FBBC05);
+        }
+    }
+
+    // =============================================================================
+    // FILTER STYLES
+    // =============================================================================
+
+    &__filters {
+        background: var(--wp-fundi-subtle-background-color, #f2f5f7);
         padding: 26px 30px 30px 30px;
-        border-radius: var(--wp-fundi-containers-border-radius);
-        border: 1px solid var(--wp-fundi-border-color);
+        border-radius: var(--wp-fundi-containers-border-radius, 8px);
+        border: 1px solid var(--wp-fundi-border-color, #687279);
+        transition: box-shadow 0.2s ease;
 
         &:hover {
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
-
-        .job-filter-form {
-            .filter-group {
-                margin-bottom: 1.5rem;
-
-                label {
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    font-weight: 600;
-                    color: var(--wp-fundi-secondary-text-color);
-                }
-
-                select,
-                input[type="text"],
-                input[type="range"] {
-                    @extend %inputs;
-                }
-
-                input[type="range"] {
-                    padding: 0.5rem 0;
-                }
-
-                button {
-                    @extend %application-button;
-                }
-            }
-        }
     }
 
-    .jobs-results,
-    .job-details {
-        a {
-            @extend %job-details-link;
-        }
+    &__filter-form {
+        .job-notices__filter-group {
+            margin-bottom: 1.5rem;
 
-        .jobs-results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-
-            @media (max-width: 768px) {
-                flex-direction: column;
-                align-items: flex-start;
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                color: var(--wp-fundi-secondary-text-color, #000000);
+                font-size: 0.9rem;
             }
 
-            .results-count {
-                font-size: 0.95rem;
-                color: var(--wp-fundi-secondary-text-color);
+            select,
+            input[type="text"],
+            input[type="range"] {
+                @extend %job-notices__input;
             }
 
-            .results-controls {
-                display: flex;
-                gap: 0.75rem;
+            input[type="range"] {
+                padding: 0.5rem 0;
+                background: transparent;
+                border: none;
+                box-shadow: none;
 
-                select {
-                    padding: 0.5rem 0.75rem;
-                    border: 1px solid var(--wp-fundi-border-color);
-                    border-radius: 0.5rem;
-                    background: var(--wp-fundi-subtle-background-color);
-                    font-size: 0.9rem;
+                &:focus {
+                    box-shadow: none;
                 }
             }
-        }
 
-        .job-cards-grid {
-            display: grid;
-            gap: 1.5rem;
-
-            .job-card {
-                @extend %cards;
-
-                .job-card-inner {
-                    .job-header {
-                        display: grid;
-                        grid-template-columns: 1fr 6fr 2fr;
-                        gap: 1rem;
-                        margin: auto;
-                        grid-template-areas:
-                            "company-logo job-meta application-section";
-
-                        .company-logo img {
-                            width: 50px;
-                            height: 50px;
-                            border-radius: var(--wp-fundi-small-containers-border-radius);
-                            object-fit: cover;
-                            margin-bottom: 0.5rem;
-                        }
-
-                        .application-section {
-                            @extend %application-section;
-
-                            .apply-button {
-                                @extend %application-button;
-                            }
-                        }
-                    }
-                }
-
-                h2 {
-                    margin-bottom: 0.5rem;
-
-                    a {
-                        color: var(--wp-fundi-main-text-color);
-                        text-decoration: none;
-
-                        &:hover {
-                            color: var(--wp-fundi-primary-color);
-                        }
-                    }
-                }
-
-                .job-meta {
-                    font-size: 0.85rem;
-                    font-weight: 600;
-                    color: var(--wp-fundi-main-text-color);
-
-                    .job-title {
-                        span.badge.featured {
-                            color: var(--wp-fundi-success-color);
-                        }
-                    }
-
-                    .job-details,
-                    .job-tags {
-                        margin-top: 0.5rem;
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 1.4rem;
-
-                        .tag {
-                            background-color: var(--wp-fundi-light-alternative-color);
-                            color: var(--wp-fundi-primary-color);
-                            font-size: 0.75rem;
-                            padding: 0.25rem 0.5rem;
-                            border-radius: 0.375rem;
-                            font-weight: 500;
-
-                            &.type {
-                                background-color: rgba(66, 133, 244, 0.2);
-                                color: var(--wp-fundi-info-color);
-                            }
-
-                            &.urgent {
-                                background-color: rgba(249, 171, 0, 0.2);
-                                color: var(--wp-fundi-warning-color);
-                            }
-                        }
-                    }
-                }
+            .job-notices__salary-output {
+                text-align: center;
+                font-weight: 600;
+                color: var(--wp-fundi-primary-color, #552732);
+                margin-top: 0.5rem;
+                font-size: 0.9rem;
             }
         }
 
-        .job-single-header {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
+        .job-notices__button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
 
-            .job-title-section {
-                .job-meta {
-                    font-size: 0.85rem;
-                    font-weight: 600;
-                    color: var(--wp-fundi-main-text-color);
-                }
-            }
-        }
-
-        .job-description,
-        .job-overview,
-        .job-location,
-        .job-skills,
-        .job-employer,
-        .related-jobs {
-            margin-top: 2rem;
-        }
-
-        .job-overview,
-        .job-location,
-        .job-skills,
-        .job-employer {
-            background-color: var(--wp-fundi-subtle-background-color);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid var(--wp-fundi-border-color);
-
-            ul {
-                list-style: none;
-                padding: 0;
-
-                li {
-                    margin-bottom: 0.5rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-
-                    i {
-                        color: var(--wp-fundi-primary-color);
-                    }
-                }
-            }
-        }
-
-        .related-jobs .job-card {
-            margin-bottom: 1rem;
-        }
-    }
-
-    .pagination {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-
-        ul {
-            list-style: none;
-            display: flex;
-            gap: 0.5rem;
-
-            li {
-
-                a,
-                span {
-                    padding: 0.5rem 0.75rem;
-                    border: 1px solid var(--wp-fundi-border-color);
-                    border-radius: 0.375rem;
-                    color: var(--wp-fundi-primary-color);
-                    text-decoration: none;
-                }
-
-                .current {
-                    background-color: var(--wp-fundi-primary-color);
-                    color: var(--wp-fundi-light-text-color);
-                }
-            }
-        }
-    }
-
-    .related-jobs {
-        h2 {
-            margin-bottom: 0.5rem;
-
-            a {
-                color: var(--wp-fundi-main-text-color);
-                text-decoration: none;
+            &--primary {
+                background: var(--wp-fundi-primary-color, #552732);
+                color: white;
 
                 &:hover {
-                    color: var(--wp-fundi-primary-color);
+                    background: var(--wp-fundi-primary-hover, #4a1f2a);
+                }
+            }
+
+            &--secondary {
+                background: var(--wp-fundi-secondary-color, #6c757d);
+                color: white;
+                margin-left: 0.5rem;
+
+                &:hover {
+                    background: var(--wp-fundi-secondary-hover, #545b62);
+                }
+            }
+
+            @media (max-width: 768px) {
+                width: 100%;
+                margin: 0.5rem 0;
+
+                &.job-notices__button--secondary {
+                    margin-left: 0;
                 }
             }
         }
+    }
 
-        .related-cards-grid {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            gap: 1rem;
+    // =============================================================================
+    // RESULTS STYLES
+    // =============================================================================
+
+    &__results {
+        position: relative;
+
+        &.job-notices__results--loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
     }
-}
 
-// Hero Search Block
-#hero-search-block {
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-
-    p.hero-description {
-        font-size: 2.125rem;
-        color: var(--wp-fundi-primary-color);
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-
-    label,
-    input#salary_range,
-    #salary_output {
-        display: none;
-    }
-
-    form.job-filter-form {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-        input,
-        select {
-            @extend %inputs;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        button {
-            @extend %application-button;
-        }
-    }
-}
-
-// Single Job Container
-article.single-job.jobs-container {
-    grid-template-columns: 2fr 1fr;
-
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
-}
-
-// Jobs Hero
-.jobs-hero {
-    .jobs-container.jobs-archive {
+    &__results-header {
         display: flex;
-        flex-direction: column;
-        padding: 1rem 2rem;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
 
-        form.job-filter-form {
-            display: flex;
-            justify-content: space-between;
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 
-}
-
-// Ajax Filtering Styles
-.jobs-results {
-    position: relative;
-
-    &.loading {
-        opacity: 0.7;
-        pointer-events: none;
+    &__results-count {
+        font-size: 0.95rem;
+        color: var(--wp-fundi-secondary-text-color, #000000);
     }
 
-    .loading-spinner {
+    &__results-controls {
+        display: flex;
+        gap: 0.75rem;
+
+        select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--wp-fundi-border-color, #687279);
+            border-radius: 0.5rem;
+            background: var(--wp-fundi-subtle-background-color, #f2f5f7);
+            font-size: 0.9rem;
+            @extend %job-notices__input;
+        }
+    }
+
+    &__job-cards-grid {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    // =============================================================================
+    // LOADING & ERROR STATES
+    // =============================================================================
+
+    &__loading-spinner {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -496,24 +639,30 @@ article.single-job.jobs-container {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         text-align: center;
 
-        .spinner {
+        .job-notices__spinner {
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--wp-fundi-primary-color, #007cba);
+            border-top: 4px solid var(--wp-fundi-primary-color, #552732);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: job-notices-spin 1s linear infinite;
             margin: 0 auto 1rem;
         }
 
         p {
             margin: 0;
-            color: var(--wp-fundi-main-text-color, #333);
+            color: var(--wp-fundi-main-text-color, #192a3d);
             font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            padding: 1rem;
+            width: 90%;
+            max-width: 300px;
         }
     }
 
-    .filter-error {
+    &__filter-error {
         background: #f8d7da;
         color: #721c24;
         padding: 1rem;
@@ -527,123 +676,341 @@ article.single-job.jobs-container {
         }
     }
 
-    .no-jobs-found {
+    &__no-jobs-found {
         text-align: center;
         padding: 3rem 1rem;
-        color: var(--wp-fundi-secondary-text-color, #666);
+        color: var(--wp-fundi-secondary-text-color, #000000);
         font-size: 1.1rem;
     }
-}
 
-// Filter form improvements
-.job-filter-form {
-    .filter-group {
-        margin-bottom: 1.5rem;
+    // =============================================================================
+    // SIDEBAR STYLES
+    // =============================================================================
 
-        label {
+    &__sidebar {
+        @extend %job-notices__card;
+    }
+
+    &__job-overview {
+        h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            strong {
+                font-weight: 600;
+                min-width: 80px;
+            }
+        }
+    }
+
+    // =============================================================================
+    // PAGINATION STYLES
+    // =============================================================================
+
+    &__pagination {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0;
+
+                a,
+                span {
+                    padding: 0.5rem 0.75rem;
+                    border: 1px solid var(--wp-fundi-border-color, #687279);
+                    border-radius: 0.375rem;
+                    color: var(--wp-fundi-primary-color, #552732);
+                    text-decoration: none;
+                    display: inline-block;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        background: var(--wp-fundi-subtle-background-color, #f2f5f7);
+                    }
+                }
+
+                .current {
+                    background-color: var(--wp-fundi-primary-color, #552732);
+                    color: var(--wp-fundi-light-alternative-color, #ffffff);
+                }
+            }
+        }
+    }
+
+    // =============================================================================
+    // RELATED JOBS STYLES
+    // =============================================================================
+
+    &__related-jobs {
+        grid-area: related-jobs;
+        margin-top: 3rem;
+
+        h2, h3 {
+            margin-bottom: 1.5rem;
+            color: var(--wp-fundi-main-text-color, #192a3d);
+            font-size: 1.5rem;
+            font-weight: 600;
+
+            a {
+                @extend %job-notices__link;
+            }
+        }
+
+        .job-notices__related-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .job-notices__job-card--related {
+            .job-notices__job-header {
+                grid-template-columns: 1fr 4fr 1fr;
+                gap: 0.75rem;
+
+                @media (max-width: 768px) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .job-notices__application-section {
+                text-align: center;
+                font-size: 0.8rem;
+
+                .job-notices__apply-button {
+                    padding: 0.4rem 0.6rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+
+    // =============================================================================
+    // HERO SEARCH BLOCK STYLES
+    // =============================================================================
+
+    &__hero-search {
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+
+        .job-notices__hero-description {
+            font-size: 2.125rem;
+            color: var(--wp-fundi-primary-color, #552732);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .job-notices__filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+
+            input,
+            select {
+                @extend %job-notices__input;
+                width: 100%;
+                margin-bottom: 0;
+            }
+
+            button {
+                @extend %job-notices__application-button;
+            }
+
+            // Hide certain elements in hero search
+            label,
+            input#salary_range,
+            .job-notices__salary-output {
+                display: none;
+            }
+        }
+    }
+
+    // =============================================================================
+    // SHARE BUTTONS STYLES
+    // =============================================================================
+
+    &__share-buttons {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: var(--wp-fundi-subtle-background-color, #f2f5f7);
+        border-radius: var(--wp-fundi-containers-border-radius, 8px);
+        border: 1px solid var(--wp-fundi-border-color, #687279);
+
+        span {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--wp-fundi-main-text-color, #333);
+            color: var(--wp-fundi-main-text-color, #192a3d);
         }
 
-        input,
-        select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--wp-fundi-border-color, #ddd);
-            border-radius: 4px;
-            font-size: 1rem;
-
-            &:focus {
-                outline: none;
-                border-color: var(--wp-fundi-primary-color, #007cba);
-                box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.2);
-            }
-        }
-
-        #salary_range {
-            width: 100%;
-            margin: 0.5rem 0;
-        }
-
-        #salary_output {
-            text-align: center;
-            font-weight: 600;
-            color: var(--wp-fundi-primary-color, #007cba);
-            margin-top: 0.5rem;
-        }
-    }
-
-    .button {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &.button-primary {
-            background: var(--wp-fundi-primary-color, #007cba);
+        .job-notices__share-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: var(--wp-fundi-primary-color, #552732);
             color: white;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
 
             &:hover {
-                background: var(--wp-fundi-primary-hover, #005a87);
+                background: var(--wp-fundi-primary-hover, #4a1f2a);
             }
-        }
 
-        &.button-secondary {
-            background: var(--wp-fundi-secondary-color, #6c757d);
-            color: white;
-            margin-left: 0.5rem;
-
-            &:hover {
-                background: var(--wp-fundi-secondary-hover, #545b62);
+            &--facebook:hover {
+                background: #1877f2;
             }
-        }
-    }
-}
 
-// Animation for spinner
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+            &--twitter:hover {
+                background: #1da1f2;
+            }
 
-// Responsive improvements
-@media (max-width: 768px) {
-    .job-filter-form {
-        .filter-group {
-            margin-bottom: 1rem;
-        }
+            &--whatsapp:hover {
+                background: #25d366;
+            }
 
-        .button {
-            width: 100%;
-            margin: 0.5rem 0;
-
-            &.button-secondary {
-                margin-left: 0;
+            &--email:hover {
+                background: #ea4335;
             }
         }
     }
 
-    .jobs-results {
-        .loading-spinner {
+    // =============================================================================
+    // RESPONSIVE DESIGN
+    // =============================================================================
+
+    @media (max-width: 768px) {
+        &__filter-form {
+            .job-notices__filter-group {
+                margin-bottom: 1rem;
+            }
+        }
+
+        &__job-cards-grid {
+            gap: 1rem;
+        }
+
+        &__results-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        &__container {
+            padding: 2rem 1rem;
+        }
+
+        &__job-header {
             padding: 1rem;
-            width: 90%;
-            max-width: 300px;
-
-
-    .job-title,
-    .job-details {
-        a {
-            @extend %job-details-link;
         }
 
-        span.badge.featured {
-            color: var(--wp-fundi-success-color);
-
+        &__filters {
+            padding: 1rem;
         }
     }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes job-notices-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// =============================================================================
+// LEGACY CLASS SUPPORT (FOR BACKWARD COMPATIBILITY)
+// =============================================================================
+// These classes maintain backward compatibility while being scoped
+
+.jobs-archive.jobs-container,
+.single-job.jobs-container,
+.hero-search-block {
+    @extend .job-notices__container;
+
+    .single-job-header {
+        @extend .job-notices__job-header;
+    }
+
+    .job-content {
+        @extend .job-notices__content;
+    }
+
+    .job-sidebar {
+        @extend .job-notices__sidebar;
+    }
+
+    .job-overview {
+        @extend .job-notices__job-overview;
+    }
+
+    .related-jobs {
+        @extend .job-notices__related-jobs;
+    }
+
+    .related-cards-grid {
+        @extend .job-notices__related-cards-grid;
+    }
+
+    .single-related-job {
+        @extend .job-notices__job-card;
+        @extend .job-notices__job-card--related;
+    }
+}
+
+.job-filter-form {
+    @extend .job-notices__filter-form;
+}
+
+.jobs-filters {
+    @extend .job-notices__filters;
+}
+
+.jobs-results {
+    @extend .job-notices__results;
+}
+
+.job-cards-grid {
+    @extend .job-notices__job-cards-grid;
+}
+
+.job-card {
+    @extend .job-notices__job-card;
+}
+
+.job-share-buttons {
+    @extend .job-notices__share-buttons;
+}
+
+#hero-search-block {
+    @extend .job-notices__hero-search;
 }

@@ -100,7 +100,7 @@
 		}
 
 		// Prevent form submission (we handle it via Ajax)
-		const form = document.querySelector('.job-filter-form');
+		const form = document.querySelector('.job-notices__filter-form');
 		if (form) {
 			form.addEventListener('submit', function(e) {
 				e.preventDefault();
@@ -167,11 +167,11 @@
 	 * Update the job results section with new HTML
 	 */
 	function updateJobResults(data) {
-		const resultsContainer = document.querySelector('.jobs-results');
+		const resultsContainer = document.querySelector('.job-notices__results');
 		if (!resultsContainer) return;
 
 		// Update results count
-		const resultsCount = resultsContainer.querySelector('.results-count');
+		const resultsCount = resultsContainer.querySelector('.job-notices__results-count');
 		if (resultsCount) {
 			resultsCount.textContent = `Showing ${data.count} results`;
 		}
@@ -182,7 +182,7 @@
 			jobResults.outerHTML = data.html;
 		} else {
 			// If no existing results, insert new ones
-			const resultsHeader = resultsContainer.querySelector('.jobs-results-header');
+			const resultsHeader = resultsContainer.querySelector('.job-notices__results-header');
 			if (resultsHeader) {
 				resultsHeader.insertAdjacentHTML('afterend', data.html);
 			}
@@ -197,14 +197,14 @@
 	 */
 	function showLoadingState() {
 		isLoading = true;
-		const resultsContainer = document.querySelector('.jobs-results');
+		const resultsContainer = document.querySelector('.job-notices__results');
 		if (resultsContainer) {
-			resultsContainer.classList.add('loading');
+			resultsContainer.classList.add('job-notices__results--loading');
 
 			// Add loading spinner
 			const loadingSpinner = document.createElement('div');
-			loadingSpinner.className = 'loading-spinner';
-			loadingSpinner.innerHTML = `<div class="spinner"></div><p>${jobNoticesAjax.strings.loading}</p>`;
+			loadingSpinner.className = 'job-notices__loading-spinner';
+			loadingSpinner.innerHTML = `<div class="job-notices__spinner"></div><p>${jobNoticesAjax.strings.loading}</p>`;
 			resultsContainer.appendChild(loadingSpinner);
 		}
 	}
@@ -214,12 +214,12 @@
 	 */
 	function hideLoadingState() {
 		isLoading = false;
-		const resultsContainer = document.querySelector('.jobs-results');
+		const resultsContainer = document.querySelector('.job-notices__results');
 		if (resultsContainer) {
-			resultsContainer.classList.remove('loading');
+			resultsContainer.classList.remove('job-notices__results--loading');
 
 			// Remove loading spinner
-			const loadingSpinner = resultsContainer.querySelector('.loading-spinner');
+			const loadingSpinner = resultsContainer.querySelector('.job-notices__loading-spinner');
 			if (loadingSpinner) {
 				loadingSpinner.remove();
 			}
@@ -230,10 +230,10 @@
 	 * Show error message
 	 */
 	function showError(message) {
-		const resultsContainer = document.querySelector('.jobs-results');
+		const resultsContainer = document.querySelector('.job-notices__results');
 		if (resultsContainer) {
 			const errorDiv = document.createElement('div');
-			errorDiv.className = 'filter-error';
+			errorDiv.className = 'job-notices__filter-error';
 			errorDiv.innerHTML = `<p>${message}</p>`;
 			resultsContainer.appendChild(errorDiv);
 
