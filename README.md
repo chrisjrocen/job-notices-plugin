@@ -29,6 +29,7 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 ### 0.8.0
 
 - Added category section to the sidebar
+- Added JobPosting schema for job posts
 
 ### 0.7.0
 

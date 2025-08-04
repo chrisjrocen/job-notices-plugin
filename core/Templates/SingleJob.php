@@ -46,6 +46,9 @@ class SingleJob {
 		}
 
 		get_header();
+
+		$this->render_schema();
+
 		echo '<article class="job-notices job-notices__container job-notices__container--single">';
 
 		while ( have_posts() ) {
@@ -221,5 +224,66 @@ class SingleJob {
 		}
 
 		echo '</div>';
+	}
+
+	/**
+	 * Output the JSON-LD schema.
+	 */
+	public function render_schema() {
+
+		$title                = get_the_title( $this->post_id );
+		$description          = wp_strip_all_tags( get_the_content( null, false, $this->post_id ) );
+		$date_posted          = get_the_date( 'c', $this->post_id ); // ISO 8601 format.
+		$application_deadline = get_post_meta( $this->post_id, 'application_deadline', true );
+		$application_deadline = $application_deadline ? gmdate( 'c', strtotime( $application_deadline ) ) : null;
+
+		$location_terms = get_the_terms( $this->post_id, 'location' );
+		$location_name  = ( ! is_wp_error( $location_terms ) && ! empty( $location_terms ) ) ? $location_terms[0]->name : 'Uganda';
+
+		$job_type_terms = get_the_terms( $this->post_id, 'job_type' );
+		$job_type       = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : 'Full-Time';
+
+		$salary = get_post_meta( $this->post_id, 'job_notices_salary', true );
+
+		$hiring_org = array(
+			'@type'  => 'Organization',
+			'name'   => get_bloginfo( 'name' ),
+			'sameAs' => home_url(),
+		);
+
+		$job_schema = array(
+			'@context'           => 'https://schema.org/',
+			'@type'              => 'JobPosting',
+			'title'              => $title,
+			'description'        => $description,
+			'datePosted'         => $date_posted,
+			'validThrough'       => $application_deadline,
+			'employmentType'     => $job_type,
+			'hiringOrganization' => $hiring_org,
+			'jobLocation'        => array(
+				'@type'   => 'Place',
+				'address' => array(
+					'@type'           => 'PostalAddress',
+					'addressLocality' => $location_name,
+					'addressCountry'  => 'UG',
+				),
+			),
+		);
+
+		if ( ! empty( $salary ) ) {
+			$job_schema['baseSalary'] = array(
+				'@type'    => 'MonetaryAmount',
+				'currency' => 'UGX',
+				'value'    => array(
+					'@type'    => 'QuantitativeValue',
+					'value'    => preg_replace( '/[^\d.]/', '', $salary ),
+					'unitText' => 'MONTH',
+				),
+			);
+		}
+
+		echo '<script type="application/ld+json">' .
+			wp_json_encode( $job_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) .
+			'</script>';
 	}
 }
