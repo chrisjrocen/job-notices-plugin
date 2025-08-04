@@ -21,8 +21,7 @@ class JobFields {
 
 		$this->fields = array(
 
-			'job_notices_expiry_date'     => array(
-
+			'job_notices_expiry_date'          => array(
 				'label'       => 'Expiry Date',
 				'type'        => 'date',
 				'description' => 'Deadline date',

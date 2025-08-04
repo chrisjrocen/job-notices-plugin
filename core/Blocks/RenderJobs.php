@@ -42,32 +42,49 @@ class RenderJobs extends BaseController {
 	 */
 	public function render_block( $attributes ) {
 		ob_start();
-		echo '<div class="jobs-hero">';
-		echo '<div class="jobs-container jobs-archive">';
-		echo '<section class="jobs-results">';
-		echo '<div class="jobs-results-header">';
+		echo '<div class="job-notices job-notices__hero-block">';
+		echo '<div class="job-notices__container job-notices__container--block">';
+		echo '<section class="job-notices__results job-notices__results--block">';
+		echo '<div class="job-notices__results-header">';
 		echo '</div>';
 
 		$jobs = new WP_Query(
 			array(
 				'post_type'      => 'jobs',
-				'posts_per_page' => -1,
+				'posts_per_page' => isset( $attributes['postsPerPage'] ) ? intval( $attributes['postsPerPage'] ) : 6,
+				'orderby'        => isset( $attributes['orderBy'] ) ? $attributes['orderBy'] : 'date',
+				'order'          => isset( $attributes['order'] ) ? $attributes['order'] : 'DESC',
 			)
 		);
 
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-cards-grid">';
+			echo '<div id="job-results" class="job-notices__job-cards-grid job-notices__job-cards-grid--block">';
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
-				echo '<div class="job-card">';
+				echo '<div class="job-notices__job-card job-notices__job-card--block">';
 				include $this->plugin_path . 'core/Templates/JobCard.php';
 				echo '</div>';
 			}
 			echo '</div>';
-			the_posts_pagination();
+			
+			// Add pagination if needed
+			if ( $jobs->max_num_pages > 1 ) {
+				echo '<div class="job-notices__pagination job-notices__pagination--block">';
+				echo paginate_links(
+					array(
+						'total'   => $jobs->max_num_pages,
+						'current' => 1,
+						'format'  => '?paged=%#%',
+					)
+				);
+				echo '</div>';
+			}
+			
 			wp_reset_postdata();
 		} else {
+			echo '<div class="job-notices__no-jobs-found">';
 			echo '<p>' . esc_html__( 'No jobs found.', 'job-notices' ) . '</p>';
+			echo '</div>';
 		}
 
 		echo '</section>';

@@ -149,10 +149,10 @@ class JobsArchive {
 		// Generate HTML for job results.
 		ob_start();
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-cards-grid">';
+			echo '<div id="job-results" class="job-notices__job-cards-grid">';
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
-				echo '<div class="job-card">';
+				echo '<div class="job-notices__job-card">';
 				include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
 				echo '</div>';
 			}
@@ -160,7 +160,7 @@ class JobsArchive {
 
 			// Add pagination if needed.
 			if ( $jobs->max_num_pages > 1 ) {
-				echo '<div class="job-pagination">';
+				echo '<div class="job-notices__pagination">';
 				echo paginate_links(
 					array(
 						'total'   => $jobs->max_num_pages,
@@ -171,8 +171,8 @@ class JobsArchive {
 				echo '</div>';
 			}
 		} else {
-			echo '<div id="job-results" class="job-cards-grid">';
-			echo '<p class="no-jobs-found">' . esc_html__( 'No jobs found matching your criteria.', 'job-notices' ) . '</p>';
+			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<p class="job-notices__no-jobs-found">' . esc_html__( 'No jobs found matching your criteria.', 'job-notices' ) . '</p>';
 			echo '</div>';
 		}
 		wp_reset_postdata();
@@ -215,23 +215,23 @@ class JobsArchive {
 	 */
 	public function render_jobs_archive_content( $results_count, $sort_select, $per_page_select ) {
 
-		echo '<div class="jobs-container jobs-archive">';
+		echo '<div class="job-notices job-notices__container">';
 
 		// Sidebar Filters.
-		echo '<aside class="jobs-filters">';
+		echo '<aside class="job-notices__filters">';
 		include plugin_dir_path( __FILE__, 1 ) . 'JobFilters.php';
 		echo '</aside>';
 
 		// Job Results.
-		echo '<section class="jobs-results">';
+		echo '<section class="job-notices__results">';
 
-		echo '<div class="jobs-results-header">';
-		echo $results_count;
-		echo '<div class="results-controls">';
+		echo '<div class="job-notices__results-header">';
+		echo '<div class="job-notices__results-count">' . $results_count . '</div>';
+		echo '<div class="job-notices__results-controls">';
 		echo $sort_select;
 		echo $per_page_select;
 		echo '</div>';
-		echo '</div>'; // jobs-results-header.
+		echo '</div>'; // job-notices__results-header.
 
 		$jobs = new WP_Query(
 			array(
@@ -244,27 +244,38 @@ class JobsArchive {
 		);
 
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-cards-grid">';
+			echo '<div id="job-results" class="job-notices__job-cards-grid">';
 
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
 
 				// Use a template part for each job card.
-				echo '<div class="job-card">';
+				echo '<div class="job-notices__job-card">';
 					include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
 				echo '</div>';
 			}
 
-			echo '</div>'; // job-cards-grid.
-			the_posts_pagination();
+			echo '</div>'; // job-notices__job-cards-grid.
+			
+			// Add pagination
+			if ( $jobs->max_num_pages > 1 ) {
+				echo '<div class="job-notices__pagination">';
+				echo paginate_links(
+					array(
+						'total'   => $jobs->max_num_pages,
+						'current' => get_query_var( 'paged', 1 ),
+						'format'  => '?paged=%#%',
+					)
+				);
+				echo '</div>';
+			}
 		} else {
-			echo sprintf(
-				'<p>%s</p>',
-				esc_html__( 'No jobs found.', 'job-notices' )
-			);
+			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<p class="job-notices__no-jobs-found">' . esc_html__( 'No jobs found.', 'job-notices' ) . '</p>';
+			echo '</div>';
 		}
 
-		echo '</section>'; // jobs-results.
-		echo '</div>'; // jobs-container.
+		echo '</section>'; // job-notices__results.
+		echo '</div>'; // job-notices__container.
 	}
 }

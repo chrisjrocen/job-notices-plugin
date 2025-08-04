@@ -173,7 +173,18 @@ __webpack_require__.r(__webpack_exports__);
   /**
    * @see ./edit.js
    */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  /**
+   * Save function for the block
+   *
+   * @param {Object} props Block props
+   * @return {WPElement} Element to render
+   */
+  save: function (props) {
+    // This is a dynamic block, so we return null for the save function
+    // The content will be rendered server-side via the render_callback
+    return null;
+  }
 });
 
 /***/ }),
