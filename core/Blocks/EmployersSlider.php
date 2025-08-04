@@ -25,10 +25,10 @@ class EmployersSlider extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function register() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ), 1 );
+	public function register_block() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 1 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 
 		register_block_type_from_metadata(
 			$this->plugin_path . 'build/employers-slider/',

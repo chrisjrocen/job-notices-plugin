@@ -25,7 +25,7 @@ class HeroSearch extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function register() {
+	public function register_block() {
 
 		register_block_type_from_metadata(
 			$this->plugin_path . 'build/hero-search/',
