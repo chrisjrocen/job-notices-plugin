@@ -112,11 +112,7 @@
 .job-notices .single-job.jobs-container .job-sidebar,
 .single-job.jobs-container .job-notices .job-sidebar,
 .job-notices .hero-search-block .job-sidebar,
-.hero-search-block .job-notices .job-sidebar, .job-notices .job-notices__job-card, .job-notices .job-card, .job-notices .jobs-archive.jobs-container .single-related-job, .jobs-archive.jobs-container .job-notices .single-related-job,
-.job-notices .single-job.jobs-container .single-related-job,
-.single-job.jobs-container .job-notices .single-related-job,
-.job-notices .hero-search-block .single-related-job,
-.hero-search-block .job-notices .single-related-job, .job-notices .job-notices__job-header--single {
+.hero-search-block .job-notices .job-sidebar, .job-notices .job-notices__job-card, .job-notices .job-card, .job-notices .job-notices__job-header--single {
   background: var(--wp-fundi-subtle-background-color, #f2f5f7);
   padding: 1.25rem;
   border-radius: 0.75rem;
@@ -128,11 +124,7 @@
 .job-notices .single-job.jobs-container .job-sidebar:hover,
 .single-job.jobs-container .job-notices .job-sidebar:hover,
 .job-notices .hero-search-block .job-sidebar:hover,
-.hero-search-block .job-notices .job-sidebar:hover, .job-notices .job-notices__job-card:hover, .job-notices .job-card:hover, .job-notices .jobs-archive.jobs-container .single-related-job:hover, .jobs-archive.jobs-container .job-notices .single-related-job:hover,
-.job-notices .single-job.jobs-container .single-related-job:hover,
-.single-job.jobs-container .job-notices .single-related-job:hover,
-.job-notices .hero-search-block .single-related-job:hover,
-.hero-search-block .job-notices .single-related-job:hover, .job-notices .job-notices__job-header--single:hover {
+.hero-search-block .job-notices .job-sidebar:hover, .job-notices .job-notices__job-card:hover, .job-notices .job-card:hover, .job-notices .job-notices__job-header--single:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 .job-notices .job-notices__hero-search .job-notices__filter-form input, .job-notices #hero-search-block .job-notices__filter-form input, .job-notices .job-notices__hero-search .job-filter-form input, .job-notices #hero-search-block .job-filter-form input, .job-notices__hero-search .job-notices__filter-form .job-notices input, #hero-search-block .job-notices__filter-form .job-notices input, .job-notices__hero-search .job-filter-form .job-notices input, #hero-search-block .job-filter-form .job-notices input,
@@ -237,7 +229,7 @@
   width: var(--theme-container-width, 90%);
   max-width: var(--theme-normal-container-max-width, 1200px);
   margin: auto;
-  grid-template-areas: "job-header job-header" "job-content job-sidebar" "related-jobs related-jobs";
+  grid-template-areas: "job-header job-header" "job-content job-sidebar" "job-content job-categories" "related-jobs related-jobs";
 }
 @media (max-width: 768px) {
   .job-notices__container, .jobs-archive.jobs-container,
@@ -245,7 +237,7 @@
   .hero-search-block {
     grid-template-columns: 1fr;
     padding: 5rem 0.2rem;
-    grid-template-areas: "job-header" "job-content" "job-sidebar" "related-jobs";
+    grid-template-areas: "job-header" "job-content" "job-sidebar" "job-categories" "related-jobs";
   }
 }
 .job-notices__container h1, .jobs-archive.jobs-container h1,
@@ -477,28 +469,20 @@
     grid-template-areas: "company-logo" "job-meta" "application-section";
   }
 }
-.job-notices__job-card--related .job-notices__company-logo img, .jobs-archive.jobs-container .single-related-job .job-notices__company-logo img,
-.single-job.jobs-container .single-related-job .job-notices__company-logo img,
-.hero-search-block .single-related-job .job-notices__company-logo img {
+.job-notices__job-card--related .job-notices__company-logo img {
   width: 60px;
   height: 60px;
 }
-.job-notices__job-card--related .job-notices__company-logo--placeholder, .jobs-archive.jobs-container .single-related-job .job-notices__company-logo--placeholder,
-.single-job.jobs-container .single-related-job .job-notices__company-logo--placeholder,
-.hero-search-block .single-related-job .job-notices__company-logo--placeholder {
+.job-notices__job-card--related .job-notices__company-logo--placeholder {
   width: 60px;
   height: 60px;
   font-size: 1.5rem;
 }
-.job-notices__job-card--related .job-notices__job-meta .job-notices__job-title h2, .jobs-archive.jobs-container .single-related-job .job-notices__job-meta .job-notices__job-title h2,
-.single-job.jobs-container .single-related-job .job-notices__job-meta .job-notices__job-title h2,
-.hero-search-block .single-related-job .job-notices__job-meta .job-notices__job-title h2 {
+.job-notices__job-card--related .job-notices__job-meta .job-notices__job-title h2 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
-.job-notices__job-card--related .job-notices__job-meta .job-notices__job-details, .jobs-archive.jobs-container .single-related-job .job-notices__job-meta .job-notices__job-details,
-.single-job.jobs-container .single-related-job .job-notices__job-meta .job-notices__job-details,
-.hero-search-block .single-related-job .job-notices__job-meta .job-notices__job-details {
+.job-notices__job-card--related .job-notices__job-meta .job-notices__job-details {
   gap: 1rem;
   margin-top: 0.5rem;
 }
@@ -823,7 +807,6 @@
 .hero-search-block .related-jobs .job-notices__related-cards-grid,
 .hero-search-block .related-jobs .related-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 @media (max-width: 768px) {
@@ -839,91 +822,6 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-}
-.job-notices__related-jobs .job-notices__job-card--related .job-notices__job-header, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .job-notices__job-header, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .job-notices__job-header,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .job-notices__job-header,
-.single-job.jobs-container .job-notices__related-jobs .single-related-job .job-notices__job-header,
-.job-notices__related-jobs .hero-search-block .single-related-job .job-notices__job-header,
-.hero-search-block .job-notices__related-jobs .single-related-job .job-notices__job-header, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .job-notices__job-header, .jobs-archive.jobs-container .related-jobs .single-related-job .job-notices__job-header,
-.single-job.jobs-container .related-jobs .job-notices__job-card--related .job-notices__job-header,
-.single-job.jobs-container .related-jobs .single-related-job .job-notices__job-header,
-.hero-search-block .related-jobs .job-notices__job-card--related .job-notices__job-header,
-.hero-search-block .related-jobs .single-related-job .job-notices__job-header, .job-notices__related-jobs .job-notices__job-card--related .jobs-archive.jobs-container .single-job-header, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .jobs-archive.jobs-container .single-job-header,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .jobs-archive.jobs-container .single-job-header,
-.job-notices__related-jobs .hero-search-block .single-related-job .jobs-archive.jobs-container .single-job-header, .jobs-archive.jobs-container .job-notices__related-jobs .job-notices__job-card--related .single-job-header, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .single-job-header, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .single-job-header, .jobs-archive.jobs-container .related-jobs .single-related-job .single-job-header,
-.job-notices__related-jobs .job-notices__job-card--related .single-job.jobs-container .single-job-header,
-.job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .single-job.jobs-container .single-job-header,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .single-job.jobs-container .single-job-header,
-.job-notices__related-jobs .hero-search-block .single-related-job .single-job.jobs-container .single-job-header,
-.single-job.jobs-container .job-notices__related-jobs .job-notices__job-card--related .single-job-header,
-.single-job.jobs-container .job-notices__related-jobs .single-related-job .single-job-header,
-.single-job.jobs-container .related-jobs .job-notices__job-card--related .single-job-header,
-.single-job.jobs-container .related-jobs .single-related-job .single-job-header,
-.job-notices__related-jobs .job-notices__job-card--related .hero-search-block .single-job-header,
-.job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .hero-search-block .single-job-header,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .hero-search-block .single-job-header,
-.job-notices__related-jobs .hero-search-block .single-related-job .hero-search-block .single-job-header,
-.hero-search-block .job-notices__related-jobs .job-notices__job-card--related .single-job-header,
-.hero-search-block .job-notices__related-jobs .single-related-job .single-job-header,
-.hero-search-block .related-jobs .job-notices__job-card--related .single-job-header,
-.hero-search-block .related-jobs .single-related-job .single-job-header {
-  grid-template-columns: 1fr 4fr 1fr;
-  gap: 0.75rem;
-}
-@media (max-width: 768px) {
-  .job-notices__related-jobs .job-notices__job-card--related .job-notices__job-header, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .job-notices__job-header, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .job-notices__job-header,
-  .job-notices__related-jobs .single-job.jobs-container .single-related-job .job-notices__job-header,
-  .single-job.jobs-container .job-notices__related-jobs .single-related-job .job-notices__job-header,
-  .job-notices__related-jobs .hero-search-block .single-related-job .job-notices__job-header,
-  .hero-search-block .job-notices__related-jobs .single-related-job .job-notices__job-header, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .job-notices__job-header, .jobs-archive.jobs-container .related-jobs .single-related-job .job-notices__job-header,
-  .single-job.jobs-container .related-jobs .job-notices__job-card--related .job-notices__job-header,
-  .single-job.jobs-container .related-jobs .single-related-job .job-notices__job-header,
-  .hero-search-block .related-jobs .job-notices__job-card--related .job-notices__job-header,
-  .hero-search-block .related-jobs .single-related-job .job-notices__job-header, .job-notices__related-jobs .job-notices__job-card--related .jobs-archive.jobs-container .single-job-header, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .jobs-archive.jobs-container .single-job-header,
-  .job-notices__related-jobs .single-job.jobs-container .single-related-job .jobs-archive.jobs-container .single-job-header,
-  .job-notices__related-jobs .hero-search-block .single-related-job .jobs-archive.jobs-container .single-job-header, .jobs-archive.jobs-container .job-notices__related-jobs .job-notices__job-card--related .single-job-header, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .single-job-header, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .single-job-header, .jobs-archive.jobs-container .related-jobs .single-related-job .single-job-header,
-  .job-notices__related-jobs .job-notices__job-card--related .single-job.jobs-container .single-job-header,
-  .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .single-job.jobs-container .single-job-header,
-  .job-notices__related-jobs .single-job.jobs-container .single-related-job .single-job.jobs-container .single-job-header,
-  .job-notices__related-jobs .hero-search-block .single-related-job .single-job.jobs-container .single-job-header,
-  .single-job.jobs-container .job-notices__related-jobs .job-notices__job-card--related .single-job-header,
-  .single-job.jobs-container .job-notices__related-jobs .single-related-job .single-job-header,
-  .single-job.jobs-container .related-jobs .job-notices__job-card--related .single-job-header,
-  .single-job.jobs-container .related-jobs .single-related-job .single-job-header,
-  .job-notices__related-jobs .job-notices__job-card--related .hero-search-block .single-job-header,
-  .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .hero-search-block .single-job-header,
-  .job-notices__related-jobs .single-job.jobs-container .single-related-job .hero-search-block .single-job-header,
-  .job-notices__related-jobs .hero-search-block .single-related-job .hero-search-block .single-job-header,
-  .hero-search-block .job-notices__related-jobs .job-notices__job-card--related .single-job-header,
-  .hero-search-block .job-notices__related-jobs .single-related-job .single-job-header,
-  .hero-search-block .related-jobs .job-notices__job-card--related .single-job-header,
-  .hero-search-block .related-jobs .single-related-job .single-job-header {
-    grid-template-columns: 1fr;
-  }
-}
-.job-notices__related-jobs .job-notices__job-card--related .job-notices__application-section, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .job-notices__application-section, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .job-notices__application-section,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .job-notices__application-section,
-.single-job.jobs-container .job-notices__related-jobs .single-related-job .job-notices__application-section,
-.job-notices__related-jobs .hero-search-block .single-related-job .job-notices__application-section,
-.hero-search-block .job-notices__related-jobs .single-related-job .job-notices__application-section, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .job-notices__application-section, .jobs-archive.jobs-container .related-jobs .single-related-job .job-notices__application-section,
-.single-job.jobs-container .related-jobs .job-notices__job-card--related .job-notices__application-section,
-.single-job.jobs-container .related-jobs .single-related-job .job-notices__application-section,
-.hero-search-block .related-jobs .job-notices__job-card--related .job-notices__application-section,
-.hero-search-block .related-jobs .single-related-job .job-notices__application-section {
-  text-align: center;
-  font-size: 0.8rem;
-}
-.job-notices__related-jobs .job-notices__job-card--related .job-notices__application-section .job-notices__apply-button, .job-notices__related-jobs .jobs-archive.jobs-container .single-related-job .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .job-notices__related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button,
-.job-notices__related-jobs .single-job.jobs-container .single-related-job .job-notices__application-section .job-notices__apply-button,
-.single-job.jobs-container .job-notices__related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button,
-.job-notices__related-jobs .hero-search-block .single-related-job .job-notices__application-section .job-notices__apply-button,
-.hero-search-block .job-notices__related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .related-jobs .job-notices__job-card--related .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button,
-.single-job.jobs-container .related-jobs .job-notices__job-card--related .job-notices__application-section .job-notices__apply-button,
-.single-job.jobs-container .related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button,
-.hero-search-block .related-jobs .job-notices__job-card--related .job-notices__application-section .job-notices__apply-button,
-.hero-search-block .related-jobs .single-related-job .job-notices__application-section .job-notices__apply-button {
-  padding: 0.4rem 0.6rem;
-  font-size: 0.8rem;
 }
 .job-notices__hero-search, #hero-search-block {
   padding: 2rem 1rem;
