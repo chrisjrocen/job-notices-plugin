@@ -146,6 +146,7 @@
         grid-template-areas:
             "job-header job-header"
             "job-content job-sidebar"
+            "job-content job-categories"
             "related-jobs related-jobs";
 
         @media (max-width: 768px) {
@@ -155,6 +156,7 @@
                 "job-header"
                 "job-content"
                 "job-sidebar"
+                "job-categories"
                 "related-jobs";
         }
 
@@ -808,33 +810,12 @@
 
         .job-notices__related-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
 
             @media (max-width: 768px) {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-        }
-
-        .job-notices__job-card--related {
-            .job-notices__job-header {
-                grid-template-columns: 1fr 4fr 1fr;
-                gap: 0.75rem;
-
-                @media (max-width: 768px) {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            .job-notices__application-section {
-                text-align: center;
-                font-size: 0.8rem;
-
-                .job-notices__apply-button {
-                    padding: 0.4rem 0.6rem;
-                    font-size: 0.8rem;
-                }
             }
         }
     }
@@ -1014,11 +995,6 @@
 
     .related-cards-grid {
         @extend .job-notices__related-cards-grid;
-    }
-
-    .single-related-job {
-        @extend .job-notices__job-card;
-        @extend .job-notices__job-card--related;
     }
 }
 

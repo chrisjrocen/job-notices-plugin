@@ -26,6 +26,11 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.1
+
+- Design cleanup for related jobs section
+- Add custom design to job_category taxonomy archive
+
 ### 0.8.0
 
 - Added category section to the sidebar

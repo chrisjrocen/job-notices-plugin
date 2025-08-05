@@ -1,6 +1,6 @@
 <?php
 /**
- * Template class for displaying job listings.
+ * Class to handle the rendering of job listings on the archive page. Works for the archive and job_category pages
  *
  * @package JOB_NOTICES
  */
@@ -191,21 +191,22 @@ class JobsArchive {
 	public function render() {
 
 		// Check if we are on the job listings archive page. If not, return early.
-		if ( ! is_post_type_archive( 'jobs' ) ) {
+		if ( is_post_type_archive( 'jobs' ) || is_tax( 'job_category' ) ) {
+
+			get_header();
+
+			$results_count   = $this->render_results_count();
+			$sort_select     = $this->sort_select();
+			$per_page_select = $this->per_page_select();
+
+			$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select );
+
+			get_footer();
+
+			exit; // Ensure no further processing occurs.
+		} else {
 			return;
 		}
-
-		get_header();
-
-		$results_count   = $this->render_results_count();
-		$sort_select     = $this->sort_select();
-		$per_page_select = $this->per_page_select();
-
-		$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select );
-
-		get_footer();
-
-		exit; // Ensure no further processing occurs.
 	}
 
 	/**
@@ -235,15 +236,26 @@ class JobsArchive {
 		echo '</div>';
 		echo '</div>'; // job-notices__results-header.
 
-		$jobs = new WP_Query(
-			array(
-				'post_type'      => 'jobs',
-				'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
-				'paged'          => get_query_var( 'paged', 1 ),
-				'orderby'        => $_GET['sort'] ?? 'date',
-				'order'          => 'salary_asc' === $_GET['sort'] ? 'ASC' : 'DESC',
-			)
+		$args = array(
+			'post_type'      => 'jobs',
+			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
+			'paged'          => get_query_var( 'paged', 1 ),
+			'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
+			'order'          => 'salary_asc' === sanitize_text_field( wp_unslash( $_GET['sort'] ?? '' ) ) ? 'ASC' : 'DESC',
 		);
+
+		// Add taxonomy filter if we're on a job_category archive.
+		if ( is_tax( 'job_category' ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'job_category',
+					'field'    => 'slug',
+					'terms'    => get_queried_object()->slug,
+				),
+			);
+		}
+
+		$jobs = new WP_Query( $args );
 
 		if ( $jobs->have_posts() ) {
 			echo '<div id="job-results" class="job-notices__job-cards-grid">';
