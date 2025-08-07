@@ -55,13 +55,6 @@ class BaseController {
 	public $enable_archives;
 
 	/**
-	 * Enable Archives Page.
-	 *
-	 * @var boolean
-	 */
-	public $enable_detail_pages;
-
-	/**
 	 * Name of Single Post Type.
 	 *
 	 * @var string
@@ -118,14 +111,30 @@ class BaseController {
 	public $enable_grid_block;
 
 	/**
+	 * Enable Right Sidebar
+	 *
+	 * @var boolean
+	 */
+	public $enable_right_sidebar;
+
+	/**
+	 * Enable Left Sidebar
+	 *
+	 * @var boolean
+	 */
+	public $enable_left_sidebar;
+
+	/**
 	 * Declare all the variables for the class.
 	 */
 	public function __construct() {
 
 		// Generic Variables.
-		$this->plugin_path = trailingslashit( plugin_dir_path( dirname( __DIR__, 1 ) ) );
-		$this->plugin_url  = trailingslashit( plugin_dir_url( dirname( __DIR__, 1 ) ) );
-		$this->plugin      = plugin_basename( dirname( __DIR__, 2 ) ) . '/job-notices.php';
+		$this->plugin_path          = trailingslashit( plugin_dir_path( dirname( __DIR__, 1 ) ) );
+		$this->plugin_url           = trailingslashit( plugin_dir_url( dirname( __DIR__, 1 ) ) );
+		$this->plugin               = plugin_basename( dirname( __DIR__, 2 ) ) . '/job-notices.php';
+		$this->enable_right_sidebar = get_option( 'options_enable_job_notices_right_sidebar' );
+		$this->enable_left_sidebar  = get_option( 'options_enable_job_notices_left_sidebar' );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 	}

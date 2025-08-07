@@ -74,7 +74,7 @@ trait RenderJobsTrait {
 	}
 
 	/**
-	 * Function to hook a method in a block. Allows it to be unhookable
+	 * Function to enqueue inline styles per block.
 	 *
 	 * @param string $method_name - method to be hooked.
 	 * @param array  $args - The styles to enqueue.

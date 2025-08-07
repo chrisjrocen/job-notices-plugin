@@ -29,6 +29,8 @@ trait PostTypeTrait {
 		$label_name   = ucwords( $this->post_type_name );
 		$label_single = ucwords( $this->post_type_name_single );
 
+		$enable_archive_page = 'true' === $this->enable_archive_page ? true : ( 'false' === $this->enable_archive_page ? false : $this->enable_archive_page );
+
 		$labels = array(
 			'name'               => $label_name,
 			'singular_name'      => $label_single,
@@ -50,7 +52,7 @@ trait PostTypeTrait {
 			'menu_position'       => $this->menu_position,
 			'taxonomies'          => array( $this->jobs_taxonomy_slug ),
 			'supports'            => array( 'title', 'thumbnail', 'editor', 'custom-fields' ),
-			'has_archive'         => $this->enable_archives,
+			'has_archive'         => $enable_archive_page,
 			'show_in_rest'        => $this->enable_gutenberg_editor,
 			'rewrite'             => array( 'slug' => $this->post_type_slug ),
 			'menu_icon'           => $this->menu_icon,
@@ -61,7 +63,7 @@ trait PostTypeTrait {
 			'show_in_admin_bar'   => true,
 			'can_export'          => true,
 			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
+			'publicly_queryable'  => $enable_archive_page,
 			'capability_type'     => 'post',
 		);
 

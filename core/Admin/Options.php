@@ -22,9 +22,8 @@ class Options extends BaseController {
 	 */
 	public function register() {
 		// call each function internally for option setup.
-		add_action( 'admin_menu', array( $this, 'mctp_admin_menu' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'mctp_enqueue_scripts' ) );
-		add_action( 'admin_init', array( $this, 'mctp_save_options' ) );
+		add_action( 'admin_menu', array( $this, 'job_notices_admin_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'job_notices_enqueue_scripts' ) );
 
 		// Register the route for the Options API.
 		add_action( 'rest_api_init', array( $this, 'rest_api_register_route' ) );
@@ -84,27 +83,15 @@ class Options extends BaseController {
 	public function rest_api_jobs_settings_page_read_options_callback( $data ) {
 
 		// Generate the response by fetching options from the database.
-		$response                            = array();
-		$response['post_type_name']          = get_option( 'options_jobs_post_type_name', 'Jobs' );
-		$response['post_type_name_singular'] = get_option( 'options_jobs_post_type_name_singular', 'Job' );
-		$response['post_type_slug']          = get_option( 'options_jobs_post_type_slug', 'job-notices-jobs-listing' );
-		$response['enable_editor']           = get_option( 'options_jobs_enable_gutenberg_editor', 'true' );
-		$response['enable_detail_pages']     = get_option( 'options_jobs_enable_detail_pages', 'true' );
-		$response['enable_taxonomy']         = get_option( 'options_jobs_enable_taxonomy', 'false' );
-		$response['enable_taxonomy_page']    = get_option( 'options_jobs_enable_taxonomy_page', 'false' );
-		$response['taxonomy_slug']           = get_option( 'options_jobs_taxonomy_slug', 'category' );
-		$response['enable_carousel_block']   = get_option( 'options_jobs_enable_carousel_block', 'false' );
-		$response['enable_grid_block']       = get_option( 'options_jobs_enable_grid_block', 'false' );
+		$response                              = array();
+		$response['enable_jobs_archive_page']  = get_option( 'options_jobs_enable_jobs_archive_page', 'true' );
+		$response['enable_jobs_right_sidebar'] = get_option( 'options_enable_job_notices_right_sidebar', 'true' );
+		$response['enable_jobs_left_sidebar']  = get_option( 'options_enable_job_notices_left_sidebar', 'true' );
 
 		// Convert to React valid values / boolean values.
-		$response['enable_editor']        = isset( $response['enable_editor'] ) && 'true' === $response['enable_editor'] ? 1 : 0;
-		$response['enable_detail_pages']  = isset( $response['enable_detail_pages'] ) && 'true' === $response['enable_detail_pages'] ? 1 : 0;
-		$response['enable_taxonomy']      = isset( $response['enable_taxonomy'] ) && 'true' === $response['enable_taxonomy'] ? 1 : 0;
-		$response['enable_taxonomy_page'] = isset( $response['enable_taxonomy_page'] ) && 'true' === $response['enable_taxonomy_page'] ? 1 : 0;
-
-		// Convert for block enablers / boolean values.
-		$response['enable_carousel_block'] = isset( $response['enable_carousel_block'] ) && 'true' === $response['enable_carousel_block'] ? 1 : 0;
-		$response['enable_grid_block']     = isset( $response['enable_grid_block'] ) && 'true' === $response['enable_grid_block'] ? 1 : 0;
+		$response['enable_jobs_archive_page']  = isset( $response['enable_jobs_archive_page'] ) && 'true' === $response['enable_jobs_archive_page'] ? 1 : 0;
+		$response['enable_jobs_right_sidebar'] = isset( $response['enable_jobs_right_sidebar'] ) && 'true' === $response['enable_jobs_right_sidebar'] ? 1 : 0;
+		$response['enable_jobs_left_sidebar']  = isset( $response['enable_jobs_left_sidebar'] ) && 'true' === $response['enable_jobs_left_sidebar'] ? 1 : 0;
 
 		// Prepare the response.
 		$response = new WP_REST_Response( $response );
@@ -122,65 +109,19 @@ class Options extends BaseController {
 
 		// Get the data and sanitize.
 		// Note: In a real-world scenario, the sanitization function should be based on the option type.
-		$post_type_name          = sanitize_text_field( $request->get_param( 'post_type_name' ) );
-		$post_type_name_singular = sanitize_text_field( $request->get_param( 'post_type_name_singular' ) );
-		$post_type_name_slug     = sanitize_text_field( $request->get_param( 'post_type_slug' ) );
-		$enable_editor           = sanitize_text_field( $request->get_param( 'enable_editor' ) );
-		$enable_detail_pages     = sanitize_text_field( $request->get_param( 'enable_detail_pages' ) );
-		$enable_taxonomy         = sanitize_text_field( $request->get_param( 'enable_taxonomy' ) );
-		$enable_taxonomy_page    = sanitize_text_field( $request->get_param( 'enable_taxonomy_page' ) );
-		$taxonomy_slug           = sanitize_text_field( $request->get_param( 'taxonomy_slug' ) );
+		$enable_jobs_archive_page = sanitize_text_field( $request->get_param( 'enable_jobs_archive_page' ) );
+		$enable_jobs_archive_page = $enable_jobs_archive_page ? 'true' : 'false';
 
-		// Used to enabled or disable the blocks.
-		$enable_carousel_block = sanitize_text_field( $request->get_param( 'enable_carousel_block' ) );
-		$enable_grid_block     = sanitize_text_field( $request->get_param( 'enable_grid_block' ) );
+		$enable_jobs_right_sidebar = sanitize_text_field( $request->get_param( 'enable_jobs_right_sidebar' ) );
+		$enable_jobs_right_sidebar = $enable_jobs_right_sidebar ? 'true' : 'false';
 
-		if ( $enable_editor ) {
-			$enable_editor = 'true';
-		} else {
-			$enable_editor = 'false';
-		}
+		$enable_jobs_left_sidebar = sanitize_text_field( $request->get_param( 'enable_jobs_left_sidebar' ) );
+		$enable_jobs_left_sidebar = $enable_jobs_left_sidebar ? 'true' : 'false';
 
-		if ( $enable_detail_pages ) {
-			$enable_detail_pages = 'true';
-		} else {
-			$enable_detail_pages = 'false';
-		}
-
-		if ( $enable_taxonomy ) {
-			$enable_taxonomy = 'true';
-		} else {
-			$enable_taxonomy = 'false';
-		}
-
-		if ( $enable_taxonomy_page ) {
-			$enable_taxonomy_page = 'true';
-		} else {
-			$enable_taxonomy_page = 'false';
-		}
-
-		if ( $enable_grid_block ) {
-			$enable_grid_block = 'true';
-		} else {
-			$enable_grid_block = 'false';
-		}
-
-		if ( $enable_carousel_block ) {
-			$enable_carousel_block = 'true';
-		} else {
-			$enable_carousel_block = 'false';
-		}
 		// Update the options.
-		update_option( 'options_jobs_post_type_name', $post_type_name );
-		update_option( 'options_jobs_post_type_name_singular', $post_type_name_singular );
-		update_option( 'options_jobs_post_type_slug', $post_type_name_slug );
-		update_option( 'options_jobs_enable_gutenberg_editor', $enable_editor );
-		update_option( 'options_jobs_enable_detail_pages', $enable_detail_pages );
-		update_option( 'options_jobs_enable_taxonomy', $enable_taxonomy );
-		update_option( 'options_jobs_enable_taxonomy_page', $enable_taxonomy_page );
-		update_option( 'options_jobs_taxonomy_slug', $taxonomy_slug );
-		update_option( 'options_jobs_enable_carousel_block', $enable_carousel_block );
-		update_option( 'options_jobs_enable_grid_block', $enable_grid_block );
+		update_option( 'options_jobs_enable_jobs_archive_page', $enable_jobs_archive_page );
+		update_option( 'options_enable_job_notices_right_sidebar', $enable_jobs_right_sidebar );
+		update_option( 'options_enable_job_notices_left_sidebar', $enable_jobs_left_sidebar );
 
 		$response = new WP_REST_Response( 'Data successfully added.', '200' );
 
@@ -192,22 +133,14 @@ class Options extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function mctp_admin_menu() {
+	public function job_notices_admin_menu() {
 		add_submenu_page(
-			'options-general.php',  // Parent slug (Settings page).
-			'Jobs Options',       // Page title.
-			'Jobs Options',       // Menu title.
-			'manage_options',       // Capability.
-			'mctp-options',         // Menu slug.
-			array( $this, 'mctp_options_page' )    // Callback function.
-		);
-		add_submenu_page(
-			'edit.php?post_type=' . $this->post_type_slug, // Parent slug (Settings page).
-			'Jobs Options',            // Page title.
-			'Jobs Options',            // Menu title.
+			'edit.php?post_type=jobs', // Parent slug (Settings page).
+			'Jobs Settings',            // Page title.
+			'Settings',            // Menu title.
 			'manage_options',            // Capability.
-			'mctp-options',              // Menu slug.
-			array( $this, 'mctp_options_page' )    // Callback function.
+			'job-notices-options',              // Menu slug.
+			array( $this, 'job_notices_options_page' )    // Callback function.
 		);
 	}
 
@@ -216,24 +149,19 @@ class Options extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function mctp_options_page() {
+	public function job_notices_options_page() {
 
 		// Load the style sheets for WordPress components.
 		wp_enqueue_style( 'wp-components' );
 
 		?>
-		<div id="mctp-react-app"></div> 
+		<div id="job-notices-react-app"></div> 
 		<script>
 			// Localize script to pass data from PHP to JS
-			const mctpOptions = {
-				postTypeName: "<?php echo esc_attr( get_option( 'options_jobs_post_type_name', 'Jobs' ) ); ?>",
-				postTypeNameSingle: "<?php echo esc_attr( get_option( 'options_jobs_post_type_name_singular', 'Job' ) ); ?>",
-				postTypeSlug: "<?php echo esc_attr( get_option( 'options_jobs_post_type_slug', 'job-notices-jobs-listing' ) ); ?>",
-				enabledBlockEditor: <?php echo esc_attr( get_option( 'options_jobs_enable_gutenberg_editor', 'true' ) ); ?>,
-				enableDetailPages: <?php echo esc_attr( get_option( 'options_jobs_enable_detail_pages', 'true' ) ); ?>,
-				enableTaxonomy: <?php echo esc_attr( get_option( 'options_jobs_enable_taxonomy', 'false' ) ); ?>,
-				enableTaxonomyPage: <?php echo esc_attr( get_option( 'options_jobs_enable_taxonomy_page', 'false' ) ); ?>,
-				taxonomySlug: "<?php echo esc_attr( get_option( 'options_jobs_taxonomy_slug', 'category' ) ); ?>"
+			const jobNoticesOptions = {
+				enableJobsArchivePage: <?php echo esc_attr( get_option( 'options_jobs_enable_jobs_archive_page', 'true' ) ); ?>
+				enableRightBar: <?php echo esc_attr( get_option( 'options_enable_job_notices_right_sidebar', 'true' ) ); ?>
+				enableLeftBar: <?php echo esc_attr( get_option( 'options_enable_job_notices_left_sidebar', 'true' ) ); ?>
 			};
 		</script>
 		<?php
@@ -244,19 +172,7 @@ class Options extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function mctp_enqueue_scripts() {
-		wp_enqueue_script( 'mctp-react-app', $this->plugin_url . 'assets/js/admin/index.js', array( 'wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'wp-data' ), JOB_NOTICES_VERSION, true ); // Dependencies and in_footer.
-	}
-
-	/**
-	 * Save Options.
-	 *
-	 * @return void
-	 */
-	public function mctp_save_options() {
-		if ( isset( $_POST['mctp_submit'] ) ) { // Check for form submission.
-			update_option( 'mctp_post_type_name', sanitize_text_field( $_POST['mctp_post_type_name'] ) );
-			// ... save other options similarly
-		}
+	public function job_notices_enqueue_scripts() {
+		wp_enqueue_script( 'job-notices-react-app', $this->plugin_url . 'assets/js/admin/index.js', array( 'wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'wp-data' ), JOB_NOTICES_VERSION, true ); // Dependencies and in_footer.
 	}
 }
