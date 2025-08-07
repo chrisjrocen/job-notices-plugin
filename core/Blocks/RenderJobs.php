@@ -41,6 +41,9 @@ class RenderJobs extends BaseController {
 	 * @return string The HTML markup for the carousel.
 	 */
 	public function render_block( $attributes ) {
+
+		do_action( 'qm/debug', $attributes );
+
 		ob_start();
 		echo '<div class="job-notices job-notices__hero-block">';
 		echo '<div class="job-notices__container job-notices__container--block">';
@@ -66,8 +69,8 @@ class RenderJobs extends BaseController {
 				echo '</div>';
 			}
 			echo '</div>';
-			// Add pagination if needed.
-			if ( $jobs->max_num_pages > 1 ) {
+
+			if ( $attributes['showPagination'] && isset( $jobs->max_num_pages ) && $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination job-notices__pagination--block">';
 				echo paginate_links(
 					array(
@@ -78,6 +81,7 @@ class RenderJobs extends BaseController {
 				);
 				echo '</div>';
 			}
+			// Reset post data to avoid conflicts with other queries.
 			wp_reset_postdata();
 		} else {
 			echo '<div class="job-notices__no-jobs-found">';

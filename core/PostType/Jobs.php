@@ -73,11 +73,11 @@ class Jobs {
 	protected $jobs_taxonomy_slug = 'job_category';
 
 	/**
-	 * Enable Archives.
+	 * Enable Archives Page.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
-	protected $enable_archives = true;
+	public $enable_archive_page;
 
 	/**
 	 * Enable Gutenberg Editor.
@@ -113,5 +113,7 @@ class Jobs {
 	 */
 	public function register() {
 		$this->register_jobs_post_type();
+
+		$this->enable_archive_page = get_option( 'options_jobs_enable_jobs_archive_page', 'true' );
 	}
 }

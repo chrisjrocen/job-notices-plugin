@@ -224,12 +224,12 @@
 .hero-search-block {
   padding: 10rem 2rem;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 2rem;
   width: var(--theme-container-width, 90%);
   max-width: var(--theme-normal-container-max-width, 1200px);
   margin: auto;
-  grid-template-areas: "job-header job-header" "job-content job-sidebar" "job-content job-categories" "related-jobs related-jobs";
+  grid-template-areas: "job-header job-header job-header" "job-sidebar job-content job-sidebar" "job-categories job-content job-categories" "related-jobs related-jobs related-jobs";
 }
 @media (max-width: 768px) {
   .job-notices__container, .jobs-archive.jobs-container,
@@ -290,10 +290,17 @@
   padding: 2rem;
   max-width: 100%;
 }
+.job-notices__container aside, .jobs-archive.jobs-container aside,
+.single-job.jobs-container aside,
+.hero-search-block aside {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
 .job-notices__content, .jobs-archive.jobs-container .job-content,
 .single-job.jobs-container .job-content,
 .hero-search-block .job-content {
-  grid-area: job-content;
+  grid-area: "job-content";
   background: var(--wp-fundi-light-alternative-color, #ffffff);
   padding: 2rem;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
@@ -562,14 +569,14 @@
   background-color: rgba(249, 171, 0, 0.2);
   color: var(--wp-fundi-warning-color, #FBBC05);
 }
-.job-notices__filters, .jobs-filters {
+.job-notices__filters, .jobs-filters, .job-notices__taxonomies {
   background: var(--wp-fundi-subtle-background-color, #f2f5f7);
   padding: 26px 30px 30px 30px;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
   border: 1px solid var(--wp-fundi-border-color, #687279);
   transition: box-shadow 0.2s ease;
 }
-.job-notices__filters:hover, .jobs-filters:hover {
+.job-notices__filters:hover, .jobs-filters:hover, .job-notices__taxonomies:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 .job-notices__filter-form .job-notices__filter-group, .job-filter-form .job-notices__filter-group {
@@ -921,7 +928,7 @@
   .hero-search-block .single-job-header {
     padding: 1rem;
   }
-  .job-notices__filters, .jobs-filters {
+  .job-notices__filters, .jobs-filters, .job-notices__taxonomies {
     padding: 1rem;
   }
 }

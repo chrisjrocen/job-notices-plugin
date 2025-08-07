@@ -8,7 +8,7 @@
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/render-jobs","version":"2.0.1","title":"Render jobs","category":"widgets","icon":"slides","description":"Render jobs.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"color":{"background":true,"text":true},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"textdomain":"render-jobs","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"job-notices/render-jobs","version":"2.0.1","title":"Render jobs","category":"widgets","icon":"slides","description":"Render jobs.","example":{},"supports":{"html":false,"align":["wide","full"],"anchor":true,"ariaLabel":true,"multiple":true,"spacing":{"padding":true,"margin":true,"blockGap":true,"__experimentalDefaultControls":{"padding":true,"blockGap":true}},"color":{"background":true,"text":true},"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true,"__experimentalDefaultControls":{"color":true,"radius":true,"style":true,"width":true}},"shadow":true},"attributes":{"heroDesc":{"type":"string","default":"Find your next job with us"},"heroTitle":{"type":"string","default":"Job Listings"},"postsPerPage":{"type":"string","default":"10"},"showPagination":{"type":"boolean","default":false}},"textdomain":"render-jobs","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":["file:./style-index.css","job-noticeslibrary-swipper-bundle-css"],"viewScript":["job-noticeslibrary-swipper-bundle","job-noticeslibrary-carousel"]}');
 
 /***/ }),
 
@@ -76,7 +76,10 @@ function Edit({
   clientId
 }) {
   const {
-    heroDesc
+    heroDesc,
+    heroTitle,
+    postsPerPage,
+    showPagination
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   const instanceId = clientId;
@@ -94,9 +97,9 @@ function Edit({
   }];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'job-notices-plugin'),
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hero Description', 'job-notices-plugin'),
             value: attributes.heroDesc,
@@ -104,7 +107,26 @@ function Edit({
               heroDesc: value
             })
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number of Jobs', 'job-notices-plugin'),
+            value: attributes.postsPerPage,
+            onChange: value => setAttributes({
+              postsPerPage: value
+            }),
+            min: 1,
+            max: 100
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Pagination', 'job-notices-plugin'),
+            checked: showPagination,
+            onChange: value => setAttributes({
+              showPagination: value
+            }),
+            help: showPagination ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pagination is enabled.', 'job-notices-plugin') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pagination is disabled.', 'job-notices-plugin')
+          })
+        })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       ...blockProps,

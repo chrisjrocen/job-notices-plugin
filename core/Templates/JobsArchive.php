@@ -7,6 +7,8 @@
 
 namespace JOB_NOTICES\Templates;
 
+use JOB_NOTICES\Base\BaseController;
+
 use WP_Query;
 
 /**
@@ -14,7 +16,7 @@ use WP_Query;
  *
  * This class handles the rendering of job listings on the archive page.
  */
-class JobsArchive {
+class JobsArchive extends BaseController {
 
 	/**
 	 * Use the RenderJobsTrait Trait
@@ -195,11 +197,16 @@ class JobsArchive {
 
 			get_header();
 
-			$results_count   = $this->render_results_count();
-			$sort_select     = $this->sort_select();
-			$per_page_select = $this->per_page_select();
+			$results_count        = $this->render_results_count();
+			$sort_select          = $this->sort_select();
+			$per_page_select      = $this->per_page_select();
+			$enable_left_sidebar  = $this->enable_left_sidebar;
+			$enable_right_sidebar = $this->enable_right_sidebar;
 
-			$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select );
+			do_action( 'qm/debug', 'Left: ' . $enable_left_sidebar );
+			do_action( 'qm/debug', 'Right: ' . $enable_right_sidebar );
+
+			$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
 
 			get_footer();
 
@@ -212,18 +219,25 @@ class JobsArchive {
 	/**
 	 * Render the job listings archive content.
 	 *
-	 * @param string $results_count The HTML for the results count.
-	 * @param string $sort_select The HTML for the sort select dropdown.
-	 * @param string $per_page_select The HTML for the per-page select dropdown.
+	 * @param string  $results_count The HTML for the results count.
+	 * @param string  $sort_select The HTML for the sort select dropdown.
+	 * @param string  $per_page_select The HTML for the per-page select dropdown.
+	 * @param boolean $enable_left_sidebar Is left sidebar enabled.
+	 * @param boolean $enable_right_sidebar Is right sidebar enabled.
 	 */
-	public function render_jobs_archive_content( $results_count, $sort_select, $per_page_select ) {
+	public function render_jobs_archive_content( $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
 
-		echo '<div class="job-notices job-notices__container">';
+		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
+		// TODO: Add toggle options for the sidebar position. Left or Right
 		// Sidebar Filters.
-		echo '<aside class="job-notices__filters">';
-		include plugin_dir_path( __FILE__, 1 ) . 'JobFilters.php';
-		echo '</aside>';
+
+		if ( 'true' === $this->enable_left_sidebar ) {
+			$this->render_sidebar_panel();
+			$left_grid = '1fr';
+		} else {
+			$left_grid = '';
+		}
 
 		// Job Results.
 		echo '<section class="job-notices__results">';
@@ -289,6 +303,51 @@ class JobsArchive {
 		}
 
 		echo '</section>'; // job-notices__results.
+
+		if ( 'true' === $this->enable_right_sidebar ) {
+			$this->render_sidebar_panel();
+			$right_grid = '1fr';
+		} else {
+			$right_grid = '';
+		}
+
 		echo '</div>'; // job-notices__container.
+
+		$this->register_inline_block_styles( $left_grid, $right_grid );
+	}
+
+	/**
+	 * Render sidebar.
+	 */
+	public function render_sidebar_panel() {
+		echo '<aside>';
+		echo '<div class="job-notices__filters">';
+		include plugin_dir_path( __FILE__, 1 ) . 'JobFilters.php';
+		echo '</div>';
+		echo '<div class="job-notices__taxonomies">';
+		include plugin_dir_path( __FILE__, 1 ) . 'CategoryCard.php';
+		echo '</div>';
+		echo '</aside>';
+	}
+
+	/**
+	 * Enqueue inline styles for the job listings archive.
+	 *
+	 * This method is used to enqueue styles specific to the job listings archive.
+	 *
+	 * @param string $left_grid entry for left grid.
+	 * @param string $right_grid entry for right grid.
+	 */
+	public function register_inline_block_styles( $left_grid, $right_grid ) {
+
+		printf(
+			'<style id="job-notices-archive-styles">
+				#job-notices__container {
+					grid-template-columns: %s 2fr %s;
+				}
+			</style>',
+			$left_grid,
+			$right_grid
+		);
 	}
 }
