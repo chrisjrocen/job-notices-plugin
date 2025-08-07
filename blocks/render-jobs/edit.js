@@ -16,7 +16,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 import {
     TextControl,
     PanelBody,
-    PanelRow
+    PanelRow,
+    ToggleControl
 } from '@wordpress/components';
 
 import { useEffect } from '@wordpress/element';
@@ -37,8 +38,17 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes, setAttributes, clientId }) {
-    const { heroDesc } = attributes;
+export default function Edit({ 
+    attributes, 
+    setAttributes,
+    clientId 
+}) {
+    const {
+        heroDesc,
+        heroTitle,
+        postsPerPage,
+        showPagination
+    } = attributes;
 
     const blockProps = useBlockProps();
 
@@ -67,6 +77,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             label={__('Hero Description', 'job-notices-plugin')}
                             value={attributes.heroDesc}
                             onChange={(value) => setAttributes({ heroDesc: value })}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <TextControl 
+                            label={__('Number of Jobs', 'job-notices-plugin')}
+                            value={attributes.postsPerPage}
+                            onChange={(value) => setAttributes({ postsPerPage: value })}
+                            min={1}
+                            max={100}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label={__('Show Pagination', 'job-notices-plugin')}
+                            checked={showPagination}
+                            onChange={(value) => setAttributes({ showPagination: value })}
+                            help={showPagination ? __('Pagination is enabled.', 'job-notices-plugin') : __('Pagination is disabled.', 'job-notices-plugin')}
                         />
                     </PanelRow>
                 </PanelBody>

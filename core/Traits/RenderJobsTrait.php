@@ -72,4 +72,24 @@ trait RenderJobsTrait {
 			esc_html__( '48 Per Page', 'job-notices' )
 		);
 	}
+
+	/**
+	 * Function to hook a method in a block. Allows it to be unhookable
+	 *
+	 * @param string $method_name - method to be hooked.
+	 * @param array  $args - The styles to enqueue.
+	 */
+	public function enqueue_inline_styles( string $method_name, array $args ) {
+		if ( ! method_exists( $this, $method_name ) ) {
+			return;
+		}
+
+		add_action(
+			'wp_footer',
+			function () use ( $method_name, $args ) {
+				call_user_func_array( array( $this, $method_name ), $args );
+			},
+			999
+		);
+	}
 }

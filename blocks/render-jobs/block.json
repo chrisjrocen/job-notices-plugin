@@ -44,6 +44,24 @@
 		},
 		"shadow": true
 	},
+	"attributes": {
+		"heroDesc": {
+			"type": "string",
+			"default": "Find your next job with us"
+		},
+		"heroTitle": {
+			"type": "string",
+			"default": "Job Listings"
+		},
+		"postsPerPage": {
+			"type": "string",
+			"default": "10"
+		},
+		"showPagination": {
+			"type": "boolean",
+			"default": false
+		}
+	},
 	"textdomain": "render-jobs",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

@@ -26,6 +26,10 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.2
+
+- Added block controls on the render-jobs block; numberOfJobs and showPagination.
+
 ### 0.8.1
 
 - Design cleanup for related jobs section

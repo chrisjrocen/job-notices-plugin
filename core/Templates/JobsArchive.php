@@ -220,6 +220,7 @@ class JobsArchive {
 
 		echo '<div class="job-notices job-notices__container">';
 
+		// TODO: Add toggle options for the sidebar position. Left or Right
 		// Sidebar Filters.
 		echo '<aside class="job-notices__filters">';
 		include plugin_dir_path( __FILE__, 1 ) . 'JobFilters.php';
@@ -290,5 +291,29 @@ class JobsArchive {
 
 		echo '</section>'; // job-notices__results.
 		echo '</div>'; // job-notices__container.
+
+		$attributes = array(); // Prepare attributes for inline styles.
+
+		$this->enqueue_inline_styles(
+			'register_inline_block_styles',
+			array(
+				$attributes,
+			)
+		);
+	}
+
+	/**
+	 * Enqueue inline styles for the job listings archive.
+	 *
+	 * This method is used to enqueue styles specific to the job listings archive.
+	 */
+	public function register_inline_block_styles( $attributes ) {
+		printf(
+			'<style id="job-notices-archive-styles">
+				.job-notices {
+					// Add your styles here
+				}
+			</style>'
+		);
 	}
 }
