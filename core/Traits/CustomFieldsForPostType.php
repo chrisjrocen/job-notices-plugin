@@ -76,9 +76,24 @@ trait CustomFieldsForPostType {
 					}
 					?>
 					style="">
-				<?php if ( ! empty( $field['description'] ) ) : ?>
+				<?php
+				if ( 'date' === $field['type'] ) {
+					?>
 					<br><small><?php echo esc_html( $field['description'] ); ?></small>
-				<?php endif; ?>
+					<?php
+				} else {
+					if ( ! empty( $field['description'] ) ) {
+						?>
+						<br><small><?php echo esc_html( $field['description'] ); ?></small>
+						<?php
+					}
+				}
+				if ( 'date' === $field['type'] ) {
+					echo esc_attr( $value );
+				} else {
+					echo esc_attr( $field['placeholder'] ?? '' );
+				}
+				?>
 			</p>
 			<?php
 		}
