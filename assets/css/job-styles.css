@@ -379,12 +379,14 @@
   margin: auto;
   grid-template-areas: "company-logo job-meta application-section";
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .job-notices__job-card-inner .job-notices__job-header, .job-notices__job-card-inner .jobs-archive.jobs-container .single-job-header, .jobs-archive.jobs-container .job-notices__job-card-inner .single-job-header,
   .job-notices__job-card-inner .single-job.jobs-container .single-job-header,
   .single-job.jobs-container .job-notices__job-card-inner .single-job-header {
-    grid-template-columns: 1fr;
-    grid-template-areas: "company-logo" "job-meta" "application-section";
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
 .job-notices__job-card--related .job-notices__company-logo img {

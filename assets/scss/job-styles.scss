@@ -377,12 +377,11 @@
                 grid-template-areas:
                     "company-logo job-meta application-section";
 
-                @media (max-width: 768px) {
-                    grid-template-columns: 1fr;
-                    grid-template-areas:
-                        "company-logo"
-                        "job-meta"
-                        "application-section";
+                @media (max-width: 1024px) {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
                 }
             }
         }
