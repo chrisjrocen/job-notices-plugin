@@ -872,48 +872,6 @@
     }
 
     // =============================================================================
-    // HERO SEARCH BLOCK STYLES
-    // =============================================================================
-
-    &__hero-search {
-        padding: 2rem 1rem;
-        display: flex;
-        flex-direction: column;
-
-        .job-notices__hero-description {
-            font-size: 2.125rem;
-            color: var(--wp-fundi-primary-color, #552732);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .job-notices__filter-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-
-            input,
-            select {
-                @extend %job-notices__input;
-                width: 100%;
-                margin-bottom: 0;
-                border: 1px solid var(--wp-fundi-border-alternative-color, #0000001a);
-            }
-
-            button {
-                @extend %job-notices__application-button;
-            }
-
-            // Hide certain elements in hero search
-            label,
-            input#salary_range,
-            .job-notices__salary-output {
-                display: none;
-            }
-        }
-    }
-
-    // =============================================================================
     // SHARE BUTTONS STYLES
     // =============================================================================
 
@@ -1024,8 +982,7 @@
 // These classes maintain backward compatibility while being scoped
 
 .jobs-archive.jobs-container,
-.single-job.jobs-container,
-.hero-search-block {
+.single-job.jobs-container {
     @extend .job-notices__container;
 
     .single-job-header {
@@ -1075,8 +1032,4 @@
 
 .job-share-buttons {
     @extend .job-notices__share-buttons;
-}
-
-#hero-search-block {
-    @extend .job-notices__hero-search;
 }
