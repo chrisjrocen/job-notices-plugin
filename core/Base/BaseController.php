@@ -150,6 +150,7 @@ class BaseController {
 		wp_enqueue_style( 'job-styles' );
 		wp_register_script( 'job-scripts', $this->plugin_url . 'assets/js/frontend/job-archive.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
 		wp_enqueue_script( 'job-scripts' );
+		wp_enqueue_style( 'google-material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), null );
 
 		// Localize script with Ajax URL and nonce.
 		wp_localize_script(

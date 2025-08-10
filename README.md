@@ -26,6 +26,12 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.3
+
+- Added redirect jobs to external link.
+- Added cron job to hide expired jobs from archive. In the single job template, expired jobs are marked.
+- Added auto default expiry date for jobs.
+
 ### 0.8.2
 
 - Added block controls on the render-jobs block; numberOfJobs and showPagination.

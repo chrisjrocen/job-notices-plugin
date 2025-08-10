@@ -45,8 +45,8 @@ class HeroSearch extends BaseController {
 
 		$description = esc_html( $attributes['heroDesc'] ?? 'Search for jobs by title, keywords, or company.' );
 
-		$hero_search  = '<div class="hero-search-block" id="hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';
-		$hero_search .= '<p class="hero-description">' . $description . '</p>';
+		$hero_search = '<div class="job-notices__hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';
+		// $hero_search .= '<p class="hero-description">' . $description . '</p>';
 
 		ob_start();
 		include plugin_dir_path( __DIR__ ) . 'Templates/JobFilters.php';
