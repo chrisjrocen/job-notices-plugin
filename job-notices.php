@@ -1,13 +1,18 @@
 <?php
 /**
- * Plugin Name:     Job Notices
- * Plugin URI:      https://www.wp-fundi.com
- * Description:     jobs
- * Author:          Ocen Chris
- * Author URI:      https://www.wp-fundi.com
- * Text Domain:     job-notices
- * Domain Path:     /languages
- * Version:         0.8.2
+ * Plugin Name:       Job Notices
+ * Plugin URI:        https://www.wp-fundi.com
+ * Description:       A plugin to turn your website into a job board.
+ * Author:            Ocen Chris
+ * Author URI:        https://www.wp-fundi.com
+ * Text Domain:       job-notices
+ * Version:           0.8.4
+ * Tags:              jobs
+ * Requires at least: 4.7
+ * Stable upto:       5.4
+ * Requires PHP:      7.2
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package JOB_NOTICES
  */
@@ -15,7 +20,7 @@
 // If this file is called firectly, abort!!!
 defined( 'ABSPATH' ) || die( 'No Access!' );
 
-define( 'JOB_NOTICES_VERSION', '0.8.2' );
+define( 'JOB_NOTICES_VERSION', '0.8.4' );
 
 // Require once the Composer Autoload.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {

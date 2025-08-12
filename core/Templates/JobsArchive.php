@@ -163,11 +163,13 @@ class JobsArchive extends BaseController {
 			// Add pagination if needed.
 			if ( $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination">';
-				echo paginate_links(
-					array(
-						'total'   => $jobs->max_num_pages,
-						'current' => $paged,
-						'format'  => '?paged=%#%',
+				echo esc_html(
+					paginate_links(
+						array(
+							'total'   => $jobs->max_num_pages,
+							'current' => $paged,
+							'format'  => '?paged=%#%',
+						)
 					)
 				);
 				echo '</div>';
@@ -346,8 +348,8 @@ class JobsArchive extends BaseController {
 					grid-template-columns: %s 2fr %s;
 				}
 			</style>',
-			$left_grid,
-			$right_grid
+			esc_attr( $left_grid ),
+			esc_attr( $right_grid )
 		);
 	}
 }

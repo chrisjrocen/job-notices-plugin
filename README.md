@@ -1,6 +1,16 @@
-# job-notices
+# Job Notices
 
-A plugin for WordPress with a custom post type for jobs management.
+=== Job Notices ===
+Contributors: ocenchris
+Donate link: [https://wp-fundi.com/](https://wp-fundi.com/)
+Tags: jobs
+Requires at least: 4.7
+Tested up to: 5.4
+Stable tag: 4.3
+Requires PHP: 7.0
+License: GPLv2 or later
+License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html)
+A plugin to turn your website into a job board.
 
 ## Features
 
@@ -25,6 +35,10 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 - Run `composer install` to get the PHP setup.
 
 ## Changelog
+
+### 0.8.4
+
+- Ran WordPress plugin-check to ensure compliace to WP Plugin Standards.
 
 ### 0.8.3
 
@@ -99,5 +113,3 @@ Note: Thinking of doing a way with the archive template. The idea is to use a bl
 - Initial Release.
 - Created `JobsPostTypeTrait` to modularize CPT registration
 - Included taxonomy registration within the trait
-
-TODO: Add settings page for dynamic settings.
