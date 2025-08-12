@@ -71,17 +71,17 @@ export default function Edit({
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Settings', 'job-notices-plugin')}>
+                <PanelBody title={__('Settings', 'job-notices')}>
                     <PanelRow>
                         <TextControl
-                            label={__('Hero Description', 'job-notices-plugin')}
+                            label={__('Hero Description', 'job-notices')}
                             value={attributes.heroDesc}
                             onChange={(value) => setAttributes({ heroDesc: value })}
                         />
                     </PanelRow>
                     <PanelRow>
                         <TextControl 
-                            label={__('Number of Jobs', 'job-notices-plugin')}
+                            label={__('Number of Jobs', 'job-notices')}
                             value={attributes.postsPerPage}
                             onChange={(value) => setAttributes({ postsPerPage: value })}
                             min={1}
@@ -90,10 +90,10 @@ export default function Edit({
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label={__('Show Pagination', 'job-notices-plugin')}
+                            label={__('Show Pagination', 'job-notices')}
                             checked={showPagination}
                             onChange={(value) => setAttributes({ showPagination: value })}
-                            help={showPagination ? __('Pagination is enabled.', 'job-notices-plugin') : __('Pagination is disabled.', 'job-notices-plugin')}
+                            help={showPagination ? __('Pagination is enabled.', 'job-notices') : __('Pagination is disabled.', 'job-notices')}
                         />
                     </PanelRow>
                 </PanelBody>

@@ -113,14 +113,14 @@ class Jobs {
 	public function get_post_statuses() {
 		$statuses = array(
 			'job-notices-expired' => array(
-				'label'                     => _x( 'Expired', 'post status', 'job_notices' ),
+				'label'                     => _x( 'Expired', 'post status', 'job-notices' ),
 				'public'                    => true,
 				'protected'                 => true,
 				'exclude_from_search'       => true,
 				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => true,
 				// translators: %s: posts count.
-				'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'job_notices' ),
+				'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'job-notices' ),
 			),
 		);
 	}

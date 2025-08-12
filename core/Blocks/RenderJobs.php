@@ -72,11 +72,13 @@ class RenderJobs extends BaseController {
 
 			if ( $attributes['showPagination'] && isset( $jobs->max_num_pages ) && $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination job-notices__pagination--block">';
-				echo paginate_links(
-					array(
-						'total'   => $jobs->max_num_pages,
-						'current' => 1,
-						'format'  => '?paged=%#%',
+				echo esc_html(
+					paginate_links(
+						array(
+							'total'   => $jobs->max_num_pages,
+							'current' => 1,
+							'format'  => '?paged=%#%',
+						)
 					)
 				);
 				echo '</div>';

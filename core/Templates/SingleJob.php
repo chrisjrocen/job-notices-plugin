@@ -79,7 +79,6 @@ class SingleJob {
 				$this->job_notices_share_buttons( $post_url, $post_title );
 			echo '</div>';
 
-			$this->render_job_sidebar( $job_date, $location, $salary, $experience );
 			$this->get_related_jobs( $current_post_id );
 			$this->render_job_categories();
 		}
@@ -129,34 +128,6 @@ class SingleJob {
 			esc_url( $whatsapp_url ),
 			esc_url( $email_url )
 		);
-	}
-
-	/**
-	 * Render Job Sidebar
-	 *
-	 * @param string $job_date job date.
-	 * @param string $location location.
-	 * @param string $salary salary.
-	 * @param string $experience Experience.
-	 */
-	public function render_job_sidebar( $job_date, $location, $salary, $experience ) {
-		echo '<aside class="job-notices__sidebar">';
-				echo '<div class="job-notices__job-overview">';
-					echo '<h4>Job Overview</h4>';
-		if ( $job_date ) :
-			echo sprintf( '<p><strong>Posted on:</strong> %s</p>', esc_html( $job_date ) );
-		endif;
-		if ( $location ) :
-			echo sprintf( '<p><strong>Location:</strong> %s</p>', esc_html( $location ) );
-		endif;
-		if ( $salary ) :
-			echo sprintf( '<p><strong>Salary:</strong> %s</p>', esc_html( $salary ) );
-		endif;
-		if ( $experience ) :
-			echo sprintf( '<p><strong>Experience:</strong> %s</p>', esc_html( $experience ) );
-		endif;
-				echo '</div>';
-			echo '</aside>';
 	}
 
 	/**

@@ -214,7 +214,7 @@ trait Styler {
 
 		// Only output on frontend, not in REST API (editor).
 		if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) {
-			echo $style;
+			echo esc_attr( $style );
 		}
 
 		return $style;

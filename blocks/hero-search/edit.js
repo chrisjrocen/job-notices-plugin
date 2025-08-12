@@ -61,10 +61,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Settings', 'job-notices-plugin')}>
+                <PanelBody title={__('Settings', 'job-notices')}>
                     <PanelRow>
                         <TextControl
-                            label={__('Hero Description', 'job-notices-plugin')}
+                            label={__('Hero Description', 'job-notices')}
                             value={attributes.heroDesc}
                             onChange={(value) => setAttributes({ heroDesc: value })}
                         />

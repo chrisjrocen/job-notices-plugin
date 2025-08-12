@@ -82,8 +82,11 @@ trait PostTypeTrait {
 	 */
 	public function register_taxonomies() {
 		foreach ( $this->taxonomy_slugs as $index => $slug ) {
-			$plural          = $this->taxonomy_names_plural[ $index ] ?? ucfirst( $slug ) . 's';
-			$singular        = $this->taxonomy_names_singular[ $index ] ?? ucfirst( $slug );
+			// translators: %s: The singular taxonomy name.
+			$plural = $this->taxonomy_names_plural[ $index ] ?? sprintf( __( '%ss', 'job-notices' ), ucfirst( $slug ) );
+
+			// translators: %s: The singular taxonomy name.
+			$singular        = $this->taxonomy_names_singular[ $index ] ?? sprintf( __( '%s', 'job-notices' ), ucfirst( $slug ) );
 			$is_hierarchical = $this->is_taxonomy_hierarchical[ $index ] ?? true;
 
 			register_taxonomy(
@@ -105,17 +108,17 @@ trait PostTypeTrait {
 						'assign_terms' => 'edit_posts',
 					),
 					'labels'                => array(
-						'name'          => __( $plural, 'job_notices' ),
-						'singular_name' => __( $singular, 'job_notices' ),
-						'add_new_item'  => __( 'Add New ' . $singular, 'job_notices' ),
-						'edit_item'     => __( 'Edit ' . $singular, 'job_notices' ),
-						'update_item'   => __( 'Update ' . $singular, 'job_notices' ),
-						'all_items'     => __( 'All ' . $plural, 'job_notices' ),
-						'view_item'     => __( 'View ' . $singular, 'job_notices' ),
-						'parent_item'   => __( 'Parent ' . $singular, 'job_notices' ),
-						'new_item_name' => __( 'New ' . $singular, 'job_notices' ),
-						'not_found'     => __( 'No ' . $plural . ' found.', 'job_notices' ),
-						'menu_name'     => __( $plural, 'job_notices' ),
+						'name'          => $plural,
+						'singular_name' => $singular,
+						'add_new_item'  => 'Add New ' . $singular,
+						'edit_item'     => 'Edit ' . $singular,
+						'update_item'   => 'Update ' . $singular,
+						'all_items'     => 'All ' . $plural,
+						'view_item'     => 'View ' . $singular,
+						'parent_item'   => 'Parent ' . $singular,
+						'new_item_name' => 'New ' . $singular,
+						'not_found'     => 'No ' . $plural . ' found.',
+						'menu_name'     => $plural,
 					),
 					'show_in_rest'          => true,
 					'rest_base'             => $slug,
