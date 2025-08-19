@@ -22,12 +22,16 @@
 	function initializeFilters() {
 		// Get current filter values
 		currentFilters = {
+			post_type: document.getElementById('post_type')?.value || '',
 			keywords: document.getElementById('keywords')?.value || '',
 			location: document.getElementById('location')?.value || '',
-			category: document.getElementById('category')?.value || '',
+			job_category: document.getElementById('job_category')?.value || '',
 			job_type: document.getElementById('job_type')?.value || '',
-			salary_min: 0,
-			salary_max: parseInt(document.getElementById('salary_range')?.value || 850) * 1000,
+			bid_location: document.getElementById('bid_location')?.value || '',
+			bid_type: document.getElementById('bid_type')?.value || '',
+			study_field: document.getElementById('study_field')?.value || '',
+			study_level: document.getElementById('study_level')?.value || '',
+			study_location: document.getElementById('study_location')?.value || '',
 			sort: document.querySelector('.sort-select')?.value || 'date',
 			paged: 1,
 			posts_per_page: document.querySelector('.per-page-select')?.value || 12
@@ -51,7 +55,17 @@
 		});
 
 		// Select dropdowns
-		const selectInputs = ['category', 'job_type', 'location'];
+		const selectInputs = [
+			'job_category', 
+			'job_type', 
+			'location', 
+			'study_location', 
+			'post_type', 
+			'bid_location', 
+			'bid_type', 
+			'study_field', 
+			'study_level'
+		];
 		selectInputs.forEach(function(inputId) {
 			const select = document.getElementById(inputId);
 			if (select) {
@@ -61,18 +75,6 @@
 				});
 			}
 		});
-
-		// Salary range slider
-		const salaryRange = document.getElementById('salary_range');
-		const salaryOutput = document.getElementById('salary_output');
-		if (salaryRange && salaryOutput) {
-			salaryRange.addEventListener('input', function() {
-				const value = parseInt(this.value);
-				currentFilters.salary_max = value * 1000;
-				salaryOutput.textContent = `$0 - $${value}k`;
-				triggerFilter();
-			});
-		}
 
 		// Sort select
 		const sortSelect = document.querySelector('.sort-select');
@@ -188,8 +190,6 @@
 			}
 		}
 
-		// Update URL without page reload
-		updateURL();
 	}
 
 	/**
@@ -250,11 +250,14 @@
 	function clearAllFilters() {
 		// Reset form inputs
 		document.getElementById('keywords').value = '';
-		document.getElementById('location').value = '';
-		document.getElementById('category').value = '';
-		document.getElementById('job_type').value = '';
-		document.getElementById('salary_range').value = '850';
-		document.getElementById('salary_output').textContent = '$0 - $850k';
+		document.getElementById('location').value = 0;
+		document.getElementById('job_category').value = 0;
+		document.getElementById('job_type').value = 0;
+		document.getElementById('bid_location').value = 0;
+		document.getElementById('bid_type').value = 0;
+		document.getElementById('study_field').value = 0;
+		document.getElementById('study_level').value = 0;
+		document.getElementById('study_location').value = 0;
 
 		if (document.querySelector('.sort-select')) {
 			document.querySelector('.sort-select').value = 'date';
@@ -265,12 +268,16 @@
 
 		// Reset current filters
 		currentFilters = {
+			post_type: '',
 			keywords: '',
 			location: '',
-			category: '',
+			job_category: '',
 			job_type: '',
-			salary_min: 0,
-			salary_max: 850000,
+			bid_location: '',
+			bid_type: '',
+			study_field: '',
+			study_level: '',
+			study_location: '',
 			sort: 'date',
 			paged: 1,
 			posts_per_page: 12
@@ -278,53 +285,6 @@
 
 		// Trigger filter to show all jobs
 		triggerFilter();
-	}
-
-	/**
-	 * Update URL with current filters (without page reload)
-	 */
-	function updateURL() {
-		const url = new URL(window.location);
-
-		// Update URL parameters
-		if (currentFilters.keywords) {
-			url.searchParams.set('s', currentFilters.keywords);
-		} else {
-			url.searchParams.delete('s');
-		}
-
-		if (currentFilters.location) {
-			url.searchParams.set('location', currentFilters.location);
-		} else {
-			url.searchParams.delete('location');
-		}
-
-		if (currentFilters.category) {
-			url.searchParams.set('job_category', currentFilters.category);
-		} else {
-			url.searchParams.delete('job_category');
-		}
-
-		if (currentFilters.job_type) {
-			url.searchParams.set('job_type', currentFilters.job_type);
-		} else {
-			url.searchParams.delete('job_type');
-		}
-
-		if (currentFilters.sort !== 'date') {
-			url.searchParams.set('sort', currentFilters.sort);
-		} else {
-			url.searchParams.delete('sort');
-		}
-
-		if (currentFilters.posts_per_page !== 12) {
-			url.searchParams.set('posts_per_page', currentFilters.posts_per_page);
-		} else {
-			url.searchParams.delete('posts_per_page');
-		}
-
-		// Update URL without page reload
-		window.history.pushState({}, '', url);
 	}
 
 	// Handle browser back/forward buttons

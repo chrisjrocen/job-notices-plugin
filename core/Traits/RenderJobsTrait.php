@@ -37,21 +37,13 @@ trait RenderJobsTrait {
 			'<select class="sort-select" name="sort" onchange="location = this.value;">
 				<option value="%1$s" %2$s>%3$s</option>
 				<option value="%4$s" %5$s>%6$s</option>
-				<option value="%7$s" %8$s>%9$s</option>
-				<option value="%10$s" %11$s>%12$s</option>
 			</select>',
 			add_query_arg( 'sort', 'default' ),
 			selected( $current_sort, 'default', false ),
 			esc_html__( 'Sort by (Default)', 'job-notices' ),
 			add_query_arg( 'sort', 'date_asc' ),
 			selected( $current_sort, 'date_asc', false ),
-			esc_html__( 'Latest', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_desc' ),
-			selected( $current_sort, 'salary_desc', false ),
-			esc_html__( 'Salary: High to Low', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_asc' ),
-			selected( $current_sort, 'salary_asc', false ),
-			esc_html__( 'Salary: Low to High', 'job-notices' )
+			esc_html__( 'Latest', 'job-notices' )
 		);
 	}
 

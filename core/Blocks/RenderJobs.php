@@ -10,7 +10,7 @@ namespace JOB_NOTICES\Blocks;
 
 use JOB_NOTICES\Base\BaseController;
 
-use JOB_NOTICES\Templates\JobsArchive;
+use JOB_NOTICES\Templates\Archive;
 
 use WP_Query;
 

@@ -56,7 +56,6 @@ class SingleJob {
 
 			$current_post_id = get_the_ID();
 
-			$salary               = get_post_meta( $current_post_id, 'salary', true ) ? get_post_meta( $current_post_id, 'salary', true ) : 'Not specified';
 			$location             = get_post_meta( $current_post_id, 'location', true ) ? get_post_meta( $current_post_id, 'location', true ) : 'Not specified';
 			$type                 = get_post_meta( $current_post_id, 'job_type', true ) ? get_post_meta( $current_post_id, 'job_type', true ) : 'Not specified';
 			$experience           = get_post_meta( $current_post_id, 'experience_level', true );
@@ -65,7 +64,6 @@ class SingleJob {
 			$location             = ( ! is_wp_error( $location_terms ) && ! empty( $location_terms ) ) ? $location_terms[0]->name : 'Uganda';
 			$job_type_terms       = get_the_terms( $post_id, 'job_type' );
 			$job_type             = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : '';
-			$salary               = get_post_meta( $post_id, 'job_notices_salary', true );
 			$featured             = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
 			$urgent               = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
 			$job_date             = get_post_meta( $current_post_id, get_the_date(), true );
@@ -214,8 +212,6 @@ class SingleJob {
 		$job_type_terms = get_the_terms( $this->post_id, 'job_type' );
 		$job_type       = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : 'Full-Time';
 
-		$salary = get_post_meta( $this->post_id, 'job_notices_salary', true );
-
 		$hiring_org = array( // TODO: Use the employer taxonomy to get the hiring organization.
 			'@type'  => 'Organization',
 			'name'   => get_bloginfo( 'name' ),
@@ -242,18 +238,6 @@ class SingleJob {
 			),
 			'occupationalCategory' => $job_type, // TODO: Use a more specific category if available.
 		);
-
-		if ( ! empty( $salary ) ) {
-			$job_schema['baseSalary'] = array(
-				'@type'    => 'MonetaryAmount',
-				'currency' => 'UGX',
-				'value'    => array(
-					'@type'    => 'QuantitativeValue',
-					'value'    => preg_replace( '/[^\d.]/', '', $salary ),
-					'unitText' => 'MONTH',
-				),
-			);
-		}
 
 		echo '<script type="application/ld+json">' .
 			wp_json_encode( $job_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) .

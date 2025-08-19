@@ -14,10 +14,8 @@ $location_terms = get_the_terms( $post_id, 'location' );
 $job_type_terms = get_the_terms( $post_id, 'job_type' );
 $job_type       = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : '';
 
-$employer_terms = get_the_terms( $post_id, 'employer' );
-$employer       = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
-
-$salary               = get_post_meta( $post_id, 'job_notices_salary', true ) ? get_post_meta( $post_id, 'job_notices_salary', true ) : '';
+$employer_terms       = get_the_terms( $post_id, 'employer' );
+$employer             = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
 $featured             = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
 $urgent               = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
 $application_deadline = get_post_meta( $post_id, 'job_notices_expiry_date', true );
