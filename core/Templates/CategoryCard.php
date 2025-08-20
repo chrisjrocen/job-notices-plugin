@@ -9,7 +9,7 @@ $taxonomies = array(
 	'job_category' => 'Job Categories',
 );
 
-echo '<div class="job-notices__taxonomies-grid" style="display:flex;gap:40px;">';
+echo '<div class="job-notices__taxonomies-grid">';
 
 foreach ( $taxonomies as $taxonomy => $title ) {
 

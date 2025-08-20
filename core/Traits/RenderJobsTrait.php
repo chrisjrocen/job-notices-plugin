@@ -99,7 +99,7 @@ trait RenderJobsTrait {
 			);
 		}
 
-		echo '<div class="job-notices__taxonomies-grid" style="display:flex;gap:40px;">';
+		echo '<div class="job-notices__taxonomies-grid">';
 
 		foreach ( $taxonomies as $taxonomy => $title ) {
 			$terms = get_terms(
