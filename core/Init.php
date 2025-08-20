@@ -31,6 +31,8 @@ final class Init {
 			Templates\Archive::class,
 			Templates\JobFilters::class,
 			Templates\SingleJob::class,
+			Templates\SingleBid::class,
+			Templates\SingleScholarship::class,
 			Users\Employer::class,
 			Users\JobSeeker::class,
 			Blocks\EmployersSlider::class,

@@ -6,8 +6,6 @@
  */
 
 $taxonomies = array(
-	// 'job_type'     => 'Search by Region',
-	// 'location'     => 'Search by City',
 	'job_category' => 'Job Categories',
 );
 

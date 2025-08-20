@@ -529,6 +529,11 @@
 .job-notices__filters:hover, .jobs-filters:hover, .job-notices__taxonomies:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
+.job-notices__filters .job-notices__taxonomies-grid, .jobs-filters .job-notices__taxonomies-grid, .job-notices__taxonomies .job-notices__taxonomies-grid {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+}
 .job-notices__filter-form .job-notices__filter-group, .job-filter-form .job-notices__filter-group {
   margin-bottom: 1.5rem;
 }

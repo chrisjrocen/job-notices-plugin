@@ -206,9 +206,6 @@ class Archive extends BaseController {
 
 		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
-		// TODO: Add toggle options for the sidebar position. Left or Right
-		// Sidebar Filters.
-
 		if ( 'true' === $this->enable_left_sidebar ) {
 			$this->render_sidebar_panel( $current_post_type );
 			$left_grid = '1fr';
@@ -295,7 +292,32 @@ class Archive extends BaseController {
 		$filters->render_filters( $current_post_type );
 		echo '</div>';
 		echo '<div class="job-notices__taxonomies">';
-		include plugin_dir_path( __FILE__, 1 ) . 'CategoryCard.php';
+
+		if ( 'jobs' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'job_category' => 'Top Categories',
+					'location'     => 'Locations',
+					'job_type'     => 'Job Types',
+				)
+			);
+		} elseif ( 'bids' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'bid_type'     => 'Bid Types',
+					'bid_location' => 'Bid Locations',
+				)
+			);
+		} elseif ( 'scholarships' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'scholarship_type' => 'Scholarship Types',
+					'study_field'      => 'Study Fields',
+					'study_level'      => 'Study Levels',
+					'study_location'   => 'Study Locations',
+				)
+			);
+		}
 		echo '</div>';
 		echo '</aside>';
 	}

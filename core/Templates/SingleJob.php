@@ -14,6 +14,9 @@ namespace JOB_NOTICES\Templates;
  */
 class SingleJob {
 
+
+	use \JOB_NOTICES\Traits\SinglePostTypeTrait;
+
 	/**
 	 * Constructor to initialize the template.
 	 */
@@ -77,122 +80,12 @@ class SingleJob {
 				$this->job_notices_share_buttons( $post_url, $post_title );
 			echo '</div>';
 
-			$this->get_related_jobs( $current_post_id );
-			$this->render_job_categories();
+			$this->get_related_jobs( $current_post_id, 'jobs' );
+			$this->render_taxonomy_list( 'Top Categories', 'job_category' );
 		}
 		echo '</article>'; // job-notices__container.
 		get_footer();
 		exit; // Ensure no further processing occurs.
-	}
-
-	/**
-	 * Render Job Header
-	 *
-	 * @param int $application_deadline Application deadline.
-	 */
-	public function render_job_header( $application_deadline ) {
-		echo '<div class="job-notices__job-header job-notices__job-header--single">';
-			include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
-		echo '</div>';
-	}
-
-	/**
-	 * Outputs social share buttons for the current post.
-	 *
-	 * @param String $post_url Post url.
-	 * @param String $post_title Post title.
-	 * @return void
-	 */
-	public function job_notices_share_buttons( $post_url, $post_title ) {
-		$facebook_url = "https://www.facebook.com/sharer/sharer.php?u={$post_url}";
-		$twitter_url  = "https://twitter.com/intent/tweet?url={$post_url}&text={$post_title}";
-		$whatsapp_url = "https://api.whatsapp.com/send?text={$post_title}%20{$post_url}";
-		$email_url    = "mailto:?subject={$post_title}&body={$post_url}";
-
-		echo sprintf(
-			'<div class="job-notices__share-buttons">' .
-			'<span>%s</span>' .
-			'<button class="job-notices__share-button job-notices__share-button--copy" data-url="%s">%s</button>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--facebook">Facebook</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--twitter">X</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--whatsapp">WhatsApp</a>' .
-			'<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--email">Email</a>' .
-			'</div>',
-			esc_html__( 'Share this post:', 'job-notices' ),
-			esc_url( get_permalink() ),
-			esc_html__( 'Copy Link', 'job-notices' ),
-			esc_url( $facebook_url ),
-			esc_url( $twitter_url ),
-			esc_url( $whatsapp_url ),
-			esc_url( $email_url )
-		);
-	}
-
-	/**
-	 * Render job categories as links.
-	 */
-	public function render_job_categories() {
-
-		$categories = get_terms(
-			array(
-				'taxonomy'   => 'job_category',
-				'hide_empty' => true,
-			)
-		);
-
-		if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
-			echo '<aside class="job-notices__sidebar">';
-			echo '<div class="job-notices__job-categories">';
-			echo '<h4>Job Categories</h4>';
-
-			foreach ( $categories as $category ) {
-				$term_link  = get_term_link( $category );
-				$term_count = $category->count;
-				if ( ! is_wp_error( $term_link ) ) {
-					printf(
-						'<a href="%s" class="job-notices__job-category-link"><p>%s (%d)</p></a>',
-						esc_url( $term_link ),
-						esc_html( $category->name ),
-						$term_count
-					);
-				}
-			}
-
-			echo '</div>';
-			echo '</aside>';
-		}
-	}
-
-
-	/**
-	 * Get related jobs
-	 *
-	 * @param int $current_post_id The ID of the current job post.
-	 */
-	public function get_related_jobs( $current_post_id ) {
-		echo sprintf( '<div class="job-notices__related-jobs"><h3>%s</h3>', esc_html( 'Related Jobs' ) );
-
-		$related_jobs = new \WP_Query(
-			array(
-				'post_type'      => 'jobs',
-				'posts_per_page' => 3,
-				'post__not_in'   => array( $current_post_id ),
-			)
-		);
-
-		if ( $related_jobs->have_posts() ) {
-			echo '<div class="job-notices__related-cards-grid">';
-			while ( $related_jobs->have_posts() ) {
-				$related_jobs->the_post();
-				echo '<div class="job-notices__job-card job-notices__job-card--related">';
-				include plugin_dir_path( __FILE__ ) . 'JobCard.php';
-				echo '</div>';
-			}
-			echo '</div>';
-			wp_reset_postdata();
-		}
-
-		echo '</div>';
 	}
 
 	/**
