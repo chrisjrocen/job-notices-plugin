@@ -12,11 +12,11 @@ use JOB_NOTICES\Base\BaseController;
 use WP_Query;
 
 /**
- * Class JobsArchive
+ * Class Archive
  *
  * This class handles the rendering of job listings on the archive page.
  */
-class JobsArchive extends BaseController {
+class Archive extends BaseController {
 
 	/**
 	 * Use the RenderJobsTrait Trait
@@ -28,7 +28,7 @@ class JobsArchive extends BaseController {
 	 */
 	public function register() {
 		// Register the template for the job listings archive.
-		add_action( 'template_redirect', array( $this, 'render' ) );
+		add_action( 'template_redirect', array( $this, 'render_archive' ) );
 
 		// Register Ajax actions for live filtering.
 		add_action( 'wp_ajax_filter_jobs', array( $this, 'ajax_filter_jobs' ) );
@@ -45,19 +45,23 @@ class JobsArchive extends BaseController {
 		}
 
 		// Get filter parameters.
-		$keywords       = sanitize_text_field( $_POST['keywords'] ?? '' );
-		$location       = sanitize_text_field( $_POST['location'] ?? 0 );
-		$category       = intval( $_POST['category'] ?? 0 );
-		$job_type       = sanitize_text_field( $_POST['job_type'] ?? 0 );
-		$salary_min     = intval( $_POST['salary_min'] ?? 0 );
-		$salary_max     = intval( $_POST['salary_max'] ?? 850000 );
-		$sort           = sanitize_text_field( $_POST['sort'] ?? 'date' );
-		$paged          = intval( $_POST['paged'] ?? 1 );
-		$posts_per_page = intval( $_POST['posts_per_page'] ?? 12 );
+		$current_post_type = sanitize_text_field( $_POST['post_type'] ?? '' );
+		$keywords          = sanitize_text_field( $_POST['keywords'] ?? '' );
+		$location          = sanitize_text_field( $_POST['location'] ?? 0 );
+		$category          = intval( $_POST['job_category'] ?? 0 );
+		$job_type          = sanitize_text_field( $_POST['job_type'] ?? 0 );
+		$bid_location      = sanitize_text_field( $_POST['bid_location'] ?? 0 );
+		$bid_type          = sanitize_text_field( $_POST['bid_type'] ?? 0 );
+		$study_field       = sanitize_text_field( $_POST['study_field'] ?? 0 );
+		$study_level       = sanitize_text_field( $_POST['study_level'] ?? 0 );
+		$study_location    = sanitize_text_field( $_POST['study_location'] ?? 0 );
+		$sort              = sanitize_text_field( $_POST['sort'] ?? 'date' );
+		$paged             = intval( $_POST['paged'] ?? 1 );
+		$posts_per_page    = intval( $_POST['posts_per_page'] ?? 12 );
 
 		// Build query arguments.
 		$query_args = array(
-			'post_type'      => 'jobs',
+			'post_type'      => $current_post_type,
 			'posts_per_page' => $posts_per_page,
 			'paged'          => $paged,
 			'post_status'    => 'publish',
@@ -68,45 +72,29 @@ class JobsArchive extends BaseController {
 			$query_args['s'] = $keywords;
 		}
 
-		// Add category filter.
-		if ( $category > 0 ) {
-			$query_args['tax_query'][] = array(
-				'taxonomy' => 'job_category',
-				'field'    => 'term_id',
-				'terms'    => $category,
-			);
-		}
+		$filter_options = array(
+			'location'       => $location,
+			'job_category'   => $category,
+			'job_type'       => $job_type,
+			'bid_location'   => $bid_location,
+			'bid_type'       => $bid_type,
+			'study_field'    => $study_field,
+			'study_level'    => $study_level,
+			'study_location' => $study_location,
+		);
 
-		// Add job type filter.
-		if ( ! empty( $job_type ) ) {
-			$query_args['tax_query'][] = array(
-				'taxonomy' => 'job_type',
-				'field'    => 'term_id',
-				'terms'    => $job_type,
-			);
-		}
-
-		// Add location filter.
-		if ( ! empty( $location ) ) {
-			$query_args['tax_query'][] = array(
-				'taxonomy' => 'location',
-				'field'    => 'term_id',
-				'terms'    => $location,
-			);
+		foreach ( $filter_options as $key => $value ) {
+			if ( ! empty( $value ) ) {
+				$query_args['tax_query'][] = array(
+					'taxonomy' => $key,
+					'field'    => 'term_id',
+					'terms'    => $value,
+				);
+			}
 		}
 
 		// Add sorting.
 		switch ( $sort ) {
-			case 'salary_asc':
-				$query_args['meta_key'] = 'job_notices_salary';
-				$query_args['orderby']  = 'meta_value_num';
-				$query_args['order']    = 'ASC';
-				break;
-			case 'salary_desc':
-				$query_args['meta_key'] = 'job_notices_salary';
-				$query_args['orderby']  = 'meta_value_num';
-				$query_args['order']    = 'DESC';
-				break;
 			case 'date_asc':
 				$query_args['orderby'] = 'date';
 				$query_args['order']   = 'ASC';
@@ -115,16 +103,6 @@ class JobsArchive extends BaseController {
 				$query_args['orderby'] = 'date';
 				$query_args['order']   = 'DESC';
 				break;
-		}
-
-		// Add salary range filter.
-		if ( $salary_min > 0 || $salary_max < 850000 ) {
-			$query_args['meta_query'][] = array(
-				'key'     => 'job_notices_salary',
-				'value'   => array( $salary_min, $salary_max ),
-				'type'    => 'NUMERIC',
-				'compare' => 'BETWEEN',
-			);
 		}
 
 		// Ensure tax_query is properly structured.
@@ -163,13 +141,11 @@ class JobsArchive extends BaseController {
 			// Add pagination if needed.
 			if ( $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination">';
-				echo esc_html(
-					paginate_links(
-						array(
-							'total'   => $jobs->max_num_pages,
-							'current' => $paged,
-							'format'  => '?paged=%#%',
-						)
+				echo paginate_links(
+					array(
+						'total'   => $jobs->max_num_pages,
+						'current' => $paged,
+						'format'  => '?paged=%#%',
 					)
 				);
 				echo '</div>';
@@ -192,10 +168,12 @@ class JobsArchive extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function render() {
+	public function render_archive() {
+
+		$current_post_type = get_post_type();
 
 		// Check if we are on the job listings archive page. If not, return early.
-		if ( is_post_type_archive( 'jobs' ) || is_tax( 'job_category' ) ) {
+		if ( is_post_type_archive( $current_post_type ) || is_tax() ) {
 
 			get_header();
 
@@ -205,14 +183,10 @@ class JobsArchive extends BaseController {
 			$enable_left_sidebar  = $this->enable_left_sidebar;
 			$enable_right_sidebar = $this->enable_right_sidebar;
 
-			do_action( 'qm/debug', 'Left: ' . $enable_left_sidebar );
-			do_action( 'qm/debug', 'Right: ' . $enable_right_sidebar );
-
-			$this->render_jobs_archive_content( $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
+			$this->render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
 
 			get_footer();
 
-			exit; // Ensure no further processing occurs.
 		} else {
 			return;
 		}
@@ -221,21 +195,19 @@ class JobsArchive extends BaseController {
 	/**
 	 * Render the job listings archive content.
 	 *
+	 * @param string  $current_post_type The current post type.
 	 * @param string  $results_count The HTML for the results count.
 	 * @param string  $sort_select The HTML for the sort select dropdown.
 	 * @param string  $per_page_select The HTML for the per-page select dropdown.
 	 * @param boolean $enable_left_sidebar Is left sidebar enabled.
 	 * @param boolean $enable_right_sidebar Is right sidebar enabled.
 	 */
-	public function render_jobs_archive_content( $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
+	public function render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
 
 		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
-		// TODO: Add toggle options for the sidebar position. Left or Right
-		// Sidebar Filters.
-
 		if ( 'true' === $this->enable_left_sidebar ) {
-			$this->render_sidebar_panel();
+			$this->render_sidebar_panel( $current_post_type );
 			$left_grid = '1fr';
 		} else {
 			$left_grid = '';
@@ -253,11 +225,11 @@ class JobsArchive extends BaseController {
 		echo '</div>'; // job-notices__results-header.
 
 		$args = array(
-			'post_type'      => 'jobs',
+			'post_type'      => $current_post_type,
 			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
 			'paged'          => get_query_var( 'paged', 1 ),
 			'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
-			'order'          => 'salary_asc' === sanitize_text_field( wp_unslash( $_GET['sort'] ?? '' ) ) ? 'ASC' : 'DESC',
+			'order'          => 'ASC',
 		);
 
 		// Add taxonomy filter if we're on a job_category archive.
@@ -286,18 +258,6 @@ class JobsArchive extends BaseController {
 			}
 
 			echo '</div>'; // job-notices__job-cards-grid.
-			// Add pagination.
-			if ( $jobs->max_num_pages > 1 ) {
-				echo '<div class="job-notices__pagination">';
-				echo paginate_links(
-					array(
-						'total'   => $jobs->max_num_pages,
-						'current' => get_query_var( 'paged', 1 ),
-						'format'  => '?paged=%#%',
-					)
-				);
-				echo '</div>';
-			}
 		} else {
 			echo '<div id="job-results" class="job-notices__job-cards-grid">';
 			echo '<p class="job-notices__no-jobs-found">' . esc_html__( 'No jobs found.', 'job-notices' ) . '</p>';
@@ -307,7 +267,7 @@ class JobsArchive extends BaseController {
 		echo '</section>'; // job-notices__results.
 
 		if ( 'true' === $this->enable_right_sidebar ) {
-			$this->render_sidebar_panel();
+			$this->render_sidebar_panel( $current_post_type );
 			$right_grid = '1fr';
 		} else {
 			$right_grid = '';
@@ -320,14 +280,44 @@ class JobsArchive extends BaseController {
 
 	/**
 	 * Render sidebar.
+	 *
+	 * @param string $current_post_type The current post type.
 	 */
-	public function render_sidebar_panel() {
+	public function render_sidebar_panel( $current_post_type ) {
+
+		$filters = new \JOB_NOTICES\Templates\JobFilters();
+
 		echo '<aside>';
 		echo '<div class="job-notices__filters">';
-		include plugin_dir_path( __FILE__, 1 ) . 'JobFilters.php';
+		$filters->render_filters( $current_post_type );
 		echo '</div>';
 		echo '<div class="job-notices__taxonomies">';
-		include plugin_dir_path( __FILE__, 1 ) . 'CategoryCard.php';
+
+		if ( 'jobs' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'job_category' => 'Top Categories',
+					'location'     => 'Locations',
+					'job_type'     => 'Job Types',
+				)
+			);
+		} elseif ( 'bids' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'bid_type'     => 'Bid Types',
+					'bid_location' => 'Bid Locations',
+				)
+			);
+		} elseif ( 'scholarships' === $current_post_type ) {
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'scholarship_type' => 'Scholarship Types',
+					'study_field'      => 'Study Fields',
+					'study_level'      => 'Study Levels',
+					'study_location'   => 'Study Locations',
+				)
+			);
+		}
 		echo '</div>';
 		echo '</aside>';
 	}

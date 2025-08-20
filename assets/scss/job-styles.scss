@@ -567,6 +567,12 @@
         &:hover {
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
+
+        .job-notices__taxonomies-grid {
+            display: flex;
+            gap: 40px;
+            flex-direction: column;
+        }
     }
 
     &__filter-form {

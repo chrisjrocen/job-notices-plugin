@@ -36,6 +36,15 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.6
+
+- Removed URL update when ajax is loading.
+- Added bids and scholarships. Now live search and layout working independently for different post types.
+
+### 0.8.5
+
+-Skipped
+
 ### 0.8.4
 
 - Ran WordPress plugin-check to ensure compliace to WP Plugin Standards.

@@ -6,12 +6,10 @@
  */
 
 $taxonomies = array(
-	// 'job_type'     => 'Search by Region',
-	// 'location'     => 'Search by City',
 	'job_category' => 'Job Categories',
 );
 
-echo '<div class="job-notices__taxonomies-grid" style="display:flex;gap:40px;">';
+echo '<div class="job-notices__taxonomies-grid">';
 
 foreach ( $taxonomies as $taxonomy => $title ) {
 

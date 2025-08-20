@@ -37,21 +37,13 @@ trait RenderJobsTrait {
 			'<select class="sort-select" name="sort" onchange="location = this.value;">
 				<option value="%1$s" %2$s>%3$s</option>
 				<option value="%4$s" %5$s>%6$s</option>
-				<option value="%7$s" %8$s>%9$s</option>
-				<option value="%10$s" %11$s>%12$s</option>
 			</select>',
 			add_query_arg( 'sort', 'default' ),
 			selected( $current_sort, 'default', false ),
 			esc_html__( 'Sort by (Default)', 'job-notices' ),
 			add_query_arg( 'sort', 'date_asc' ),
 			selected( $current_sort, 'date_asc', false ),
-			esc_html__( 'Latest', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_desc' ),
-			selected( $current_sort, 'salary_desc', false ),
-			esc_html__( 'Salary: High to Low', 'job-notices' ),
-			add_query_arg( 'sort', 'salary_asc' ),
-			selected( $current_sort, 'salary_asc', false ),
-			esc_html__( 'Salary: Low to High', 'job-notices' )
+			esc_html__( 'Latest', 'job-notices' )
 		);
 	}
 
@@ -91,5 +83,63 @@ trait RenderJobsTrait {
 			},
 			999
 		);
+	}
+
+
+	/**
+	 * Outputs a grid of taxonomy terms sorted by count.
+	 *
+	 * @param array $taxonomies Array of taxonomy => title pairs.
+	 * @param array $args       Optional. Additional get_terms() arguments.
+	 */
+	public function job_notices_display_taxonomies_grid( $taxonomies = array(), $args = array() ) {
+		if ( empty( $taxonomies ) ) {
+			$taxonomies = array(
+				'job_category' => 'Job Categories',
+			);
+		}
+
+		echo '<div class="job-notices__taxonomies-grid">';
+
+		foreach ( $taxonomies as $taxonomy => $title ) {
+			$terms = get_terms(
+				wp_parse_args(
+					array(
+						'taxonomy'   => $taxonomy,
+						'hide_empty' => true,
+					),
+					$args
+				)
+			);
+
+			// Sort terms by count in descending order.
+			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+				usort(
+					$terms,
+					function ( $a, $b ) {
+						return $b->count - $a->count;
+					}
+				);
+
+				echo '<div class="job-notices__taxonomy-column">';
+				echo '<h3>' . esc_html( $title ) . '</h3>';
+				echo '<ul class="job-notices__taxonomy-list" style="list-style:none;padding:0;margin:0;">';
+
+				foreach ( $terms as $term ) {
+						$term_link = get_term_link( $term );
+					if ( ! is_wp_error( $term_link ) ) {
+						echo '<li>';
+						echo '<a href="' . esc_url( $term_link ) . '">'
+						. esc_html( $term->name ) . ' (' . intval( $term->count ) . ')</a>';
+						echo '</li>';
+					}
+				}
+
+				echo '</ul>';
+				echo '</div>';
+			}
+		}
+
+		echo '</div>';
 	}
 }
