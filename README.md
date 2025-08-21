@@ -36,6 +36,11 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.7
+
+- Fixed bug preventing display on hero search block
+- Fixed mobile view for archive page
+
 ### 0.8.6
 
 - Removed URL update when ajax is loading.
