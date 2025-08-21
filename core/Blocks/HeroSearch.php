@@ -48,8 +48,10 @@ class HeroSearch extends BaseController {
 		$hero_search = '<div class="job-notices__hero-search-block" style="' . esc_attr( $this->get_block_level_styles( $attributes ) ) . '">';
 		// $hero_search .= '<p class="hero-description">' . $description . '</p>';
 
+		$filters = new \JOB_NOTICES\Templates\JobFilters();
+
 		ob_start();
-		include plugin_dir_path( __DIR__ ) . 'Templates/JobFilters.php';
+		$filters->render_filters( 'jobs' );
 		$hero_search .= ob_get_clean();
 
 		$hero_search .= '</div>';
