@@ -50,7 +50,7 @@ trait PostTypeTrait {
 			'labels'              => $labels,
 			'public'              => true,
 			'menu_position'       => $this->menu_position,
-			'taxonomies'          => array( $this->jobs_taxonomy_slug ),
+			// 'taxonomies'          => array( $this->jobs_taxonomy_slug ),
 			'supports'            => array( 'title', 'thumbnail', 'editor', 'custom-fields' ),
 			'has_archive'         => $enable_archive_page,
 			'show_in_rest'        => $this->enable_gutenberg_editor,
@@ -86,7 +86,7 @@ trait PostTypeTrait {
 			$plural = $this->taxonomy_names_plural[ $index ] ?? sprintf( __( '%ss', 'job-notices' ), ucfirst( $slug ) );
 
 			// translators: %s: The singular taxonomy name.
-			$singular        = $this->taxonomy_names_singular[ $index ] ?? sprintf( __( '%s', 'job-notices' ), ucfirst( $slug ) );
+			$singular        = $this->taxonomy_names_singular[ $index ] ?? sprintf( __( 'Category: %s', 'job-notices' ), ucfirst( $slug ) );
 			$is_hierarchical = $this->is_taxonomy_hierarchical[ $index ] ?? true;
 
 			register_taxonomy(

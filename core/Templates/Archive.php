@@ -337,6 +337,12 @@ class Archive extends BaseController {
 				#job-notices__container {
 					grid-template-columns: %s 2fr %s;
 				}
+
+				@media (max-width: 480px) {
+					#job-notices__container {
+						grid-template-columns: 1fr;
+					}
+				}
 			</style>',
 			esc_attr( $left_grid ),
 			esc_attr( $right_grid )

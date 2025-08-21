@@ -66,13 +66,6 @@ class Jobs {
 	protected $is_taxonomy_hierarchical = array( true, false, true, true );
 
 	/**
-	 * Taxonomy Slug for Jobs.
-	 *
-	 * @var string
-	 */
-	protected $jobs_taxonomy_slug = 'job_category';
-
-	/**
 	 * Enable Archives Page.
 	 *
 	 * @var boolean
