@@ -36,6 +36,10 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 0.8.8
+
+- Added Taxonomies to the top sidebar.
+
 ### 0.8.7
 
 - Fixed bug preventing display on hero search block

@@ -68,25 +68,27 @@ trait SinglePostTypeTrait {
 		);
 
 		if ( ! empty( $taxonomies ) && ! is_wp_error( $taxonomies ) ) {
-			echo '<aside class="job-notices__sidebar">';
-			echo '<div class="job-notices__job-categories">';
-			echo '<h4>' . esc_html( $title_to_render ) . '</h4>';
-
+			echo '<div class="job-notices__taxonomies">';
+			echo '<div class="job-notices__taxonomies-grid">';
+			echo '<div class="job-notices__taxonomy-column">';
+			echo '<h3>' . esc_html( $title_to_render ) . '</h3>';
+			echo '<ul class="job-notices__taxonomy-list">';
 			foreach ( $taxonomies as $taxonomy ) {
 				$term_link  = get_term_link( $taxonomy );
 				$term_count = $taxonomy->count;
 				if ( ! is_wp_error( $term_link ) ) {
 					printf(
-						'<a href="%s" class="job-notices__job-category-link"><p>%s (%d)</p></a>',
+						'<li><a href="%s" class="job-notices__job-category-link">%s (%d)</a></li>',
 						esc_url( $term_link ),
 						esc_html( $taxonomy->name ),
 						$term_count
 					);
 				}
 			}
-
+			echo '</ul>';
 			echo '</div>';
-			echo '</aside>';
+			echo '</div>';
+			echo '</div>';
 		}
 	}
 
