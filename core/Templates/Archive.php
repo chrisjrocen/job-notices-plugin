@@ -207,10 +207,8 @@ class Archive extends BaseController {
 		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
 		if ( 'true' === $this->enable_left_sidebar ) {
-			$this->render_sidebar_panel( $current_post_type );
+			$this->render_left_sidebar_panel( $current_post_type );
 			$left_grid = '1fr';
-		} else {
-			$left_grid = '';
 		}
 
 		// Job Results.
@@ -267,10 +265,8 @@ class Archive extends BaseController {
 		echo '</section>'; // job-notices__results.
 
 		if ( 'true' === $this->enable_right_sidebar ) {
-			$this->render_sidebar_panel( $current_post_type );
+			$this->render_right_sidebar_panel( $current_post_type );
 			$right_grid = '1fr';
-		} else {
-			$right_grid = '';
 		}
 
 		echo '</div>'; // job-notices__container.
@@ -279,11 +275,11 @@ class Archive extends BaseController {
 	}
 
 	/**
-	 * Render sidebar.
+	 * Render left sidebar.
 	 *
 	 * @param string $current_post_type The current post type.
 	 */
-	public function render_sidebar_panel( $current_post_type ) {
+	public function render_left_sidebar_panel( $current_post_type ) {
 
 		$filters = new \JOB_NOTICES\Templates\JobFilters();
 
@@ -315,6 +311,79 @@ class Archive extends BaseController {
 					'study_field'      => 'Study Fields',
 					'study_level'      => 'Study Levels',
 					'study_location'   => 'Study Locations',
+				)
+			);
+		}
+		echo '</div>';
+		echo '</aside>';
+	}
+
+	/**
+	 * Render right sidebar
+	 *
+	 * @param string $current_post_type Current post type.
+	 */
+	public function render_right_sidebar_panel( $current_post_type ) {
+
+		$filters = new \JOB_NOTICES\Templates\JobFilters();
+
+		echo '<aside>';
+		echo '<div class="job-notices__taxonomies">';
+
+		if ( 'jobs' === $current_post_type ) {
+
+			$this->job_notices_display_posts_list( 'Latest Bids', 'bids' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'bid_type' => 'Bid Types',
+				)
+			);
+
+			$this->job_notices_display_posts_list( 'Latest Scholarships', 'scholarships' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'scholarship_type' => 'Scholarship Types',
+					'study_field'      => 'Study Fields',
+					'study_level'      => 'Study Levels',
+					'study_location'   => 'Study Locations',
+				)
+			);
+		} elseif ( 'bids' === $current_post_type ) {
+
+			$this->job_notices_display_posts_list( 'Latest Jobs', 'jobs' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'job_category' => 'Top Categories',
+					'job_type'     => 'Job Types',
+				)
+			);
+
+			$this->job_notices_display_posts_list( 'Latest Scholarships', 'scholarships' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'scholarship_type' => 'Scholarship Types',
+					'study_field'      => 'Study Fields',
+				)
+			);
+		} elseif ( 'scholarships' === $current_post_type ) {
+
+			$this->job_notices_display_posts_list( 'Latest Jobs', 'jobs' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'job_category' => 'Top Job Categories',
+				)
+			);
+
+			$this->job_notices_display_posts_list( 'Latest Bids', 'bids' );
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'bid_type' => 'Bid Types',
 				)
 			);
 		}

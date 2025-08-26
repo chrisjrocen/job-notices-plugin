@@ -123,23 +123,70 @@ trait RenderJobsTrait {
 
 				echo '<div class="job-notices__taxonomy-column">';
 				echo '<h3>' . esc_html( $title ) . '</h3>';
-				echo '<ul class="job-notices__taxonomy-list" style="list-style:none;padding:0;margin:0;">';
+				echo '<div class="job-notices__taxonomy-list">';
 
 				foreach ( $terms as $term ) {
 						$term_link = get_term_link( $term );
 					if ( ! is_wp_error( $term_link ) ) {
-						echo '<li>';
+						echo '<div class="job-notices__taxonomy-list-item">';
 						echo '<a href="' . esc_url( $term_link ) . '">'
 						. esc_html( $term->name ) . ' (' . intval( $term->count ) . ')</a>';
-						echo '</li>';
+						echo '</div>';
 					}
 				}
 
-				echo '</ul>';
+				echo '</div>';
 				echo '</div>';
 			}
 		}
 
 		echo '</div>';
+	}
+
+	/**
+	 * Display post list.
+	 *
+	 * @param String $title Title.
+	 * @param String $post_type Post type.
+	 */
+	public function job_notices_display_posts_list( $title, $post_type ) {
+		$args = array(
+			'post_type'      => $post_type,
+			'posts_per_page' => 5,
+			'post_status'    => 'publish',
+		);
+
+		$query = new \WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			echo sprintf(
+				'<h3>%s</h3><div class="job-notices__posts-list">%s</div>',
+				esc_html( $title ),
+				( function () use ( $query ) {
+					$items = '';
+					while ( $query->have_posts() ) {
+						$query->the_post();
+						$items .= sprintf(
+							'<div class="job-notices__post-item">
+								<a href="%s">
+									<div class="job-notices__aside-company-logo">
+										<img src="%s" alt="%s">
+										<p>%s</p>
+									</div>
+								</a>
+							</div>',
+							esc_url( get_permalink() ),
+							esc_url( get_the_post_thumbnail_url( null, 'medium' ) ),
+							esc_attr( get_the_title() ),
+							esc_html( get_the_title() )
+						);
+					}
+					return $items;
+				} )()
+			);
+			wp_reset_postdata();
+		} else {
+			echo '<p>' . esc_html__( 'No job posts found.', 'job-notices' ) . '</p>';
+		}
 	}
 }
