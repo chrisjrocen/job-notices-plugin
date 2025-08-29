@@ -26,7 +26,6 @@ class RenderCustomPosts extends BaseController {
 	 */
 	public function register() {
 		add_shortcode( 'job_notices_jobs_custom_posts', array( $this, 'job_notices_jobs_custom_posts_shortcode' ) );
-		add_action( 'wp_footer', array( $this, 'add_inline_styles' ) );
 	}
 
 	/**
