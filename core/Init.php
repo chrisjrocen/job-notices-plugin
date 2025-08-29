@@ -39,6 +39,8 @@ final class Init {
 			Blocks\HeroSearch::class,
 			Blocks\RenderJobs::class,
 			ShortCodes\JobsCounter::class,
+			ShortCodes\RenderCustomPosts::class,
+			ShortCodes\RenderCustomTaxonomies::class,
 		);
 	}
 
