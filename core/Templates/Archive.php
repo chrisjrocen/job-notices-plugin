@@ -93,18 +93,6 @@ class Archive extends BaseController {
 			}
 		}
 
-		// Add sorting.
-		switch ( $sort ) {
-			case 'date_asc':
-				$query_args['orderby'] = 'date';
-				$query_args['order']   = 'ASC';
-				break;
-			default:
-				$query_args['orderby'] = 'date';
-				$query_args['order']   = 'DESC';
-				break;
-		}
-
 		// Ensure tax_query is properly structured.
 		if ( isset( $query_args['tax_query'] ) && count( $query_args['tax_query'] ) > 1 ) {
 			$query_args['tax_query']['relation'] = 'AND';
@@ -178,12 +166,11 @@ class Archive extends BaseController {
 			get_header();
 
 			$results_count        = $this->render_results_count();
-			$sort_select          = $this->sort_select();
 			$per_page_select      = $this->per_page_select();
 			$enable_left_sidebar  = $this->enable_left_sidebar;
 			$enable_right_sidebar = $this->enable_right_sidebar;
 
-			$this->render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
+			$this->render_jobs_archive_content( $current_post_type, $results_count, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
 
 			get_footer();
 
@@ -197,12 +184,11 @@ class Archive extends BaseController {
 	 *
 	 * @param string  $current_post_type The current post type.
 	 * @param string  $results_count The HTML for the results count.
-	 * @param string  $sort_select The HTML for the sort select dropdown.
 	 * @param string  $per_page_select The HTML for the per-page select dropdown.
 	 * @param boolean $enable_left_sidebar Is left sidebar enabled.
 	 * @param boolean $enable_right_sidebar Is right sidebar enabled.
 	 */
-	public function render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
+	public function render_jobs_archive_content( $current_post_type, $results_count, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
 
 		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
@@ -217,7 +203,6 @@ class Archive extends BaseController {
 		echo '<div class="job-notices__results-header">';
 		echo '<div class="job-notices__results-count">' . $results_count . '</div>';
 		echo '<div class="job-notices__results-controls">';
-		echo $sort_select;
 		echo $per_page_select;
 		echo '</div>';
 		echo '</div>'; // job-notices__results-header.
@@ -226,8 +211,8 @@ class Archive extends BaseController {
 			'post_type'      => $current_post_type,
 			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
 			'paged'          => get_query_var( 'paged', 1 ),
-			'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
-			'order'          => 'ASC',
+			// 'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
+			// 'order'          => 'DESC',
 		);
 
 		if ( is_tax() ) {

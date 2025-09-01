@@ -62,9 +62,12 @@
     // =============================================================================
 
     %job-notices__application-section {
-        text-align: right;
+        text-align: center;
         font-weight: bold;
         font-size: 0.85rem;
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
     }
 
     %job-notices__application-button {
@@ -86,6 +89,26 @@
         &:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(85, 39, 50, 0.2);
+        }
+    }
+
+    %job-notices__application-button--email {
+        background: var(--wp-fundi-success-color, #28a745);
+        border-color: var(--wp-fundi-success-color, #28a745);
+
+        &:hover {
+            background: var(--wp-fundi-success-hover-color, #218838);
+            border-color: var(--wp-fundi-success-hover-color, #218838);
+        }
+    }
+
+    %job-notices__application-button--external {
+        background: var(--wp-fundi-info-color, #17a2b8);
+        border-color: var(--wp-fundi-info-color, #17a2b8);
+
+        &:hover {
+            background: var(--wp-fundi-info-hover-color, #138496);
+            border-color: var(--wp-fundi-info-hover-color, #138496);
         }
     }
 

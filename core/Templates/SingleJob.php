@@ -105,6 +105,7 @@ class SingleJob {
 		$featured             = get_post_meta( $post_id, 'job_notices_job_is_featured', true );
 		$urgent               = get_post_meta( $post_id, 'job_notices_job_is_urgent', true );
 		$application_link     = get_post_meta( $post_id, 'job_notices_job_application_link', true );
+		$application_email    = get_post_meta( $post_id, 'job_notices_job_application_email', true );
 
 		// Get location data.
 		$location_terms = get_the_terms( $post_id, 'location' );

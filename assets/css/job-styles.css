@@ -57,9 +57,12 @@
 .job-notices .single-job.jobs-container .single-job-header .job-notices__application-section,
 .single-job.jobs-container .job-notices .single-job-header .job-notices__application-section, .job-notices__job-header .job-notices .job-notices__application-section, .jobs-archive.jobs-container .single-job-header .job-notices .job-notices__application-section,
 .single-job.jobs-container .single-job-header .job-notices .job-notices__application-section {
-  text-align: right;
+  text-align: center;
   font-weight: bold;
   font-size: 0.85rem;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
 }
 .job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button,
 .job-notices .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button,

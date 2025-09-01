@@ -21,25 +21,30 @@ class JobFields {
 
 		$this->fields = array(
 
-			'job_notices_expiry_date'          => array(
+			'job_notices_expiry_date'           => array(
 				'label'       => 'Expiry Date',
 				'type'        => 'date',
 				'description' => 'Deadline date',
 			),
-			'job_notices_job_is_featured'      => array(
+			'job_notices_job_is_featured'       => array(
 				'label'       => 'Featured?',
 				'type'        => 'checkbox',
 				'description' => 'Check if this job is featured.',
 			),
-			'job_notices_job_is_urgent'        => array(
+			'job_notices_job_is_urgent'         => array(
 				'label'       => 'Urgent?',
 				'type'        => 'checkbox',
 				'description' => 'Check if this job is Urgent.',
 			),
-			'job_notices_job_application_link' => array(
+			'job_notices_job_application_link'  => array(
 				'label'       => 'Application link',
 				'type'        => 'url',
 				'description' => 'Application link or email.',
+			),
+			'job_notices_job_application_email' => array(
+				'label'       => 'Application email',
+				'type'        => 'email',
+				'description' => 'Application email.',
 			),
 		);
 
