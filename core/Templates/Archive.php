@@ -230,11 +230,12 @@ class Archive extends BaseController {
 			'order'          => 'ASC',
 		);
 
-		// Add taxonomy filter if we're on a job_category archive.
-		if ( is_tax( 'job_category' ) ) {
+		if ( is_tax() ) {
+			$current_taxonomy = get_queried_object()->taxonomy;
+
 			$args['tax_query'] = array(
 				array(
-					'taxonomy' => 'job_category',
+					'taxonomy' => $current_taxonomy,
 					'field'    => 'slug',
 					'terms'    => get_queried_object()->slug,
 				),

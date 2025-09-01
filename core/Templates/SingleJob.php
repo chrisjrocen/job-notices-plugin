@@ -248,26 +248,30 @@ class SingleJob {
 		// 'unitText' => 'MONTH'
 		// )
 		// );
+		// .
 
 		// Add experience level placeholder (TODO: Implement when experience fields are added)
 		// $job_schema['experienceRequirements'] = array(
 		// '@type' => 'OccupationalExperienceRequirements',
 		// 'minimumMonthsOfExperience' => '12'
 		// );
+		// .
 
 		// Add education requirements placeholder (TODO: Implement when education fields are added)
 		// $job_schema['educationRequirements'] = array(
 		// '@type' => 'EducationalOccupationalCredential',
 		// 'credentialCategory' => 'Bachelor Degree'
 		// );
+		// .
 
 		// Add skills placeholder (TODO: Implement when skills fields are added)
 		// $job_schema['skills'] = array(
 		// '@type' => 'DefinedTerm',
 		// 'name' => 'JavaScript'
 		// );
+		// .
 
-		// Output the schema
+		// Output the schema.
 		echo '<script type="application/ld+json">' .
 			wp_json_encode( $job_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) .
 			'</script>';
