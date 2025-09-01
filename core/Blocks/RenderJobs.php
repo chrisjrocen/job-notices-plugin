@@ -55,8 +55,9 @@ class RenderJobs extends BaseController {
 			array(
 				'post_type'      => 'jobs',
 				'posts_per_page' => isset( $attributes['postsPerPage'] ) ? intval( $attributes['postsPerPage'] ) : 6,
-				'orderby'        => isset( $attributes['orderBy'] ) ? $attributes['orderBy'] : 'date',
-				'order'          => isset( $attributes['order'] ) ? $attributes['order'] : 'DESC',
+				'meta_key'       => 'job_notices_job_is_featured',
+				'orderby'        => 'meta_value_num date',
+				'order'          => 'DESC',
 			)
 		);
 

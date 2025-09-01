@@ -42,6 +42,7 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 - Added missing schema.org fields.
 - Added a taxonomy filter if we're on a taxonomy archive.
 - Added application links for binds and scholarships.
+- Added featured tag for bids and scholarships.
 
 ## 0.8.9
 

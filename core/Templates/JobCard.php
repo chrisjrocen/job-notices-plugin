@@ -21,11 +21,13 @@ $bid_type       = ( ! is_wp_error( $bid_type_terms ) && ! empty( $bid_type_terms
 $study_level_terms = get_the_terms( $post_id, 'study_level' );
 $study_level       = ( ! is_wp_error( $study_level_terms ) && ! empty( $study_level_terms ) ) ? $study_level_terms[0]->name : '';
 
-$employer_terms       = get_the_terms( $post_id, 'employer' );
-$employer             = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
-$featured             = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
-$urgent               = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
-$application_deadline = get_post_meta( $post_id, 'job_notices_expiry_date', true );
+$employer_terms          = get_the_terms( $post_id, 'employer' );
+$employer                = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
+$job_is_featured         = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
+$bid_is_featured         = get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) : false;
+$scholarship_is_featured = get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) : false;
+$urgent                  = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
+$application_deadline    = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 if ( $application_deadline ) {
 	$date_obj = DateTime::createFromFormat( 'Y-m-d', $application_deadline );
 	if ( $date_obj ) {
@@ -62,7 +64,8 @@ $study_field                  = get_the_terms( $post_id, 'study_field' );
 				<a href="<?php the_permalink(); ?>"> <?php the_title(); ?> </a>
 				<?php if ( 'job-notices-expired' === $post_status ) : ?>
 					<span class="job-notices__badge job-notices__badge--expired"><sup>Expired</sup></span>
-				<?php elseif ( $featured ) : ?>
+				<?php endif; ?>
+				<?php if ( $job_is_featured || $bid_is_featured || $scholarship_is_featured ) : ?>
 					<span class="job-notices__badge job-notices__badge--featured"><sup>Featured</sup></span>
 				<?php endif; ?>
 			</h2>

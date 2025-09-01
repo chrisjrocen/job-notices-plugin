@@ -65,6 +65,9 @@ class Archive extends BaseController {
 			'posts_per_page' => $posts_per_page,
 			'paged'          => $paged,
 			'post_status'    => 'publish',
+			'meta_key'       => $this->get_featured_meta_key( $current_post_type ),
+			'orderby'        => 'meta_value_num date',
+			'order'          => 'DESC',
 		);
 
 		// Add search query.
@@ -211,8 +214,9 @@ class Archive extends BaseController {
 			'post_type'      => $current_post_type,
 			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
 			'paged'          => get_query_var( 'paged', 1 ),
-			// 'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
-			// 'order'          => 'DESC',
+			'meta_key'       => $this->get_featured_meta_key( $current_post_type ),
+			'orderby'        => 'meta_value_num date',
+			'order'          => 'DESC',
 		);
 
 		if ( is_tax() ) {
@@ -402,5 +406,24 @@ class Archive extends BaseController {
 			esc_attr( $left_grid ),
 			esc_attr( $right_grid )
 		);
+	}
+
+	/**
+	 * Get the featured meta key for a given post type.
+	 *
+	 * @param string $post_type The post type.
+	 * @return string The featured meta key.
+	 */
+	private function get_featured_meta_key( $post_type ) {
+		switch ( $post_type ) {
+			case 'jobs':
+				return 'job_notices_job_is_featured';
+			case 'bids':
+				return 'job_notices_bid_is_featured';
+			case 'scholarships':
+				return 'job_notices_scholarship_is_featured';
+			default:
+				return 'job_notices_job_is_featured';
+		}
 	}
 }
