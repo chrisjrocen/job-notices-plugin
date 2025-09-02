@@ -112,8 +112,8 @@ $study_field                  = get_the_terms( $post_id, 'study_field' );
 						<?php echo esc_html( $study_level ); ?></span>
 				<?php endif; ?>
 				<?php if ( ! empty( $job_categories ) && ! is_wp_error( $job_categories ) ) : ?>
-					<span class="job-notices__detail job-notices__detail--categories">
-						<?php the_terms( $post_id, 'job_category', '', ',&nbsp;', '' ); ?>
+					<span class="job-notices__detail job-notices__detail--job--categories">
+						<?php the_terms( $post_id, 'job_category', '', ' ', '' ); ?>
 					</span>
 				<?php endif; ?>
 				<?php if ( ! empty( $study_field ) && ! is_wp_error( $study_field ) ) : ?>
