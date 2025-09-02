@@ -36,7 +36,7 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
-### 9.0.0
+### 0.9.0
 
 - Bug fixes.
 - Added missing schema.org fields.
