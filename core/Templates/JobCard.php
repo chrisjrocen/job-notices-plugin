@@ -5,30 +5,46 @@
  * @package JOB_NOTICES
  */
 
-$post_id = get_the_ID();
+$post_id                      = get_the_ID();
+$company_logo                 = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
+$post_status                  = get_post_status( $post_id );
+$location_terms               = get_the_terms( $post_id, 'location' );
+$bid_location_terms           = get_the_terms( $post_id, 'bid_location' );
+$study_location_terms         = get_the_terms( $post_id, 'study_location' );
+$job_type_terms               = get_the_terms( $post_id, 'job_type' );
+$job_type                     = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : '';
+$bid_type_terms               = get_the_terms( $post_id, 'bid_type' );
+$bid_type                     = ( ! is_wp_error( $bid_type_terms ) && ! empty( $bid_type_terms ) ) ? $bid_type_terms[0]->name : '';
+$study_level_terms            = get_the_terms( $post_id, 'study_level' );
+$study_level                  = ( ! is_wp_error( $study_level_terms ) && ! empty( $study_level_terms ) ) ? $study_level_terms[0]->name : '';
+$employer_terms               = get_the_terms( $post_id, 'employer' );
+$employer                     = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
+$job_is_featured              = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
+$bid_is_featured              = get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) : false;
+$scholarship_is_featured      = get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) : false;
+$job_location_type            = get_post_meta( $post_id, 'job_notices_job_location_type', true ) ? get_post_meta( $post_id, 'job_notices_job_location_type', true ) : '';
+$urgent                       = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
+$job_application_link         = get_post_meta( $post_id, 'job_notices_job_application_link', true ) ? get_post_meta( $post_id, 'job_notices_job_application_link', true ) : '';
+$bid_application_link         = get_post_meta( $post_id, 'job_notices_bid_application_link', true ) ? get_post_meta( $post_id, 'job_notices_bid_application_link', true ) : '';
+$scholarship_application_link = get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) : '';
+$application_email            = get_post_meta( $post_id, 'job_notices_job_application_email', true );
+$job_categories               = get_the_terms( $post_id, 'job_category' );
+$study_field                  = get_the_terms( $post_id, 'study_field' );
+$application_deadline         = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 
-$company_logo         = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
-$post_status          = get_post_status( $post_id );
-$location_terms       = get_the_terms( $post_id, 'location' );
-$bid_location_terms   = get_the_terms( $post_id, 'bid_location' );
-$study_location_terms = get_the_terms( $post_id, 'study_location' );
-$job_type_terms       = get_the_terms( $post_id, 'job_type' );
-$job_type             = ( ! is_wp_error( $job_type_terms ) && ! empty( $job_type_terms ) ) ? $job_type_terms[0]->name : '';
+// For old jobs.
+if ( 'job' === get_post_type( $post_id ) ) {
 
-$bid_type_terms = get_the_terms( $post_id, 'bid_type' );
-$bid_type       = ( ! is_wp_error( $bid_type_terms ) && ! empty( $bid_type_terms ) ) ? $bid_type_terms[0]->name : '';
+	$company_details = get_field( 'company_details', $post_id );
+	$job_details     = get_field( 'job_details', $post_id );
 
-$study_level_terms = get_the_terms( $post_id, 'study_level' );
-$study_level       = ( ! is_wp_error( $study_level_terms ) && ! empty( $study_level_terms ) ) ? $study_level_terms[0]->name : '';
+	$location             = $company_details['location'];
+	$job_type             = $job_details['job_type'];
+	$employer             = $company_details['company'];
+	$job_categories       = get_the_terms( $post_id, 'job-category' );
+	$application_deadline = $job_details['expiry_date'];
+}
 
-$employer_terms          = get_the_terms( $post_id, 'employer' );
-$employer                = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
-$job_is_featured         = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
-$bid_is_featured         = get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) : false;
-$scholarship_is_featured = get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) : false;
-$job_location_type       = get_post_meta( $post_id, 'job_notices_job_location_type', true ) ? get_post_meta( $post_id, 'job_notices_job_location_type', true ) : '';
-$urgent                  = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
-$application_deadline    = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 if ( $application_deadline ) {
 	$date_obj = DateTime::createFromFormat( 'Y-m-d', $application_deadline );
 	if ( $date_obj ) {
@@ -41,13 +57,6 @@ if ( ! $application_deadline ) {
 	$date->modify( '+30 days' );
 	$application_deadline = $date->format( 'jS F Y' );
 }
-
-$job_application_link         = get_post_meta( $post_id, 'job_notices_job_application_link', true ) ? get_post_meta( $post_id, 'job_notices_job_application_link', true ) : '';
-$bid_application_link         = get_post_meta( $post_id, 'job_notices_bid_application_link', true ) ? get_post_meta( $post_id, 'job_notices_bid_application_link', true ) : '';
-$scholarship_application_link = get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) : '';
-$application_email            = get_post_meta( $post_id, 'job_notices_job_application_email', true );
-$job_categories               = get_the_terms( $post_id, 'job_category' );
-$study_field                  = get_the_terms( $post_id, 'study_field' );
 ?>
 
 <div class="job-notices__job-card-inner">
@@ -73,7 +82,13 @@ $study_field                  = get_the_terms( $post_id, 'study_field' );
 
 			<div class="job-notices__job-details">
 				<span class="job-notices__detail job-notices__detail--employer">
-					<?php the_terms( $post_id, 'employer', '', ', ', '' ); ?>
+					<?php
+					if ( $employer ) {
+						echo esc_html( $employer );
+					} else {
+						the_terms( $post_id, 'employer', '', ', ', '' );
+					}
+					?>
 				</span>
 			</div>
 
@@ -82,6 +97,12 @@ $study_field                  = get_the_terms( $post_id, 'study_field' );
 				<span class="job-notices__detail job-notices__detail--location">
 					<svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#552732"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
 					<?php the_terms( $post_id, 'location', '', ',&nbsp;', '' ); ?>
+				</span>
+				<?php endif; ?>
+				<?php if ( ! empty( $location ) ) : ?>
+				<span class="job-notices__detail job-notices__detail--location">
+					<svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#552732"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+					<?php echo esc_html( $location ); ?>
 				</span>
 				<?php endif; ?>
 				<?php if ( ! empty( $bid_location_terms ) && ! is_wp_error( $bid_location_terms ) ) : ?>

@@ -61,7 +61,7 @@ class Archive extends BaseController {
 
 		// Build query arguments.
 		$query_args = array(
-			'post_type'      => $current_post_type,
+			'post_type'      => 'jobs' === $current_post_type ? array( 'jobs', 'job' ) : $current_post_type,
 			'posts_per_page' => $posts_per_page,
 			'paged'          => $paged,
 			'post_status'    => 'publish',
@@ -211,7 +211,7 @@ class Archive extends BaseController {
 		echo '</div>'; // job-notices__results-header.
 
 		$args = array(
-			'post_type'      => $current_post_type,
+			'post_type'      => 'jobs' === $current_post_type ? array( 'jobs', 'job' ) : $current_post_type,
 			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
 			'paged'          => get_query_var( 'paged', 1 ),
 			'meta_key'       => $this->get_featured_meta_key( $current_post_type ),
