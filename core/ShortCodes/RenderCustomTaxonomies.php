@@ -26,7 +26,6 @@ class RenderCustomTaxonomies extends BaseController {
 	 */
 	public function register() {
 		add_shortcode( 'job_notices_jobs_custom_taxonomies', array( $this, 'job_notices_jobs_custom_taxonomies_shortcode' ) );
-		add_action( 'wp_footer', array( $this, 'add_inline_styles' ) );
 	}
 
 	/**

@@ -36,6 +36,15 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 
 ## Changelog
 
+### 9.0.0
+
+- Bug fixes.
+- Added missing schema.org fields.
+- Added a taxonomy filter if we're on a taxonomy archive.
+- Added application links for binds and scholarships.
+- Added featured tag for bids and scholarships.
+- Added radio input for location type.
+
 ## 0.8.9
 
 - Added a shortcodes to render custom taxonomies in the sidebar.

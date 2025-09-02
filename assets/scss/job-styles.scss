@@ -62,9 +62,12 @@
     // =============================================================================
 
     %job-notices__application-section {
-        text-align: right;
+        text-align: center;
         font-weight: bold;
         font-size: 0.85rem;
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
     }
 
     %job-notices__application-button {
@@ -86,6 +89,26 @@
         &:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(85, 39, 50, 0.2);
+        }
+    }
+
+    %job-notices__application-button--email {
+        background: var(--wp-fundi-success-color, #28a745);
+        border-color: var(--wp-fundi-success-color, #28a745);
+
+        &:hover {
+            background: var(--wp-fundi-success-hover-color, #218838);
+            border-color: var(--wp-fundi-success-hover-color, #218838);
+        }
+    }
+
+    %job-notices__application-button--external {
+        background: var(--wp-fundi-info-color, #17a2b8);
+        border-color: var(--wp-fundi-info-color, #17a2b8);
+
+        &:hover {
+            background: var(--wp-fundi-info-hover-color, #138496);
+            border-color: var(--wp-fundi-info-hover-color, #138496);
         }
     }
 
@@ -371,7 +394,7 @@
         &-inner {
             .job-notices__job-header {
                 display: grid;
-                grid-template-columns: 1fr 6fr 2fr;
+                grid-template-columns: 2fr 6fr 1fr;
                 gap: 1rem;
                 margin: auto;
                 grid-template-areas:
@@ -468,10 +491,15 @@
 
             .job-notices__badge {
                 &.job-notices__badge--featured {
-                    color: var(--wp-fundi-success-color, #34A853);
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
+                    sup {
+                        font-size: 0.65rem;
+                        text-transform: uppercase;
+                        background: #ff6b35;
+                        color: white;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                        font-weight: bold;
+                    }
                 }
 
                 &.job-notices__badge--expired {
@@ -514,6 +542,7 @@
         font-weight: 500;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
 
         &--location {
             color: var(--wp-fundi-primary-color, #552732);
@@ -539,6 +568,29 @@
             border: 1px solid #192a3d40;
         }
 
+        &--job--categories {
+            background-color: unset;
+            padding: 0px;
+
+            a {
+                background-color: var(--wp-fundi-light-alternative-color, #ffffff);
+                border: 1px solid #192a3d40;
+                color: var(--wp-fundi-primary-color, #552732);
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.375rem;
+                font-weight: 500;
+                margin: 0px 8px 4px 0px;
+
+                &:hover {
+                    color: var(--wp-fundi-main-text-color, #552732);
+                    background-color: var(--wp-fundi-subtle-background-color, #1967D2);
+                }
+            }
+
+
+        }
+
         &--type {
             background-color: rgba(66, 133, 244, 0.2);
             color: var(--wp-fundi-info-color, #1967D2);
@@ -547,6 +599,11 @@
         &--urgent {
             background-color: rgba(249, 171, 0, 0.2);
             color: var(--wp-fundi-warning-color, #FBBC05);
+        }
+
+        &--location-type {
+            background-color: rgba(52, 168, 83, 0.2);
+            color: var(--wp-fundi-success-color, #34A853);
         }
     }
 

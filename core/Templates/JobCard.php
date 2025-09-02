@@ -21,11 +21,14 @@ $bid_type       = ( ! is_wp_error( $bid_type_terms ) && ! empty( $bid_type_terms
 $study_level_terms = get_the_terms( $post_id, 'study_level' );
 $study_level       = ( ! is_wp_error( $study_level_terms ) && ! empty( $study_level_terms ) ) ? $study_level_terms[0]->name : '';
 
-$employer_terms       = get_the_terms( $post_id, 'employer' );
-$employer             = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
-$featured             = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
-$urgent               = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
-$application_deadline = get_post_meta( $post_id, 'job_notices_expiry_date', true );
+$employer_terms          = get_the_terms( $post_id, 'employer' );
+$employer                = ( ! is_wp_error( $employer_terms ) && ! empty( $employer_terms ) ) ? $employer_terms[0]->name : '';
+$job_is_featured         = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
+$bid_is_featured         = get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) : false;
+$scholarship_is_featured = get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) : false;
+$job_location_type       = get_post_meta( $post_id, 'job_notices_job_location_type', true ) ? get_post_meta( $post_id, 'job_notices_job_location_type', true ) : '';
+$urgent                  = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
+$application_deadline    = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 if ( $application_deadline ) {
 	$date_obj = DateTime::createFromFormat( 'Y-m-d', $application_deadline );
 	if ( $date_obj ) {
@@ -39,9 +42,12 @@ if ( ! $application_deadline ) {
 	$application_deadline = $date->format( 'jS F Y' );
 }
 
-$application_link = is_singular( 'jobs' ) ? get_post_meta( $post_id, 'job_notices_job_application_link', true ) : get_permalink();
-$job_categories   = get_the_terms( $post_id, 'job_category' );
-$study_field      = get_the_terms( $post_id, 'study_field' );
+$job_application_link         = get_post_meta( $post_id, 'job_notices_job_application_link', true ) ? get_post_meta( $post_id, 'job_notices_job_application_link', true ) : '';
+$bid_application_link         = get_post_meta( $post_id, 'job_notices_bid_application_link', true ) ? get_post_meta( $post_id, 'job_notices_bid_application_link', true ) : '';
+$scholarship_application_link = get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_application_link', true ) : '';
+$application_email            = get_post_meta( $post_id, 'job_notices_job_application_email', true );
+$job_categories               = get_the_terms( $post_id, 'job_category' );
+$study_field                  = get_the_terms( $post_id, 'study_field' );
 ?>
 
 <div class="job-notices__job-card-inner">
@@ -59,7 +65,8 @@ $study_field      = get_the_terms( $post_id, 'study_field' );
 				<a href="<?php the_permalink(); ?>"> <?php the_title(); ?> </a>
 				<?php if ( 'job-notices-expired' === $post_status ) : ?>
 					<span class="job-notices__badge job-notices__badge--expired"><sup>Expired</sup></span>
-				<?php elseif ( $featured ) : ?>
+				<?php endif; ?>
+				<?php if ( $job_is_featured || $bid_is_featured || $scholarship_is_featured ) : ?>
 					<span class="job-notices__badge job-notices__badge--featured"><sup>Featured</sup></span>
 				<?php endif; ?>
 			</h2>
@@ -105,8 +112,8 @@ $study_field      = get_the_terms( $post_id, 'study_field' );
 						<?php echo esc_html( $study_level ); ?></span>
 				<?php endif; ?>
 				<?php if ( ! empty( $job_categories ) && ! is_wp_error( $job_categories ) ) : ?>
-					<span class="job-notices__detail job-notices__detail--categories">
-						<?php the_terms( $post_id, 'job_category', '', ',&nbsp;', '' ); ?>
+					<span class="job-notices__detail job-notices__detail--job--categories">
+						<?php the_terms( $post_id, 'job_category', '', ' ', '' ); ?>
 					</span>
 				<?php endif; ?>
 				<?php if ( ! empty( $study_field ) && ! is_wp_error( $study_field ) ) : ?>
@@ -117,6 +124,11 @@ $study_field      = get_the_terms( $post_id, 'study_field' );
 			</div>
 
 			<div class="job-notices__job-tags">
+				<?php if ( $job_location_type ) : ?>
+					<span class="job-notices__tag job-notices__tag--location-type">
+						<?php echo esc_html( $job_location_type ); ?>
+					</span>
+				<?php endif; ?>
 				<?php if ( $urgent ) : ?>
 					<span class="job-notices__tag job-notices__tag--urgent">Urgent</span>
 				<?php endif; ?>
@@ -127,7 +139,54 @@ $study_field      = get_the_terms( $post_id, 'study_field' );
 			</div>
 		</div>
 		<div class="job-notices__application-section">
-			<a class="job-notices__apply-button"  href="<?php echo esc_url( $application_link ); ?>" target="<?php echo is_singular( 'jobs' ) ? '_blank' : ''; ?>" rel="noopener">Apply Now</a>
+			<?php if ( is_post_type_archive() ) { ?>
+				<a class="job-notices__apply-button job-notices__apply-button--external" href="<?php echo esc_url( get_permalink() ); ?>" rel="noopener">
+					Details
+				</a>
+				<?php
+			}
+
+			if ( is_singular( 'jobs' ) ) {
+
+				if ( $application_email && is_email( $application_email ) ) {
+					$mailto_link = 'mailto:' . esc_attr( $application_email );
+					?>
+						<a class='job-notices__apply-button job-notices__apply-button--email' href="<?php echo esc_url( $mailto_link ); ?>" rel='noopener'>
+							Apply by Email
+						</a>
+					<?php
+				}
+				if ( $job_application_link && filter_var( $job_application_link, FILTER_VALIDATE_URL ) ) {
+					?>
+						<a class='job-notices__apply-button job-notices__apply-button--external' href="<?php echo esc_url( $job_application_link ); ?>" rel='noopener' target='_blank'>
+							Apply Now
+						</a>
+					<?php
+				}
+			}
+
+			if ( is_singular( 'bids' ) ) {
+
+				if ( $bid_application_link && filter_var( $bid_application_link, FILTER_VALIDATE_URL ) ) {
+					?>
+						<a class='job-notices__apply-button job-notices__apply-button--external' href="<?php echo esc_url( $bid_application_link ); ?>" rel='noopener' target='_blank'>
+							Apply Now
+						</a>
+					<?php
+				}
+			}
+
+			if ( is_singular( 'scholarships' ) ) {
+
+				if ( $scholarship_application_link && filter_var( $scholarship_application_link, FILTER_VALIDATE_URL ) ) {
+					?>
+						<a class='job-notices__apply-button job-notices__apply-button--external' href="<?php echo esc_url( $scholarship_application_link ); ?>" rel='noopener' target='_blank'>
+							Apply Now
+						</a>
+					<?php
+				}
+			}
+			?>
 		</div>
 	</div>
 </div>

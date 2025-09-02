@@ -65,6 +65,9 @@ class Archive extends BaseController {
 			'posts_per_page' => $posts_per_page,
 			'paged'          => $paged,
 			'post_status'    => 'publish',
+			'meta_key'       => $this->get_featured_meta_key( $current_post_type ),
+			'orderby'        => 'meta_value_num date',
+			'order'          => 'DESC',
 		);
 
 		// Add search query.
@@ -91,18 +94,6 @@ class Archive extends BaseController {
 					'terms'    => $value,
 				);
 			}
-		}
-
-		// Add sorting.
-		switch ( $sort ) {
-			case 'date_asc':
-				$query_args['orderby'] = 'date';
-				$query_args['order']   = 'ASC';
-				break;
-			default:
-				$query_args['orderby'] = 'date';
-				$query_args['order']   = 'DESC';
-				break;
 		}
 
 		// Ensure tax_query is properly structured.
@@ -178,12 +169,11 @@ class Archive extends BaseController {
 			get_header();
 
 			$results_count        = $this->render_results_count();
-			$sort_select          = $this->sort_select();
 			$per_page_select      = $this->per_page_select();
 			$enable_left_sidebar  = $this->enable_left_sidebar;
 			$enable_right_sidebar = $this->enable_right_sidebar;
 
-			$this->render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
+			$this->render_jobs_archive_content( $current_post_type, $results_count, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
 
 			get_footer();
 
@@ -197,12 +187,11 @@ class Archive extends BaseController {
 	 *
 	 * @param string  $current_post_type The current post type.
 	 * @param string  $results_count The HTML for the results count.
-	 * @param string  $sort_select The HTML for the sort select dropdown.
 	 * @param string  $per_page_select The HTML for the per-page select dropdown.
 	 * @param boolean $enable_left_sidebar Is left sidebar enabled.
 	 * @param boolean $enable_right_sidebar Is right sidebar enabled.
 	 */
-	public function render_jobs_archive_content( $current_post_type, $results_count, $sort_select, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
+	public function render_jobs_archive_content( $current_post_type, $results_count, $per_page_select, $enable_left_sidebar, $enable_right_sidebar ) {
 
 		echo '<div id="job-notices__container" class="job-notices job-notices__container">';
 
@@ -217,7 +206,6 @@ class Archive extends BaseController {
 		echo '<div class="job-notices__results-header">';
 		echo '<div class="job-notices__results-count">' . $results_count . '</div>';
 		echo '<div class="job-notices__results-controls">';
-		echo $sort_select;
 		echo $per_page_select;
 		echo '</div>';
 		echo '</div>'; // job-notices__results-header.
@@ -226,15 +214,17 @@ class Archive extends BaseController {
 			'post_type'      => $current_post_type,
 			'posts_per_page' => get_query_var( 'posts_per_page', 12 ),
 			'paged'          => get_query_var( 'paged', 1 ),
-			'orderby'        => sanitize_text_field( wp_unslash( $_GET['sort'] ?? 'date' ) ),
-			'order'          => 'ASC',
+			'meta_key'       => $this->get_featured_meta_key( $current_post_type ),
+			'orderby'        => 'meta_value_num date',
+			'order'          => 'DESC',
 		);
 
-		// Add taxonomy filter if we're on a job_category archive.
-		if ( is_tax( 'job_category' ) ) {
+		if ( is_tax() ) {
+			$current_taxonomy = get_queried_object()->taxonomy;
+
 			$args['tax_query'] = array(
 				array(
-					'taxonomy' => 'job_category',
+					'taxonomy' => $current_taxonomy,
 					'field'    => 'slug',
 					'terms'    => get_queried_object()->slug,
 				),
@@ -416,5 +406,24 @@ class Archive extends BaseController {
 			esc_attr( $left_grid ),
 			esc_attr( $right_grid )
 		);
+	}
+
+	/**
+	 * Get the featured meta key for a given post type.
+	 *
+	 * @param string $post_type The post type.
+	 * @return string The featured meta key.
+	 */
+	private function get_featured_meta_key( $post_type ) {
+		switch ( $post_type ) {
+			case 'jobs':
+				return 'job_notices_job_is_featured';
+			case 'bids':
+				return 'job_notices_bid_is_featured';
+			case 'scholarships':
+				return 'job_notices_scholarship_is_featured';
+			default:
+				return 'job_notices_job_is_featured';
+		}
 	}
 }

@@ -31,15 +31,10 @@ class BidFields {
 				'type'        => 'checkbox',
 				'description' => 'Check if this bid is featured.',
 			),
-			'job_notices_bid_is_urgent'        => array(
-				'label'       => 'Urgent?',
-				'type'        => 'checkbox',
-				'description' => 'Check if this bid is Urgent.',
-			),
 			'job_notices_bid_application_link' => array(
 				'label'       => 'Application link',
 				'type'        => 'url',
-				'description' => 'Application link or email.',
+				'description' => 'Application link',
 			),
 		);
 
