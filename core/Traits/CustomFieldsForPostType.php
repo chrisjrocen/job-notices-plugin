@@ -64,6 +64,20 @@ trait CustomFieldsForPostType {
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $key ); ?>"><strong><?php echo esc_html( $field['label'] ); ?></strong></label><br>
+				<?php
+				if ( 'radio' === $field['type'] ) {
+					?>
+					<div>
+						<?php foreach ( $field['options'] as $option_key => $option_label ) { ?>
+							<label>
+								<input type="radio" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $option_key ); ?>" <?php checked( $value, $option_key ); ?>>
+								<?php echo esc_html( $option_label ); ?>
+							</label><br>
+						<?php } ?>
+					</div>
+					<?php
+				} else {
+					?>
 				<input 
 					type="<?php echo esc_attr( $field['type'] ?? 'text' ); ?>"
 					id="<?php echo esc_attr( $key ); ?>"
@@ -76,24 +90,23 @@ trait CustomFieldsForPostType {
 					}
 					?>
 					style="">
-				<?php
-				if ( 'date' === $field['type'] ) {
-					?>
-					<br><small><?php echo esc_html( $field['description'] ); ?></small>
-					<?php
-				} else {
-					if ( ! empty( $field['description'] ) ) {
-						?>
+					<?php } ?>
+					<?php if ( 'date' === $field['type'] ) { ?>
 						<br><small><?php echo esc_html( $field['description'] ); ?></small>
 						<?php
+					} else {
+						if ( ! empty( $field['description'] ) ) {
+							?>
+							<br><small><?php echo esc_html( $field['description'] ); ?></small>
+							<?php
+						}
 					}
-				}
-				if ( 'date' === $field['type'] ) {
-					echo esc_attr( $value );
-				} else {
-					echo esc_attr( $field['placeholder'] ?? '' );
-				}
-				?>
+					if ( 'date' === $field['type'] ) {
+						echo esc_attr( $value );
+					} else {
+						echo esc_attr( $field['placeholder'] ?? '' );
+					}
+					?>
 			</p>
 			<?php
 		}

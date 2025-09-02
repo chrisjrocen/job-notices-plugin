@@ -26,6 +26,15 @@ class JobFields {
 				'type'        => 'date',
 				'description' => 'Deadline date',
 			),
+			'job_notices_job_location_type'     => array(
+				'label'   => 'Job Location Type',
+				'type'    => 'radio',
+				'options' => array(
+					'Onsite' => 'Onsite',
+					'Remote' => 'Remote',
+					'Hybrid' => 'Hybrid',
+				),
+			),
 			'job_notices_job_is_featured'       => array(
 				'label'       => 'Featured?',
 				'type'        => 'checkbox',

@@ -26,6 +26,7 @@ $employer                = ( ! is_wp_error( $employer_terms ) && ! empty( $emplo
 $job_is_featured         = get_post_meta( $post_id, 'job_notices_job_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_job_is_featured', true ) : false;
 $bid_is_featured         = get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_bid_is_featured', true ) : false;
 $scholarship_is_featured = get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) ? get_post_meta( $post_id, 'job_notices_scholarship_is_featured', true ) : false;
+$job_location_type       = get_post_meta( $post_id, 'job_notices_job_location_type', true ) ? get_post_meta( $post_id, 'job_notices_job_location_type', true ) : '';
 $urgent                  = get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) ? get_post_meta( $post_id, 'job_notices_job_is_urgent', true ) : false;
 $application_deadline    = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 if ( $application_deadline ) {
@@ -123,6 +124,11 @@ $study_field                  = get_the_terms( $post_id, 'study_field' );
 			</div>
 
 			<div class="job-notices__job-tags">
+				<?php if ( $job_location_type ) : ?>
+					<span class="job-notices__tag job-notices__tag--location-type">
+						<?php echo esc_html( $job_location_type ); ?>
+					</span>
+				<?php endif; ?>
 				<?php if ( $urgent ) : ?>
 					<span class="job-notices__tag job-notices__tag--urgent">Urgent</span>
 				<?php endif; ?>
