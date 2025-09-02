@@ -24,17 +24,16 @@ This is a list of all the features intended for the plugin. Some are not yet cre
 - Email alerts
 - Resume Builder. (can be a separate plugin)
 
-## Road map for v1
-
-- Featured jobs on top
-- Add schema to jobs.
-
 ## Setup
 
 - Run `npm install` to install all the sass + dev dependencies.
 - Run `composer install` to get the PHP setup.
 
 ## Changelog
+
+### 0.9.1
+
+-Added backwards compatibility to 'job' post type and ACF fields.
 
 ### 0.9.0
 
