@@ -20,9 +20,13 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 
 ## Changelog
 
+### 1.0.2
+
+-Bug fix: Expiry dates for bids and scholarships post types.
+
 ### 1.0.1
 
--Fixed bug to remove inrecognised property in schema for job posting.
+-Bug fix: Removed inrecognised property in schema for job posting.
 
 ### 1.0.0
 

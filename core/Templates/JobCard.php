@@ -6,6 +6,7 @@
  */
 
 $post_id                      = get_the_ID();
+$post_type                    = get_post_type( $post_id );
 $company_logo                 = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
 $post_status                  = get_post_status( $post_id );
 $location_terms               = get_the_terms( $post_id, 'location' );
@@ -32,8 +33,16 @@ $job_categories               = get_the_terms( $post_id, 'job_category' );
 $study_field                  = get_the_terms( $post_id, 'study_field' );
 $application_deadline         = get_post_meta( $post_id, 'job_notices_expiry_date', true );
 
+if ( 'bids' === $post_type ) {
+	$application_deadline = get_post_meta( $post_id, 'job_notices_bid_expiry_date', true );
+}
+
+if ( 'scholarships' === $post_type ) {
+	$application_deadline = get_post_meta( $post_id, 'job_notices_scholarship_expiry_date', true );
+}
+
 // For old jobs.
-if ( 'job' === get_post_type( $post_id ) ) {
+if ( 'job' === $post_type ) {
 
 	$company_details = get_field( 'company_details', $post_id );
 	$job_details     = get_field( 'job_details', $post_id );
