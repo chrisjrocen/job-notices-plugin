@@ -388,7 +388,9 @@
     // JOB CARD STYLES
     // =============================================================================
 
-    &__job-card {
+    &__job-card,
+    &__job-list-item,
+    &__related-job-item {
         @extend %job-notices__card;
 
         &-inner {
@@ -819,7 +821,8 @@
         }
     }
 
-    &__job-cards-grid {
+    &__job-cards-grid,
+    &__job-list {
         display: grid;
         gap: 1.5rem;
     }
@@ -982,7 +985,9 @@
             }
         }
 
-        .job-notices__related-cards-grid {
+        .job-notices__related-cards-grid,
+        .job-notices__related-job-item,
+        .job-notices__related-jobs-list {
             display: grid;
             // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
@@ -1058,7 +1063,8 @@
             }
         }
 
-        &__job-cards-grid {
+        &__job-cards-grid,
+        &__job-list {
             gap: 1rem;
         }
 

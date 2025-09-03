@@ -62,14 +62,16 @@ class RenderJobs extends BaseController {
 		);
 
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-notices__job-cards-grid job-notices__job-cards-grid--block">';
+			echo '<section id="job-results" class="job-notices__job-cards-grid job-notices__job-cards-grid--block" aria-label="Featured Jobs">';
+			echo '<ul class="job-notices__job-list job-notices__job-list--block" role="list">';
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
-				echo '<div class="job-notices__job-card job-notices__job-card--block">';
+				echo '<li class="job-notices__job-list-item job-notices__job-list-item--block">';
 				include $this->plugin_path . 'core/Templates/JobCard.php';
-				echo '</div>';
+				echo '</li>';
 			}
-			echo '</div>';
+			echo '</ul>';
+			echo '</section>';
 
 			if ( $attributes['showPagination'] && isset( $jobs->max_num_pages ) && $jobs->max_num_pages > 1 ) {
 				echo '<div class="job-notices__pagination job-notices__pagination--block">';
