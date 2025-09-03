@@ -178,10 +178,6 @@ trait SinglePostTypeTrait {
 					'url'   => esc_url( $employer_logo ),
 				);
 			}
-
-			if ( $employer_industry ) {
-				$employer['industry'] = esc_attr( $employer_industry );
-			}
 		}
 
 		// Fallback to site info if no employer.
