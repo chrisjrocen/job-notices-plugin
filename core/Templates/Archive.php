@@ -120,14 +120,16 @@ class Archive extends BaseController {
 		// Generate HTML for job results.
 		ob_start();
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<section id="job-results" class="job-notices__job-cards-grid" aria-label="Job Listings">';
+			echo '<ul class="job-notices__job-list" role="list">';
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
-				echo '<div class="job-notices__job-card">';
-				include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
-				echo '</div>';
+				echo '<li class="job-notices__job-list-item">';
+					include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
+				echo '</li>';
 			}
-			echo '</div>';
+			echo '</ul>';
+			echo '</section>';
 
 			// Add pagination if needed.
 			if ( $jobs->max_num_pages > 1 ) {
@@ -142,9 +144,9 @@ class Archive extends BaseController {
 				echo '</div>';
 			}
 		} else {
-			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<section id="job-results" class="job-notices__job-cards-grid" aria-label="Job Listings">';
 			echo '<p class="job-notices__no-jobs-found">' . esc_html__( 'No jobs found matching your criteria.', 'job-notices' ) . '</p>';
-			echo '</div>';
+			echo '</section>';
 		}
 		wp_reset_postdata();
 
@@ -203,6 +205,12 @@ class Archive extends BaseController {
 		// Job Results.
 		echo '<section class="job-notices__results">';
 
+		/**
+		 * Hook for AdSense injection before job results
+		 * Usage: add_action('job_notices_before_job_results', 'your_adsense_function');
+		 */
+		do_action( 'job_notices_before_job_results' );
+
 		echo '<div class="job-notices__results-header">';
 		echo '<div class="job-notices__results-count">' . $results_count . '</div>';
 		echo '<div class="job-notices__results-controls">';
@@ -234,25 +242,33 @@ class Archive extends BaseController {
 		$jobs = new WP_Query( $args );
 
 		if ( $jobs->have_posts() ) {
-			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<section id="job-results" class="job-notices__job-cards-grid" aria-label="Job Listings">';
+			echo '<ul class="job-notices__job-list" role="list">';
 
 			while ( $jobs->have_posts() ) {
 				$jobs->the_post();
 
 				// Use a template part for each job card.
-				echo '<div class="job-notices__job-card">';
+				echo '<li class="job-notices__job-list-item">';
 					include plugin_dir_path( __FILE__, 1 ) . 'JobCard.php';
-				echo '</div>';
+				echo '</li>';
 			}
 
-			echo '</div>'; // job-notices__job-cards-grid.
+			echo '</ul>';
+			echo '</section>'; // job-notices__job-cards-grid.
 		} else {
-			echo '<div id="job-results" class="job-notices__job-cards-grid">';
+			echo '<section id="job-results" class="job-notices__job-cards-grid" aria-label="Job Listings">';
 			echo '<p class="job-notices__no-jobs-found">' . esc_html__( 'No jobs found.', 'job-notices' ) . '</p>';
-			echo '</div>';
+			echo '</section>';
 		}
 
 		echo '</section>'; // job-notices__results.
+
+		/**
+		 * Hook for AdSense injection after job results
+		 * Usage: add_action('job_notices_after_job_results', 'your_adsense_function');
+		 */
+		do_action( 'job_notices_after_job_results' );
 
 		if ( 'true' === $this->enable_right_sidebar ) {
 			$this->render_right_sidebar_panel( $current_post_type );

@@ -108,14 +108,16 @@ trait SinglePostTypeTrait {
 		);
 
 		if ( $related_jobs->have_posts() ) {
-			echo '<div class="job-notices__related-cards-grid">';
+			echo '<section class="job-notices__related-cards-grid" aria-label="Related Jobs">';
+			echo '<ul class="job-notices__related-jobs-list" role="list">';
 			while ( $related_jobs->have_posts() ) {
 				$related_jobs->the_post();
-				echo '<div class="job-notices__job-card job-notices__job-card--related">';
+				echo '<li class="job-notices__related-job-item">';
 				include trailingslashit( plugin_dir_path( dirname( __DIR__, 1 ) ) ) . 'core/Templates/JobCard.php';
-				echo '</div>';
+				echo '</li>';
 			}
-			echo '</div>';
+			echo '</ul>';
+			echo '</section>';
 			wp_reset_postdata();
 		}
 

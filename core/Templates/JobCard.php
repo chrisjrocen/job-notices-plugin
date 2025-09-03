@@ -59,8 +59,8 @@ if ( ! $application_deadline ) {
 }
 ?>
 
-<div class="job-notices__job-card-inner">
-	<div class="job-notices__job-header">
+<article class="job-notices__job-card-inner" itemscope itemtype="https://schema.org/JobPosting">
+	<header class="job-notices__job-header">
 		<?php if ( $company_logo ) : ?>
 			<div class="job-notices__company-logo">
 				<img src="<?php echo esc_url( $company_logo ); ?>" alt="<?php the_title_attribute(); ?> logo"/>
@@ -71,7 +71,7 @@ if ( ! $application_deadline ) {
 
 		<div class="job-notices__job-meta">
 			<h2 class="job-notices__job-title">
-				<a href="<?php the_permalink(); ?>"> <?php the_title(); ?> </a>
+				<a href="<?php the_permalink(); ?>" itemprop="title"> <?php the_title(); ?> </a>
 				<?php if ( 'job-notices-expired' === $post_status ) : ?>
 					<span class="job-notices__badge job-notices__badge--expired"><sup>Expired</sup></span>
 				<?php endif; ?>
@@ -81,7 +81,7 @@ if ( ! $application_deadline ) {
 			</h2>
 
 			<div class="job-notices__job-details">
-				<span class="job-notices__detail job-notices__detail--employer">
+				<span class="job-notices__detail job-notices__detail--employer" itemprop="hiringOrganization">
 					<?php
 					if ( $employer ) {
 						echo esc_html( $employer );
@@ -153,8 +153,8 @@ if ( ! $application_deadline ) {
 				<?php if ( $urgent ) : ?>
 					<span class="job-notices__tag job-notices__tag--urgent">Urgent</span>
 				<?php endif; ?>
-				<span class="job-notices__expiry-date">
-					<svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#687279"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+				<span class="job-notices__expiry-date" itemprop="validThrough">
+					<svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#687279"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v80Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
 					<?php echo esc_html( 'Deadline: ' . $application_deadline ); ?>
 				</span>
 			</div>
@@ -208,6 +208,5 @@ if ( ! $application_deadline ) {
 				}
 			}
 			?>
-		</div>
-	</div>
-</div>
+	</header>
+</article>

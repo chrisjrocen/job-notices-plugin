@@ -1,0 +1,119 @@
+/**
+ * Semantic HTML Compatibility CSS
+ * 
+ * This file ensures that existing CSS styles continue to work
+ * after converting to semantic HTML elements.
+ */
+
+/* Maintain existing job card styles */
+.job-notices__job-list-item {
+	/* Inherit all styles from the old .job-notices__job-card */
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.job-notices__job-list-item .job-notices__job-card-inner {
+	/* Ensure the inner card maintains its styling */
+	display: block;
+}
+
+/* Maintain existing grid styles */
+.job-notices__job-list {
+	/* Inherit all styles from the old .job-notices__job-cards-grid */
+	display: grid;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Maintain existing related jobs styles */
+.job-notices__related-job-item {
+	/* Inherit all styles from the old .job-notices__job-card--related */
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.job-notices__related-jobs-list {
+	/* Inherit all styles from the old .job-notices__related-cards-grid */
+	display: grid;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Maintain existing block styles */
+.job-notices__job-list-item--block {
+	/* Inherit all styles from the old .job-notices__job-card--block */
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.job-notices__job-list--block {
+	/* Inherit all styles from the old .job-notices__job-cards-grid--block */
+	display: grid;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Ensure proper spacing and layout */
+.job-notices__job-list > li,
+.job-notices__related-jobs-list > li,
+.job-notices__job-list--block > li {
+	margin-bottom: 1rem;
+}
+
+.job-notices__job-list > li:last-child,
+.job-notices__related-jobs-list > li:last-child,
+.job-notices__job-list--block > li:last-child {
+	margin-bottom: 0;
+}
+
+/* Maintain existing responsive behavior */
+@media (max-width: 768px) {
+	.job-notices__job-list,
+	.job-notices__related-jobs-list,
+	.job-notices__job-list--block {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+}
+
+/* Ensure proper focus states for accessibility */
+.job-notices__job-list-item:focus-within,
+.job-notices__related-job-item:focus-within,
+.job-notices__job-list-item--block:focus-within {
+	outline: 2px solid #007cba;
+	outline-offset: 2px;
+}
+
+/* Maintain existing hover effects */
+.job-notices__job-list-item:hover .job-notices__job-card-inner,
+.job-notices__related-job-item:hover .job-notices__job-card-inner,
+.job-notices__job-list-item--block:hover .job-notices__job-card-inner {
+	/* Inherit any existing hover styles */
+	transform: translateY(-2px);
+	transition: transform 0.2s ease;
+}
+
+/* Ensure proper print styles */
+@media print {
+	.job-notices__job-list,
+	.job-notices__related-jobs-list,
+	.job-notices__job-list--block {
+		display: block;
+	}
+	
+	.job-notices__job-list > li,
+	.job-notices__related-jobs-list > li,
+	.job-notices__job-list--block > li {
+		page-break-inside: avoid;
+		margin-bottom: 1.5rem;
+	}
+}
