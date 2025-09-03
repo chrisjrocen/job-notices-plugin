@@ -20,6 +20,10 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 
 ## Changelog
 
+### 1.0.1
+
+-Fixed bug to remove inrecognised property in schema for job posting.
+
 ### 1.0.0
 
 Initial live release with;
