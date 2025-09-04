@@ -32,8 +32,6 @@ class SingleBid {
 		$enable_share_buttons = true;
 
 		if ( true === $enable_share_buttons ) {
-			wp_register_style( 'job-share-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-share.css', array(), JOB_NOTICES_VERSION );
-			wp_enqueue_style( 'job-share-styles' );
 			wp_register_script( 'job-share-scripts', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/js/frontend/job-share.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
 			wp_enqueue_script( 'job-share-scripts' );
 		}

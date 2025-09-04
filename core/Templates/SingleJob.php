@@ -33,8 +33,6 @@ class SingleJob {
 		$enable_share_buttons = true;
 
 		if ( true === $enable_share_buttons ) {
-			wp_register_style( 'job-share-styles', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/css/job-share.css', array(), JOB_NOTICES_VERSION );
-			wp_enqueue_style( 'job-share-styles' );
 			wp_register_script( 'job-share-scripts', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/js/frontend/job-share.js', array( 'jquery' ), JOB_NOTICES_VERSION, true );
 			wp_enqueue_script( 'job-share-scripts' );
 		}
@@ -73,12 +71,16 @@ class SingleJob {
 			$job_date             = get_post_meta( $current_post_id, get_the_date(), true );
 			$post_url             = urlencode( get_permalink() );
 			$post_title           = urlencode( get_the_title() );
+			$invitation_heading   = get_option( 'options_job_notices_invitation_heading' ) ? get_option( 'options_job_notices_invitation_heading' ) : 'Share this job';
+			$invitation_text      = get_option( 'options_job_notices_share_text' ) ? get_option( 'options_job_notices_share_text' ) : 'I found this job and thought you might be interested:';
+			$invitation_url       = get_option( 'options_job_notices_share_url' );
 
 			$this->render_job_header( $application_deadline );
 
 			echo '<div class="job-notices__content">';
 			echo wp_kses_post( the_content() );
 			$this->job_notices_share_buttons( $post_url, $post_title );
+			$this->job_notices_render_social_widget( $invitation_heading, $invitation_text, $invitation_url );
 			echo '</div>';
 
 			$this->get_related_jobs( $current_post_id, 'jobs' );

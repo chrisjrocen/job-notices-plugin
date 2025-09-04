@@ -20,6 +20,9 @@ const App = () => {
   const [enableJobsArchivePage, setEnableJobsArchivePage] = useState(false);
   const [enableRightSidebar, setEnableRightSidebar] = useState(false);
   const [enableLeftSidebar, setEnableLeftSidebar] = useState(false);
+  const [invitationHeading, setInvitationHeading] = useState('Job Invitation');
+  const [shareText, setShareText] = useState('Check out Whatsapp Channel!');
+  const [shareUrl, setShareUrl] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -34,6 +37,9 @@ const App = () => {
         setEnableJobsArchivePage(!!data['enable_jobs_archive_page']);
         setEnableRightSidebar(!!data['enable_jobs_right_sidebar']);
         setEnableLeftSidebar(!!data['enable_jobs_left_sidebar']);
+        setInvitationHeading(data['job_notices_invitation_heading'] || 'Job Invitation');
+        setShareText(data['job_notices_share_text'] || 'Check out this job!');
+        setShareUrl(data['job_notices_share_url'] || '');
         setIsLoading(false);
       })
       .catch(err => {
@@ -76,6 +82,26 @@ const App = () => {
           />
         )}
       </CardBody>
+      <CardHeader>
+        <Heading level={4}>Settings for Job Invitation</Heading>
+      </CardHeader>
+      <CardBody>
+         <TextControl
+          label="Heading"
+          value={invitationHeading}
+          onChange={(value) => setInvitationHeading(value)}
+        />
+        <TextControl
+          label="Share Text"
+          value={shareText}
+          onChange={(value) => setShareText(value)}
+        />
+        <TextControl
+          label="Share URL"
+          value={shareUrl}
+          onChange={(value) => setShareUrl(value)}
+        />
+      </CardBody>
       <CardFooter>
         <Text>Save Jobs Options</Text>
         <Button
@@ -89,6 +115,9 @@ const App = () => {
                 'enable_jobs_archive_page': enableJobsArchivePage,
                 'enable_jobs_right_sidebar': enableRightSidebar,
                 'enable_jobs_left_sidebar': enableLeftSidebar,
+                'job_notices_invitation_heading': invitationHeading,
+                'job_notices_share_text': shareText,
+                'job_notices_share_url': shareUrl,
               },
             }).then(data => {
               alert('Options saved successfully! Page will refresh on OK');

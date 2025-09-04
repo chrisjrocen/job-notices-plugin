@@ -51,6 +51,27 @@ trait SinglePostTypeTrait {
 	}
 
 	/**
+	 * Render the social share widget.
+	 *
+	 * @param String $invitation_heading The heading for the invitation.
+	 * @param String $share_text The text to share.
+	 * @param String $share_url The URL to share.
+	 */
+	public function job_notices_render_social_widget( $invitation_heading, $share_text, $share_url ) {
+		// Render the social share widget.
+
+		echo sprintf(
+			'<div class="job-notices__social-widget">
+				<h4>%s</h4>
+				<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--social">%s</a>
+			</div>',
+			esc_html__( $invitation_heading, 'job-notices' ),
+			esc_url( $share_url ),
+			esc_html__( $share_text, 'job-notices' )
+		);
+	}
+
+	/**
 	 * Render job categories as links.
 	 *
 	 * @param String $title_to_render Title to render.
