@@ -96,7 +96,7 @@
 .job-notices .single-job.jobs-container .job-sidebar,
 .single-job.jobs-container .job-notices .job-sidebar, .job-notices .job-notices__job-card, .job-notices .job-card, .job-notices .job-notices__job-list-item, .job-notices .job-notices__related-job-item, .job-notices .job-notices__job-header--single {
   background: var(--wp-fundi-subtle-background-color, #f2f5f7);
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   transition: box-shadow 0.2s ease;
@@ -228,7 +228,7 @@
 .job-notices__container--block {
   grid-template-columns: 1fr;
   grid-template-areas: "job-content";
-  padding: 2rem;
+  padding: 1rem;
   max-width: 100%;
 }
 .job-notices__container aside, .jobs-archive.jobs-container aside,
@@ -241,7 +241,7 @@
 .single-job.jobs-container .job-content {
   grid-area: "job-content";
   background: var(--wp-fundi-light-alternative-color, #ffffff);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   border: 1px solid var(--wp-fundi-border-alternative-color, rgba(0, 0, 0, 0.1019607843));
@@ -556,7 +556,7 @@
 }
 .job-notices__filters, .jobs-filters, .job-notices__taxonomies {
   background: var(--wp-fundi-subtle-background-color, #f2f5f7);
-  padding: 26px 30px 30px 30px;
+  padding: 1.25rem;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
   transition: box-shadow 0.2s ease;
   border: 1px solid var(--wp-fundi-border-alternative-color, rgba(0, 0, 0, 0.1019607843));
@@ -728,7 +728,7 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -960,7 +960,7 @@
 @media (max-width: 480px) {
   .job-notices__container, .jobs-archive.jobs-container,
   .single-job.jobs-container {
-    padding: 2rem 1rem;
+    padding: 1rem 0rem;
   }
   .job-notices__job-header, .jobs-archive.jobs-container .single-job-header,
   .single-job.jobs-container .single-job-header {
