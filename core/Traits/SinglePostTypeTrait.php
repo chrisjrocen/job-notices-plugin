@@ -65,9 +65,9 @@ trait SinglePostTypeTrait {
 				<h4>%s</h4>
 				<a href="%s" target="_blank" rel="noopener noreferrer" class="job-notices__share-button job-notices__share-button--social">%s</a>
 			</div>',
-			esc_html__( $invitation_heading ),
+			esc_html__( $invitation_heading, 'job-notices' ),
 			esc_url( $share_url ),
-			esc_html__( $share_text )
+			esc_html__( $share_text, 'job-notices' )
 		);
 	}
 
