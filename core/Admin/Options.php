@@ -83,10 +83,13 @@ class Options extends BaseController {
 	public function rest_api_jobs_settings_page_read_options_callback( $data ) {
 
 		// Generate the response by fetching options from the database.
-		$response                              = array();
-		$response['enable_jobs_archive_page']  = get_option( 'options_jobs_enable_jobs_archive_page', 'true' );
-		$response['enable_jobs_right_sidebar'] = get_option( 'options_enable_job_notices_right_sidebar', 'true' );
-		$response['enable_jobs_left_sidebar']  = get_option( 'options_enable_job_notices_left_sidebar', 'true' );
+		$response                                   = array();
+		$response['enable_jobs_archive_page']       = get_option( 'options_jobs_enable_jobs_archive_page', 'true' );
+		$response['enable_jobs_right_sidebar']      = get_option( 'options_enable_job_notices_right_sidebar', 'true' );
+		$response['enable_jobs_left_sidebar']       = get_option( 'options_enable_job_notices_left_sidebar', 'true' );
+		$response['job_notices_invitation_heading'] = get_option( 'options_job_notices_invitation_heading', 'Job Invitation' );
+		$response['job_notices_share_text']         = get_option( 'options_job_notices_share_text', 'Check out this job!' );
+		$response['job_notices_share_url']          = get_option( 'options_job_notices_share_url', '' );
 
 		// Convert to React valid values / boolean values.
 		$response['enable_jobs_archive_page']  = isset( $response['enable_jobs_archive_page'] ) && 'true' === $response['enable_jobs_archive_page'] ? 1 : 0;
@@ -118,10 +121,17 @@ class Options extends BaseController {
 		$enable_jobs_left_sidebar = sanitize_text_field( $request->get_param( 'enable_jobs_left_sidebar' ) );
 		$enable_jobs_left_sidebar = $enable_jobs_left_sidebar ? 'true' : 'false';
 
+		$invitation_heading = sanitize_text_field( $request->get_param( 'job_notices_invitation_heading' ) );
+		$share_text         = sanitize_text_field( $request->get_param( 'job_notices_share_text' ) );
+		$share_url          = sanitize_text_field( $request->get_param( 'job_notices_share_url' ) );
+
 		// Update the options.
 		update_option( 'options_jobs_enable_jobs_archive_page', $enable_jobs_archive_page );
 		update_option( 'options_enable_job_notices_right_sidebar', $enable_jobs_right_sidebar );
 		update_option( 'options_enable_job_notices_left_sidebar', $enable_jobs_left_sidebar );
+		update_option( 'options_job_notices_invitation_heading', $invitation_heading );
+		update_option( 'options_job_notices_share_text', $share_text );
+		update_option( 'options_job_notices_share_url', $share_url );
 
 		$response = new WP_REST_Response( 'Data successfully added.', '200' );
 
@@ -162,6 +172,9 @@ class Options extends BaseController {
 				enableJobsArchivePage: <?php echo esc_attr( get_option( 'options_jobs_enable_jobs_archive_page', 'true' ) ); ?>
 				enableRightBar: <?php echo esc_attr( get_option( 'options_enable_job_notices_right_sidebar', 'true' ) ); ?>
 				enableLeftBar: <?php echo esc_attr( get_option( 'options_enable_job_notices_left_sidebar', 'true' ) ); ?>
+				invitationHeading: "<?php echo esc_attr( get_option( 'options_job_notices_invitation_heading', 'Job Invitation' ) ); ?>",
+				shareText: "<?php echo esc_attr( get_option( 'options_job_notices_share_text', 'Check out this job!' ) ); ?>",
+				shareUrl: "<?php echo esc_attr( get_option( 'options_job_notices_share_url', '' ) ); ?>"
 			};
 		</script>
 		<?php

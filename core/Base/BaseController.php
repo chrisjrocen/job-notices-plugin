@@ -125,6 +125,27 @@ class BaseController {
 	public $enable_left_sidebar;
 
 	/**
+	 * Invitation Heading
+	 *
+	 * @var boolean
+	 */
+	public $invitation_heading;
+
+	/**
+	 * Share Text
+	 *
+	 * @var string
+	 */
+	public $share_text;
+
+	/**
+	 * Share URL
+	 *
+	 * @var string
+	 */
+	public $share_url;
+
+	/**
 	 * Declare all the variables for the class.
 	 */
 	public function __construct() {
@@ -135,6 +156,9 @@ class BaseController {
 		$this->plugin               = plugin_basename( dirname( __DIR__, 2 ) ) . '/job-notices.php';
 		$this->enable_right_sidebar = get_option( 'options_enable_job_notices_right_sidebar' );
 		$this->enable_left_sidebar  = get_option( 'options_enable_job_notices_left_sidebar' );
+		$this->invitation_heading   = get_option( 'options_job_notices_invitation_heading' );
+		$this->share_text           = get_option( 'options_job_notices_share_text' );
+		$this->share_url            = get_option( 'options_job_notices_share_url' );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 	}
