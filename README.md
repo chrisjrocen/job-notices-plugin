@@ -23,9 +23,10 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 ### 1.0.2
 
 - Bug fix: Expiry dates for bids and scholarships post types.
-- Bug fix: Replaced template_redirect with template_include for arhives.
+- Bug fix: Added exit  tp template_redirect for arhives. Solves output of archives under the footer.
 - Bug fix: Added support for old clipboards.
 - Added Whatsapp share button
+- Clean deprecated/unused code.
 
 ### 1.0.1
 

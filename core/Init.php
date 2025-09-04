@@ -36,7 +36,6 @@ final class Init {
 			Templates\SingleScholarship::class,
 			Users\Employer::class,
 			Users\JobSeeker::class,
-			Blocks\EmployersSlider::class,
 			Blocks\HeroSearch::class,
 			Blocks\RenderJobs::class,
 			ShortCodes\JobsCounter::class,

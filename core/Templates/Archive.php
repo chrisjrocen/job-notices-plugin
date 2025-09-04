@@ -28,7 +28,7 @@ class Archive extends BaseController {
 	 */
 	public function register() {
 		// Register the template for the job listings archive.
-		add_action( 'template_include', array( $this, 'render_archive' ) );
+		add_action( 'template_redirect', array( $this, 'render_archive' ) );
 
 		// Register Ajax actions for live filtering.
 		add_action( 'wp_ajax_filter_jobs', array( $this, 'ajax_filter_jobs' ) );
@@ -178,9 +178,7 @@ class Archive extends BaseController {
 			$this->render_jobs_archive_content( $current_post_type, $results_count, $per_page_select, $enable_left_sidebar, $enable_right_sidebar );
 
 			get_footer();
-
-		} else {
-			return;
+			exit;
 		}
 	}
 
