@@ -20,6 +20,10 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 
 ## Changelog
 
+### 1.1.2
+
+-CSS Fixes. Sidebar taxonomies set to persist on the sidebar after ad injection.
+
 ### 1.1.1
 
 -CSS Fixes.
