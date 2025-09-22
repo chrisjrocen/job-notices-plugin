@@ -239,7 +239,7 @@
 }
 .job-notices__content, .jobs-archive.jobs-container .job-content,
 .single-job.jobs-container .job-content {
-  grid-area: "job-content";
+  grid-area: job-content;
   background: var(--wp-fundi-light-alternative-color, #ffffff);
   padding: 1rem;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
@@ -555,6 +555,7 @@
   color: var(--wp-fundi-success-color, #34A853);
 }
 .job-notices__filters, .jobs-filters, .job-notices__taxonomies {
+  grid-area: job-sidebar;
   background: var(--wp-fundi-subtle-background-color, #f2f5f7);
   padding: 1.25rem;
   border-radius: var(--wp-fundi-containers-border-radius, 8px);
@@ -562,6 +563,7 @@
   border: 1px solid var(--wp-fundi-border-alternative-color, rgba(0, 0, 0, 0.1019607843));
   border-left-color: var(--wp-fundi-primary-color, #552732);
   border-left-width: 4px;
+  height: fit-content;
 }
 .job-notices__filters:hover, .jobs-filters:hover, .job-notices__taxonomies:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
