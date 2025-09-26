@@ -260,6 +260,25 @@ class Archive extends BaseController {
 			echo '</section>';
 		}
 
+		// Add pagination if needed.
+		if ( $jobs->max_num_pages > 1 ) {
+			echo '<div class="job-notices__pagination">';
+			echo paginate_links(
+				array(
+					'total'    => $jobs->max_num_pages,
+					// 'current'  => get_query_var( 'paged', 1 ),
+					// 'format'   => '?paged=%#%',
+					'base'     => esc_url_raw( add_query_arg( 'paged', '%#%' ) ),
+					'type'     => 'list',
+					'end_size' => 1,
+					'mid_size' => 1,
+				)
+			);
+			echo '</div>';
+		}
+
+		wp_reset_postdata();
+
 		echo '</section>'; // job-notices__results.
 
 		/**
