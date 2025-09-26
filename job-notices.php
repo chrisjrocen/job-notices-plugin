@@ -6,7 +6,7 @@
  * Author:            Ocen Chris
  * Author URI:        https://www.wp-fundi.com
  * Text Domain:       job-notices
- * Version:           1.1.2
+ * Version:           1.1.3
  * Tags:              jobs
  * Requires at least: 4.7
  * Stable upto:       5.4
@@ -20,7 +20,7 @@
 // If this file is called firectly, abort!!!
 defined( 'ABSPATH' ) || die( 'No Access!' );
 
-define( 'JOB_NOTICES_VERSION', '1.1.2' );
+define( 'JOB_NOTICES_VERSION', '1.1.3' );
 
 // Require once the Composer Autoload.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
