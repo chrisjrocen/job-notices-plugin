@@ -64,7 +64,7 @@
   gap: 1em;
   flex-wrap: wrap;
 }
-.job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button,
+.job-notices .job-notices__load-more-taxonomies, .job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button,
 .job-notices .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button,
 .single-job.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button, .job-notices__job-header .job-notices__application-section .job-notices .job-notices__apply-button, .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button,
 .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button {
@@ -78,14 +78,14 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button:hover, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:hover, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:hover,
+.job-notices .job-notices__load-more-taxonomies:hover, .job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button:hover, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:hover, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:hover,
 .job-notices .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:hover,
 .single-job.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:hover, .job-notices__job-header .job-notices__application-section .job-notices .job-notices__apply-button:hover, .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button:hover,
 .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button:hover {
   background: var(--wp-fundi-primary-color, #552732);
   color: var(--wp-fundi-alternative-color, #fcdfb7);
 }
-.job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button:focus, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:focus, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:focus,
+.job-notices .job-notices__load-more-taxonomies:focus, .job-notices .job-notices__job-header .job-notices__application-section .job-notices__apply-button:focus, .job-notices .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:focus, .jobs-archive.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:focus,
 .job-notices .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices__apply-button:focus,
 .single-job.jobs-container .job-notices .single-job-header .job-notices__application-section .job-notices__apply-button:focus, .job-notices__job-header .job-notices__application-section .job-notices .job-notices__apply-button:focus, .jobs-archive.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button:focus,
 .single-job.jobs-container .single-job-header .job-notices__application-section .job-notices .job-notices__apply-button:focus {
@@ -793,6 +793,10 @@
 .single-job.jobs-container .job-overview p strong {
   font-weight: 600;
   min-width: 80px;
+}
+.job-notices__load-more-taxonomies.load-more {
+  width: unset;
+  padding: 0.25rem;
 }
 .job-notices__pagination {
   margin-top: 2rem;

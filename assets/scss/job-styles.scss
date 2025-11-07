@@ -925,6 +925,15 @@
         }
     }
 
+    &__load-more-taxonomies {
+        @extend %job-notices__application-button;
+
+        &.load-more {
+            width: unset;
+            padding: 0.25rem;
+        }
+    }
+
     // =============================================================================
     // PAGINATION STYLES
     // =============================================================================
