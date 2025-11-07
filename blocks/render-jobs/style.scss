@@ -3,13 +3,18 @@
 
 .job-notices__hero-block {
     .job-notices__container--block {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
         max-width: 100%;
         
         @media (max-width: 768px) {
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            aside {
+                display: none;
+            }
         }
     }
     

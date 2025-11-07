@@ -191,7 +191,10 @@ trait RenderJobsTrait {
 								<a href="%s">
 									<div class="job-notices__aside-company-logo">
 										<img src="%s" alt="%s">
-										<p>%s<br>Posted on: %s</p>
+										<div>
+										<p style="font-weight: 600; color: black">%s</p>
+										<p>Date: %s</p>
+										</div>
 									</div>
 								</a>
 							</div>',

@@ -179,7 +179,6 @@
 }
 .job-notices__container, .jobs-archive.jobs-container,
 .single-job.jobs-container {
-  padding: 10rem 0rem;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 2rem;
@@ -236,7 +235,6 @@
 .job-notices__container--block {
   grid-template-columns: 1fr;
   grid-template-areas: "job-content";
-  padding: 1rem;
   max-width: 100%;
 }
 .job-notices__container aside, .jobs-archive.jobs-container aside,
@@ -602,14 +600,13 @@
   border-radius: var(--wp-fundi-containers-border-radius, 8px) 0px 0px var(--wp-fundi-containers-border-radius, 8px);
   margin: 0px;
 }
-.job-notices__filters .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo p, .jobs-filters .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo p, .job-notices__taxonomies .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo p {
+.job-notices__filters .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo div, .jobs-filters .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo div, .job-notices__taxonomies .job-notices__posts-list .job-notices__post-item .job-notices__aside-company-logo div {
   color: var(--wp-fundi-info-color, #1967D2);
   background: rgba(66, 133, 244, 0.2);
   border-radius: 0px var(--wp-fundi-containers-border-radius, 8px) var(--wp-fundi-containers-border-radius, 8px) 0px;
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   font-weight: 500;
-  display: flex;
   align-items: center;
   margin: 0;
   width: 100%;
