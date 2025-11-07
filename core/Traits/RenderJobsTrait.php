@@ -191,14 +191,15 @@ trait RenderJobsTrait {
 								<a href="%s">
 									<div class="job-notices__aside-company-logo">
 										<img src="%s" alt="%s">
-										<p>%s</p>
+										<p>%s<br>Posted on: %s</p>
 									</div>
 								</a>
 							</div>',
 							esc_url( get_permalink() ),
 							esc_url( get_the_post_thumbnail_url( null, 'medium' ) ),
 							esc_attr( get_the_title() ),
-							esc_html( get_the_title() )
+							esc_html( get_the_title() ),
+							esc_html( get_the_date() )
 						);
 					}
 					return $items;
