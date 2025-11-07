@@ -87,24 +87,44 @@ trait SinglePostTypeTrait {
 		);
 
 		if ( ! empty( $taxonomies ) && ! is_wp_error( $taxonomies ) ) {
+			$total_terms     = count( $taxonomies );
+			$initial_display = 10;
+
 			echo '<div class="job-notices__taxonomies">';
 			echo '<div class="job-notices__taxonomies-grid">';
 			echo '<div class="job-notices__taxonomy-column">';
 			echo '<h3>' . esc_html( $title_to_render ) . '</h3>';
 			echo '<ul class="job-notices__taxonomy-list">';
-			foreach ( $taxonomies as $taxonomy ) {
-				$term_link  = get_term_link( $taxonomy );
-				$term_count = $taxonomy->count;
+
+			foreach ( $taxonomies as $index => $taxonomy ) {
+				$term_link    = get_term_link( $taxonomy );
+				$term_count   = $taxonomy->count;
+				$is_hidden    = $index >= $initial_display ? ' style="display:none;"' : '';
+				$hidden_class = $index >= $initial_display ? ' class="job-notices__taxonomy-item--hidden"' : '';
+
 				if ( ! is_wp_error( $term_link ) ) {
 					printf(
-						'<li><a href="%s" class="job-notices__job-category-link">%s (%d)</a></li>',
+						'<li%s%s><a href="%s" class="job-notices__job-category-link">%s (%d)</a></li>',
+						$hidden_class,
+						$is_hidden,
 						esc_url( $term_link ),
 						esc_html( $taxonomy->name ),
 						$term_count
 					);
 				}
 			}
+
 			echo '</ul>';
+
+			// Add load more button if there are more than 5 terms.
+			if ( $total_terms > $initial_display ) {
+				printf(
+					'<button class="job-notices__load-more-taxonomies load-more" data-taxonomy="%s">%s</button>',
+					esc_attr( $taxonomy_to_render ),
+					esc_html__( 'Display all', 'job-notices' )
+				);
+			}
+
 			echo '</div>';
 			echo '</div>';
 			echo '</div>';

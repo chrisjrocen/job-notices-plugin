@@ -121,21 +121,41 @@ trait RenderJobsTrait {
 					}
 				);
 
+				$total_terms     = count( $terms );
+				$initial_display = 10;
+
 				echo '<div class="job-notices__taxonomy-column">';
 				echo '<h3>' . esc_html( $title ) . '</h3>';
 				echo '<div class="job-notices__taxonomy-list">';
 
-				foreach ( $terms as $term ) {
-						$term_link = get_term_link( $term );
+				foreach ( $terms as $index => $term ) {
+						$term_link    = get_term_link( $term );
+						$is_hidden    = $index >= $initial_display ? ' style="display:none;"' : '';
+						$hidden_class = $index >= $initial_display ? ' job-notices__taxonomy-item--hidden' : '';
+
 					if ( ! is_wp_error( $term_link ) ) {
-						echo '<div class="job-notices__taxonomy-list-item">';
-						echo '<a href="' . esc_url( $term_link ) . '">'
-						. esc_html( $term->name ) . ' (' . intval( $term->count ) . ')</a>';
-						echo '</div>';
+						printf(
+							'<div class="job-notices__taxonomy-list-item%s"%s><a href="%s">%s (%d)</a></div>',
+							$hidden_class,
+							$is_hidden,
+							esc_url( $term_link ),
+							esc_html( $term->name ),
+							intval( $term->count )
+						);
 					}
 				}
 
 				echo '</div>';
+
+				// Add load more button if there are more than 5 terms.
+				if ( $total_terms > $initial_display ) {
+					printf(
+						'<button class="job-notices__load-more-taxonomies load-more" data-taxonomy="%s">%s</button>',
+						esc_attr( $taxonomy ),
+						esc_html__( 'Load More', 'job-notices' )
+					);
+				}
+
 				echo '</div>';
 			}
 		}
@@ -171,14 +191,18 @@ trait RenderJobsTrait {
 								<a href="%s">
 									<div class="job-notices__aside-company-logo">
 										<img src="%s" alt="%s">
-										<p>%s</p>
+										<div>
+										<p style="font-weight: 600; color: black">%s</p>
+										<p>Date: %s</p>
+										</div>
 									</div>
 								</a>
 							</div>',
 							esc_url( get_permalink() ),
 							esc_url( get_the_post_thumbnail_url( null, 'medium' ) ),
 							esc_attr( get_the_title() ),
-							esc_html( get_the_title() )
+							esc_html( get_the_title() ),
+							esc_html( get_the_date() )
 						);
 					}
 					return $items;

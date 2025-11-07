@@ -4,7 +4,7 @@ Job Notices is a WordPress plugin designed to turn your website into a fully-fea
 
 === Job Notices ===
 Contributors: ocenchris
-Donate link: [https://wp-fundi.com/](https://wp-fundi.com/)
+Donate link: [https://ocenchris.com/](https://wp-fundi.com/)
 Tags: jobs
 Requires at least: 4.7
 Tested up to: 5.4
@@ -19,6 +19,12 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 - Run `composer install` to get the PHP setup.
 
 ## Changelog
+
+### 1.1.4
+
+- Added a "display more" button for job categories on archive and single post pages.
+- Modified the design of the jobs, bids sidebar
+- Added left sidebar
 
 ### 1.1.3
 

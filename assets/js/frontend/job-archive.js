@@ -293,4 +293,37 @@
 		window.location.reload();
 	});
 
+	/**
+	 * Handle load more taxonomies functionality
+	 */
+	function setupTaxonomyLoadMore() {
+		const loadMoreButtons = document.querySelectorAll('.job-notices__load-more-taxonomies');
+
+		loadMoreButtons.forEach(function(button) {
+			button.addEventListener('click', function() {
+				const taxonomyList = this.previousElementSibling;
+				if (!taxonomyList) return;
+
+				// Find all hidden taxonomy items
+				const hiddenItems = taxonomyList.querySelectorAll('.job-notices__taxonomy-item--hidden');
+
+				// Show all hidden items
+				hiddenItems.forEach(function(item) {
+					item.style.display = 'list-item';
+					item.style.listStyle = 'none';
+				});
+
+				// Hide the load more button
+				this.style.display = 'none';
+			});
+		});
+	}
+
+	// Initialize taxonomy load more when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setupTaxonomyLoadMore);
+	} else {
+		setupTaxonomyLoadMore();
+	}
+
 })();

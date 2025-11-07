@@ -20,6 +20,11 @@ use WP_Query;
 class RenderJobs extends BaseController {
 
 	/**
+	 * Use the RenderJobsTrait Trait
+	 */
+	use \JOB_NOTICES\Traits\RenderJobsTrait;
+
+	/**
 	 * Register function is called by default to get the class running
 	 *
 	 * @return void
@@ -42,11 +47,10 @@ class RenderJobs extends BaseController {
 	 */
 	public function render_block( $attributes ) {
 
-		do_action( 'qm/debug', $attributes );
-
 		ob_start();
 		echo '<div class="job-notices job-notices__hero-block">';
 		echo '<div class="job-notices__container job-notices__container--block">';
+		$this->render_left_sidebar_panel();
 		echo '<section class="job-notices__results job-notices__results--block">';
 		echo '<div class="job-notices__results-header">';
 		echo '</div>';
@@ -98,5 +102,31 @@ class RenderJobs extends BaseController {
 		echo '</div>';
 		echo '</div>';
 		return ob_get_clean();
+	}
+
+	/**
+	 *
+	 * @param string $current_post_type The current post type.
+	 */
+	public function render_left_sidebar_panel() {
+
+		echo '<aside>';
+		echo '<div class="job-notices__taxonomies">';
+
+			$this->job_notices_display_taxonomies_grid(
+				array(
+					'job_category'     => 'Top Job Categories',
+					'location'         => 'Locations',
+					'job_type'         => 'Job Types',
+					'bid_type'         => 'Bid Types',
+					'bid_location'     => 'Bid Locations',
+					'scholarship_type' => 'Scholarship Types',
+					'study_field'      => 'Study Fields',
+					'study_level'      => 'Study Levels',
+					'study_location'   => 'Study Locations',
+				)
+			);
+		echo '</div>';
+		echo '</aside>';
 	}
 }
