@@ -66,7 +66,12 @@ class SingleScholarship {
 			echo '</div>';
 
 			$this->get_related_jobs( $current_post_id, 'scholarships' );
+			echo '<aside class="job-notices__sidebar--right">';
 			$this->render_taxonomy_list( 'Top Locations', 'study_location' );
+			$this->render_taxonomy_list( 'Study Level', 'study_level' );
+			$this->render_taxonomy_list( 'Field', 'study_field' );
+			$this->render_taxonomy_list( 'Organisation', 'organisation' );
+			echo '</aside>';
 		}
 		echo '</article>'; // job-notices__container.
 		get_footer();

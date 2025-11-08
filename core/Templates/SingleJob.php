@@ -84,7 +84,11 @@ class SingleJob {
 			echo '</div>';
 
 			$this->get_related_jobs( $current_post_id, 'jobs' );
+			echo '<aside class="job-notices__sidebar--right">';
 			$this->render_taxonomy_list( 'Top Categories', 'job_category' );
+			$this->render_taxonomy_list( 'Locations', 'location' );
+			$this->render_taxonomy_list( 'Employers', 'employer' );
+			echo '</aside>';
 		}
 			echo '</article>'; // job-notices__container.
 			get_footer();

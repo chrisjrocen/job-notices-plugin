@@ -66,7 +66,12 @@ class SingleBid {
 			echo '</div>';
 
 			$this->get_related_jobs( $current_post_id, 'bids' );
+
+			echo '<aside class="job-notices__sidebar--right">';
 			$this->render_taxonomy_list( 'Top Categories', 'bid_type' );
+			$this->render_taxonomy_list( 'Locations', 'bid_location' );
+			$this->render_taxonomy_list( 'Organisations', 'big_org' );
+			echo '</aside>';
 		}
 		echo '</article>'; // job-notices__container.
 		get_footer();
