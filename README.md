@@ -27,6 +27,7 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 - Added left sidebar
 - Trimmed sidebar headings to 10 words.
 - Fixed typos
+- Added more sidebar options for jobs, bids and scholarships
 
 ### 1.1.3
 
