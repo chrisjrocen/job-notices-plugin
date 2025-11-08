@@ -398,14 +398,6 @@ class Archive extends BaseController {
 
 			$this->job_notices_display_taxonomies_grid(
 				array(
-					'job_category' => 'Top Job Categories',
-				)
-			);
-
-			$this->job_notices_display_posts_list( 'Latest Bids', 'bids' );
-
-			$this->job_notices_display_taxonomies_grid(
-				array(
 					'bid_type' => 'Bid Types',
 				)
 			);

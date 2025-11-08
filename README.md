@@ -25,6 +25,8 @@ License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/lic
 - Added a "display more" button for job categories on archive and single post pages.
 - Modified the design of the jobs, bids sidebar
 - Added left sidebar
+- Trimmed sidebar headings to 10 words.
+- Fixed typos
 
 ### 1.1.3
 

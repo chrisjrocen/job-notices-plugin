@@ -55,13 +55,13 @@ trait RenderJobsTrait {
 	public function per_page_select() {
 		return sprintf(
 			'<select class="per-page-select">
-				<option value="12">%s</option>
-				<option value="24">%s</option>
-				<option value="48">%s</option>
+				<option value="10">%s</option>
+				<option value="20">%s</option>
+				<option value="50">%s</option>
 			</select>',
-			esc_html__( '12 Per Page', 'job-notices' ),
-			esc_html__( '24 Per Page', 'job-notices' ),
-			esc_html__( '48 Per Page', 'job-notices' )
+			esc_html__( '10 Per Page', 'job-notices' ),
+			esc_html__( '20 Per Page', 'job-notices' ),
+			esc_html__( '50 Per Page', 'job-notices' )
 		);
 	}
 
@@ -186,6 +186,7 @@ trait RenderJobsTrait {
 					$items = '';
 					while ( $query->have_posts() ) {
 						$query->the_post();
+						$the_title = wp_trim_words( get_the_title(), 10, '...' );
 						$items .= sprintf(
 							'<div class="job-notices__post-item">
 								<a href="%s">
@@ -201,7 +202,7 @@ trait RenderJobsTrait {
 							esc_url( get_permalink() ),
 							esc_url( get_the_post_thumbnail_url( null, 'medium' ) ),
 							esc_attr( get_the_title() ),
-							esc_html( get_the_title() ),
+							esc_html( $the_title ),
 							esc_html( get_the_date() )
 						);
 					}
