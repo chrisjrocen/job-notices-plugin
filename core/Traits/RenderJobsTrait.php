@@ -186,7 +186,7 @@ trait RenderJobsTrait {
 					$items = '';
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						$the_title = wp_trim_words( get_the_title(), 10, '...' );
+						$the_title = wp_trim_words( get_the_title(), 5, '...' );
 						$items .= sprintf(
 							'<div class="job-notices__post-item">
 								<a href="%s">
