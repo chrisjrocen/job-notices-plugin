@@ -179,6 +179,7 @@
 }
 .job-notices__container, .jobs-archive.jobs-container,
 .single-job.jobs-container {
+  padding: 5rem 0rem;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 2rem;
